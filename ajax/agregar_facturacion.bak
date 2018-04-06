@@ -2,7 +2,7 @@
 	/*-------------------------
 	Autor: Jordan Diaz
 	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
+	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
 include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 $session_id= session_id();
@@ -77,7 +77,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	<td></td>
 </tr>
 <tr>
-	<td class='text-right' colspan=4>IVA (<?php echo TAX?>)% $</td>
+	<td class='text-right' colspan=4>IGV (<?php echo TAX?>)% $</td>
 	<td class='text-right'><?php echo number_format($total_iva,2);?></td>
 	<td></td>
 </tr>

@@ -13,7 +13,13 @@
 		  <div class="modal-body">
 			<form class="form-horizontal" method="post" id="guardar_cliente" name="guardar_cliente">
 			<div id="resultados_ajax"></div>
-			  <div class="form-group">
+		   	<div class="form-group">
+				<label for="ruc" class="col-sm-3 control-label">RUC</label>
+				<div class="col-sm-8">
+				  <input type="text" class="form-control" id="ruc" name="ruc" required>
+				</div>
+			  </div>
+				<div class="form-group">
 				<label for="nombre" class="col-sm-3 control-label">Nombre</label>
 				<div class="col-sm-8">
 				  <input type="text" class="form-control" id="nombre" name="nombre" required>

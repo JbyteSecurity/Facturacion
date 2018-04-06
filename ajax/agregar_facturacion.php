@@ -1,8 +1,8 @@
 <?php
 	/*-------------------------
 	Autor: Jordan Diaz
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
+	Web: 
+	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
 include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 $session_id= session_id();
@@ -72,17 +72,17 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 
 ?>
 <tr>
-	<td class='text-right' colspan=4>SUBTOTAL $</td>
+	<td class='text-right' colspan=4>SUBTOTAL S/</td>
 	<td class='text-right'><?php echo number_format($subtotal,2);?></td>
 	<td></td>
 </tr>
 <tr>
-	<td class='text-right' colspan=4>IGV (<?php echo TAX?>)% $</td>
+	<td class='text-right' colspan=4>IGV (<?php echo TAX?>)% S/</td>
 	<td class='text-right'><?php echo number_format($total_iva,2);?></td>
 	<td></td>
 </tr>
 <tr>
-	<td class='text-right' colspan=4>TOTAL $</td>
+	<td class='text-right' colspan=4>TOTAL S/</td>
 	<td class='text-right'><?php echo number_format($total_factura,2);?></td>
 	<td></td>
 </tr>

@@ -1,8 +1,8 @@
 <?php
 	/*-------------------------
 	Autor: Jordan Diaz
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
+	Web: 
+	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
 	session_start();
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -46,14 +46,15 @@
 					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un cliente" required>
 					  <input id="id_cliente" type='hidden'>	
 				  </div>
-				  <label for="tel1" class="col-md-1 control-label">Teléfono</label>
+				  <label for="ruc1" class="col-md-1 control-label">Ruc</label>
 							<div class="col-md-2">
+								<input type="text" class="form-control input-sm" id="ruc1" placeholder="Ruc" readonly>
+							</div>
+				  <label for="tel1" class="col-md-1 control-label">Teléfono</label>
+							<div class="col-md-3">
 								<input type="text" class="form-control input-sm" id="tel1" placeholder="Teléfono" readonly>
 							</div>
-					<label for="mail" class="col-md-1 control-label">Email</label>
-							<div class="col-md-3">
-								<input type="text" class="form-control input-sm" id="mail" placeholder="Email" readonly>
-							</div>
+				
 				 </div>
 						<div class="form-group row">
 							<label for="empresa" class="col-md-1 control-label">Vendedor</label>
@@ -138,7 +139,8 @@
 							select: function(event, ui) {
 								event.preventDefault();
 								$('#id_cliente').val(ui.item.id_cliente);
-								$('#nombre_cliente').val(ui.item.nombre_cliente);
+								$('#nombre_cliente').val(ui.item.nombre_cliente);		
+								$('#ruc1').val(ui.item.ruc);						
 								$('#tel1').val(ui.item.telefono_cliente);
 								$('#mail').val(ui.item.email_cliente);
 																

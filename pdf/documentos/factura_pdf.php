@@ -1,8 +1,8 @@
 <?php
 	/*-------------------------
 	Autor: Jordan Diaz
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
+	Web: 
+	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
 	session_start();
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
@@ -37,7 +37,8 @@
 	$numero_factura=$rw['last']+1;	
     // get the HTML
      ob_start();
-     include(dirname('__FILE__').'/res/factura_html.php');
+	 include(dirname('__FILE__').'/res/factura_html.php');
+	//echo dirname('__FILE__');
     $content = ob_get_clean();
 
     try

@@ -1,8 +1,8 @@
 <?php
 	/*-------------------------
 	Autor: Jordan Diaz
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
+	Web: 
+	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
 	# conectare la base de datos
     $con=@mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);

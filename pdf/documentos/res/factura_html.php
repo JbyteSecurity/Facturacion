@@ -82,8 +82,11 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['nombre_cliente'];
-				echo "<br>";
+				echo "<br> RUC: ";
+				echo $rw_cliente['ruc'];				
+				echo "<br> Cliente: ";
+				echo $rw_cliente['nombre_cliente'];			
+				echo "<br> Direcciòn: ";
 				echo $rw_cliente['direccion_cliente'];
 				echo "<br> Teléfono: ";
 				echo $rw_cliente['telefono_cliente'];
@@ -173,7 +176,7 @@ while ($row=mysqli_fetch_array($sql))
 
 	<?php 
 	//Insert en la tabla detalle_cotizacion
-	$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES ('','$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
+	$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES (0,'$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
 	
 	$nums++;
 	}
@@ -208,6 +211,6 @@ while ($row=mysqli_fetch_array($sql))
 
 <?php
 $date=date("Y-m-d H:i:s");
-$insert=mysqli_query($con,"INSERT INTO facturas VALUES ('','$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
+$insert=mysqli_query($con,"INSERT INTO facturas VALUES (0,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 ?>

@@ -2,8 +2,8 @@
 
 	/*-------------------------
 	Autor: Jordan Diaz
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
+	Web: 
+	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	/* Connect To Database*/

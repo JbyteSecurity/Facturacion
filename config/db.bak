@@ -6,11 +6,11 @@ define('DB_PASS', '');//Contraseña del usuario de la base de datos
 define('DB_NAME', 'simple_invoice');//Nombre de la base de datos
  
 /*Datos de la empresa*/
-define('NOMBRE_EMPRESA', ' ');
-define('DIRECCION_EMPRESA', ' ');
-define('TELEFONO_EMPRESA', ' ');
-define('EMAIL_EMPRESA', 'jordandiaz2016@gmail.com');
-define('TAX', '17');
+define('NOMBRE_EMPRESA', 'SISTEMAS WEB LA');
+define('DIRECCION_EMPRESA', 'San Miguel, El Salvador, C.A.');
+define('TELEFONO_EMPRESA', '+(503) 2250-5550');
+define('EMAIL_EMPRESA', 'info@obedalvarado.pw');
+define('TAX', '13');
 
 /*-------------------------------------------------
 Los datos por defecto del usuario administrador son:

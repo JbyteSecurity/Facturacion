@@ -1,9 +1,9 @@
 <?php
 
 	/*-------------------------
-	Autor: Obed Alvarado
+	Autor: Jordan Diaz
 	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
+	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	/* Connect To Database*/
@@ -84,6 +84,7 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="info">
+				    <th>Ruc</th>
 					<th>Nombre</th>
 					<th>Teléfono</th>
 					<th>Email</th>
@@ -96,6 +97,7 @@
 				<?php
 				while ($row=mysqli_fetch_array($query)){
 						$id_cliente=$row['id_cliente'];
+						$ruc = $row['ruc'];
 						$nombre_cliente=$row['nombre_cliente'];
 						$telefono_cliente=$row['telefono_cliente'];
 						$email_cliente=$row['email_cliente'];
@@ -115,6 +117,7 @@
 					
 					<tr>
 						
+						<td><?php echo $ruc; ?></td>
 						<td><?php echo $nombre_cliente; ?></td>
 						<td ><?php echo $telefono_cliente; ?></td>
 						<td><?php echo $email_cliente;?></td>

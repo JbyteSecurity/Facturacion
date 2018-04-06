@@ -14,6 +14,7 @@ if ($con)
 		$id_cliente=$row['id_cliente'];
 		$row_array['value'] = $row['nombre_cliente'];
 		$row_array['id_cliente']=$id_cliente;
+		$row_array['ruc']=$row['ruc'];
 		$row_array['nombre_cliente']=$row['nombre_cliente'];
 		$row_array['telefono_cliente']=$row['telefono_cliente'];
 		$row_array['email_cliente']=$row['email_cliente'];
