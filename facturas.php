@@ -1,6 +1,6 @@
 <?php
 	/*-------------------------
-	Autor: Jordan Diaz
+	Autor: Jordan Diaz Diaz
 	Web: 
 	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
