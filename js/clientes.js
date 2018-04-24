@@ -39,6 +39,7 @@
 		}
 		}
 		
+
 		
 	
 $( "#guardar_cliente" ).submit(function( event ) {
@@ -219,16 +220,29 @@ $("#cboProvincia2").change(function(){
 			var email_cliente = $("#email_cliente"+id).val();
 			var direccion_cliente = $("#direccion_cliente"+id).val();
 			var status_cliente = $("#status_cliente"+id).val();
-	
+	        
 			$("#mod_nombre").val(nombre_cliente);
 			$("#mod_telefono").val(telefono_cliente);
 			$("#mod_email").val(email_cliente);
 			$("#mod_direccion").val(direccion_cliente);
 			$("#mod_estado").val(status_cliente);
 			$("#mod_id").val(id);
+			obtener_ubigeo(id)
 		
 		}
 	
-		
+	function obtener_ubigeo(id)
+	{  
+			
+		$.post('../facturacion/inei.php',  { id: id },  function(data, status, jqXHR) {
+		var obj = jQuery.parseJSON(data)
+		console.log(obj)
+		var departamento_id = obj.departamento_id.substring(0, 2);
+		alert(obj.provincia_id)
+		$("select[name='select4']").find("option[value='"+departamento_id+"']").attr("selected",true);
+		$("select[name='select5']").find("option[value='"+obj.provincia_id+"']").attr("selected",true);
+		$("select[name='select6']").find("option[value='"+obj.ubigeo_id+"']").attr("selected",true);
+		})
+	}	
 		
 

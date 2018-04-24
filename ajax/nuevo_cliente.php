@@ -13,10 +13,14 @@
 		$telefono=mysqli_real_escape_string($con,(strip_tags($_POST["telefono"],ENT_QUOTES)));
 		$email=mysqli_real_escape_string($con,(strip_tags($_POST["email"],ENT_QUOTES)));
 		$direccion=mysqli_real_escape_string($con,(strip_tags($_POST["direccion"],ENT_QUOTES)));
+		$departamento = mysqli_real_escape_string($con,(strip_tags($_POST["select4"],ENT_QUOTES)));
+		$departamento = $departamento."0000";
+		$provincia = mysqli_real_escape_string($con,(strip_tags($_POST["select5"],ENT_QUOTES)));
+		$provincia = explode("-",$provincia);
 		$ubigeo = mysqli_real_escape_string($con,(strip_tags($_POST["select6"],ENT_QUOTES)));
 		$estado=intval($_POST['estado']);
 		$date_added=date("Y-m-d H:i:s");
-		$sql="INSERT INTO clientes (ruc, nombre_cliente, telefono_cliente, email_cliente, direccion_cliente, ubigeo, status_cliente, date_added) VALUES ('$ruc', '$nombre','$telefono','$email','$direccion', '$ubigeo', '$estado','$date_added')";
+		$sql="INSERT INTO clientes (ruc, nombre_cliente, telefono_cliente, email_cliente, direccion_cliente, departamento, provincia, ubigeo, status_cliente, date_added) VALUES ('$ruc', '$nombre','$telefono','$email','$direccion', '$departamento', '$provincia[1]', '$ubigeo', '$estado','$date_added')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Cliente ha sido ingresado satisfactoriamente.";
