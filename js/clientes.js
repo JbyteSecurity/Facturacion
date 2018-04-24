@@ -86,12 +86,11 @@ $("#cboDepartamento").change(function(){
 	$("#cboProvincia").empty();	
 	$.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
 
-			console.log(data.id);
+			//alert(data);
 			var i = 0;
 			var id;
 			var nombre;
-			$.each(JSON.parse(data), function(key, value) {
-		  	
+			$.each(JSON.parse(data), function(key, value) {		  	
 		    	if(i==0)
 		    	{
 		       		 id = value.toString().split(',');
@@ -100,11 +99,15 @@ $("#cboDepartamento").change(function(){
 				{
 					 nombre = value.toString().split(',');
 				}
+				if(i==2)
+				{
+					 region_id = value.toString().split(',');
+				}
 			i++;
 			}); 
 
 			for (var i=0; i<id.length; i++) {
-			$("#cboProvincia").append('<option name="' + id[i] + '">' + nombre[i] + '</option>');
+			$("#cboProvincia").append('<option value="' + region_id[i] +'-'+id[i]+ '">' + nombre[i] + '</option>');
 		    }
 
     })
@@ -112,11 +115,11 @@ $("#cboDepartamento").change(function(){
 })
 
 $("#cboProvincia").change(function(){
-  	var distrito = $("#cboProvincia").val();
+	  var provincia = $("#cboProvincia").val();
+	 	  
 	$("#cboDistrito").empty();	
-	$.post('../facturacion/inei.php',  { distrito: distrito },  function(data, status, jqXHR) {
-
-			console.log(data.id);
+	$.post('../facturacion/inei.php',  { provincia: provincia },  function(data, status, jqXHR) {
+			
 			var i = 0;
 			var id;
 			var nombre;
@@ -134,7 +137,7 @@ $("#cboProvincia").change(function(){
 			}); 
 
 			for (var i=0; i<id.length; i++) {
-			$("#cboDistrito").append('<option name="' + id[i] + '">' + nombre[i] + '</option>');
+			$("#cboDistrito").append('<option value="' + id[i] + '">' + nombre[i] + '</option>');
 		    }
 
     })
