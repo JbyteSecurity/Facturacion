@@ -79,7 +79,7 @@
 	<hr>
 	<?php
 	include("footer.php");
-	?>
-	<script type="text/javascript" src="js/clientes.js"></script>
+	?>		
+	<script type="text/javascript" src="js/clientes.js"></script>	
   </body>
 </html>

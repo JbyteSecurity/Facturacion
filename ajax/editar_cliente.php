@@ -20,10 +20,11 @@
 		$telefono=mysqli_real_escape_string($con,(strip_tags($_POST["mod_telefono"],ENT_QUOTES)));
 		$email=mysqli_real_escape_string($con,(strip_tags($_POST["mod_email"],ENT_QUOTES)));
 		$direccion=mysqli_real_escape_string($con,(strip_tags($_POST["mod_direccion"],ENT_QUOTES)));
+		$ubigeo = mysqli_real_escape_string($con,(strip_tags($_POST["select6"],ENT_QUOTES)));
 		$estado=intval($_POST['mod_estado']);
 		
 		$id_cliente=intval($_POST['mod_id']);
-		$sql="UPDATE clientes SET nombre_cliente='".$nombre."', telefono_cliente='".$telefono."', email_cliente='".$email."', direccion_cliente='".$direccion."', status_cliente='".$estado."' WHERE id_cliente='".$id_cliente."'";
+		$sql="UPDATE clientes SET nombre_cliente='".$nombre."', telefono_cliente='".$telefono."', email_cliente='".$email."', direccion_cliente='".$direccion."', ubigeo='".$ubigeo."', status_cliente='".$estado."' WHERE id_cliente='".$id_cliente."'";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){
 				$messages[] = "Cliente ha sido actualizado satisfactoriamente.";

@@ -39,7 +39,59 @@
 				  <textarea class="form-control" id="mod_direccion" name="mod_direccion" ></textarea>
 				</div>
 			  </div>
+				<div class="form-group">
+				<label for="direccion" class="col-sm-3 control-label">Departamento:</label>
+				<div class="col-sm-8">
+
+				<select class="form-control" name="select4" id="cboDepartamento2">
+      		<option value="">TODOS</option>
+    			<option value="01">Amazonas</option>
+					<option value="02">Áncash</option>
+					<option value="03">Apurímac</option>
+					<option value="04">Arequipa</option>
+					<option value="05">Ayacucho</option>
+					<option value="06">Cajamarca</option>
+					<option value="07">Callao</option>
+					<option value="08">Cusco</option>
+					<option value="09">Huancavelica</option>
+					<option value="10">Huánuco</option>
+					<option value="11">Ica</option>
+					<option value="12">Junín</option>
+					<option value="13">La Libertad</option>
+					<option value="14">Lambayeque</option>
+					<option value="15">Lima</option>
+					<option value="16">Loreto</option>
+					<option value="17">Madre de Dios</option>
+					<option value="18">Moquegua</option>
+					<option value="19">Pasco</option>
+					<option value="20">Piura</option>
+					<option value="21">Puno</option>
+					<option value="22">San Martín</option>
+					<option value="23">Tacna</option>
+					<option value="24">Tumbes</option>
+   				<option value="25">Ucayali</option>
+        		</select> 
+				</div>
+			  </div>
+
+
+ 			  <div class="form-group">
+				<label for="Provincia" class="col-sm-3 control-label">Provincia:</label>
+				<div class="col-sm-8">
+
+				<select class="form-control" name="select5" id="cboProvincia2">			
+        </select> 
+				</div>
+			  </div>
 			  
+			   <div class="form-group">
+				<label for="Distrito" class="col-sm-3 control-label">Distrito:</label>
+				<div class="col-sm-8">
+
+				<select class="form-control" name="select6" id="cboDistrito2">
+        </select> 
+				</div>
+			  </div>
 			  <div class="form-group">
 				<label for="mod_estado" class="col-sm-3 control-label">Estado</label>
 				<div class="col-sm-8">
