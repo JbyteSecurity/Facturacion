@@ -150,7 +150,40 @@ $("#cboDepartamento2").change(function(){
   })
 
 })
+function provincia()
+{
+	var departamento = $("#cboDepartamento2").val()+"0000";
+  $("#cboProvincia2").empty();	
+  $("#cboProvincia2").append('<option value="0">TODOS</option>');
+  $.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
 
+		  //alert(data);
+		  var i = 0;
+		  var id;
+		  var nombre;
+		  $.each(JSON.parse(data), function(key, value) {		  	
+			  if(i==0)
+			  {
+					  id = value.toString().split(',');
+			  }
+			  if(i==1)
+			  {
+				   nombre = value.toString().split(',');
+			  }
+			  if(i==2)
+			  {
+				   region_id = value.toString().split(',');
+			  }
+		  i++;
+		  }); 
+
+		  for (var i=0; i<id.length; i++) {
+		  $("#cboProvincia2").append('<option value="' + region_id[i] +'-'+id[i]+ '">' + nombre[i] + '</option>');
+		  }
+
+  })
+
+}
 $("#cboProvincia").change(function(){
 	  var provincia = $("#cboProvincia").val();
 	 	  
@@ -233,13 +266,15 @@ $("#cboProvincia2").change(function(){
 	
 	function obtener_ubigeo(id)
 	{  
-			
+		alert("ubigeo");	
 		$.post('../facturacion/inei.php',  { id: id },  function(data, status, jqXHR) {
 		var obj = jQuery.parseJSON(data)
 		console.log(obj)
 		var departamento_id = obj.departamento_id.substring(0, 2);
-		alert(obj.provincia_id)
+		
 		$("select[name='select4']").find("option[value='"+departamento_id+"']").attr("selected",true);
+		provincia();
+		alert(obj.provincia_id);
 		$("select[name='select5']").find("option[value='"+obj.provincia_id+"']").attr("selected",true);
 		$("select[name='select6']").find("option[value='"+obj.ubigeo_id+"']").attr("selected",true);
 		})
