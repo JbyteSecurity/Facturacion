@@ -1,3 +1,6 @@
+<?php
+//error_reporting(E_ERROR);
+?>
 <style type="text/css">
 <!--
 table { vertical-align: top; }
@@ -64,7 +67,46 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 
             </td>
 			<td style="width: 25%;text-align:right">
-			FACTURA Nº <?php echo $numero_factura;?>
+			FACTURA Nº
+			<?php 
+			$factura = $numero_factura;
+            $cantidad = strlen($numero_factura);  
+			if($cantidad == "1")
+			{
+				$numero_factura = "0000000".$numero_factura;
+			}
+
+            if($cantidad == "2")
+			{
+				$numero_factura = "000000".$numero_factura;
+			}
+
+			if($cantidad == "3")
+			{
+				$numero_factura = "00000".$numero_factura;
+			}
+
+			if($cantidad == "4")
+			{
+				$numero_factura = "0000".$numero_factura;
+			}
+
+			if($cantidad == "5")
+			{
+				$numero_factura = "000".$numero_factura;
+			}
+
+			if($cantidad == "6")
+			{
+				$numero_factura = "00".$numero_factura;
+			}
+
+			if($cantidad == "7")
+			{
+				$numero_factura = "0".$numero_factura;
+			}
+                echo $numero_factura;
+			?>
 			</td>
 			
         </tr>
@@ -187,14 +229,14 @@ while ($row=mysqli_fetch_array($sql))
 ?>
 	  
         <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL &#36; </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% &#36; </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
         </tr><tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL &#36; </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
         </tr>
     </table>
@@ -211,6 +253,81 @@ while ($row=mysqli_fetch_array($sql))
 
 <?php
 $date=date("Y-m-d H:i:s");
+
 $insert=mysqli_query($con,"INSERT INTO facturas VALUES (0,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
+
+	//Creamos Archivo txt
+    $pdf = "10292356817-01-F002-".$numero_factura;
+	$ruc = "10292356817-01-F002-".$numero_factura.".CAB";
+	$date=date("Y-m-d");
+	$documento = $rw_cliente['ruc'];
+	$nombre = $rw_cliente['nombre_cliente'];	
+	$tipodocumento = "";
+	if(strlen($documento)=="7"){
+		$tipodocumento = "1";
+	}
+	if(strlen($documento)=="11"){
+		$tipodocumento = "6";
+	}
+   
+	$file =fopen($ruc, "a") or die("Problemas");
+	fputs($file, "08|".$date."|0|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$total_iva."|0.00|0.00|".$total_factura."|");
+	fclose($file);  
+
+    //Creamos Archivo Detalle Sunat
+	$ruc2 = "10292356817-01-F002-".$numero_factura.".DET";
+	$file2 =fopen($ruc2, "a") or die("Problemas");
+	$sql=mysqli_query($con, "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura."'");
+	while ($row=mysqli_fetch_array($sql))
+	{
+	$cantidad=$row["cantidad"].".00";
+	$codigoproducto=$row["codigo_producto"];
+	$nombreproducto = $row["nombre_producto"];
+	$precioproducto = $row["precio_producto"];
+	$pos = strpos($precioproducto, ".");
+	if ($pos === false) {
+        $precioproducto = $precioproducto.".00";
+	} 
+    
+    $preciototalunitario =  $cantidad * $precioproducto;
+	$pos2 = strpos($preciototalunitario, ".");
+	if ($pos2 === false) {
+        $preciototalunitario = $preciototalunitario.".00";
+	} 
+	$igv=($preciototalunitario * TAX )/100;
+	$igv=number_format($igv,2,'.','');
+    $total = $preciototalunitario + $igv;
+	$pos3 = strpos($total, ".");
+	if ($pos3 === false) {
+        $total = $total.".00";
+	} 
+
+	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
+	fwrite($file2,"\n");  
+	
+	}
+	fclose($file2);
+
+
+    //Creamos Archivo Adicional Cabecera
+	$ruc3 = "10292356817-01-F002-".$numero_factura.".ACA";
+	$file3 =fopen($ruc3, "a") or die("Problemas");
+	$sql=mysqli_query($con, "Select direccion_cliente  from clientes where id_cliente =".$id_cliente."");
+	//echo $sql;
+    $direccion_cliente = "";
+
+	while ($row=mysqli_fetch_array($sql))
+	{
+			
+    	$direccion_cliente = $row["direccion_cliente"];
+	} 
+
+	fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|040102|".$direccion_cliente."||||".$date."|");
+	fwrite($file3,"\n");{  
+	
+	}
+	fclose($file3);
+
+
 ?>

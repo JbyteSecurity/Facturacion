@@ -81,6 +81,67 @@ $( "#editar_cliente" ).submit(function( event ) {
   event.preventDefault();
 })
 
+$("#cboDepartamento").change(function(){
+  	var departamento = $("#cboDepartamento").val()+"0000";
+	$("#cboProvincia").empty();	
+	$.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
+
+			console.log(data.id);
+			var i = 0;
+			var id;
+			var nombre;
+			$.each(JSON.parse(data), function(key, value) {
+		  	
+		    	if(i==0)
+		    	{
+		       		 id = value.toString().split(',');
+				}
+				if(i==1)
+				{
+					 nombre = value.toString().split(',');
+				}
+			i++;
+			}); 
+
+			for (var i=0; i<id.length; i++) {
+			$("#cboProvincia").append('<option name="' + id[i] + '">' + nombre[i] + '</option>');
+		    }
+
+    })
+
+})
+
+$("#cboProvincia").change(function(){
+  	var distrito = $("#cboProvincia").val();
+	$("#cboDistrito").empty();	
+	$.post('../facturacion/inei.php',  { distrito: distrito },  function(data, status, jqXHR) {
+
+			console.log(data.id);
+			var i = 0;
+			var id;
+			var nombre;
+			$.each(JSON.parse(data), function(key, value) {
+		  	
+		    	if(i==0)
+		    	{
+		       		 id = value.toString().split(',');
+				}
+				if(i==1)
+				{
+					 nombre = value.toString().split(',');
+				}
+			i++;
+			}); 
+
+			for (var i=0; i<id.length; i++) {
+			$("#cboDistrito").append('<option name="' + id[i] + '">' + nombre[i] + '</option>');
+		    }
+
+    })
+
+})
+
+				
 	function obtener_datos(id){
 			var nombre_cliente = $("#nombre_cliente"+id).val();
 			var telefono_cliente = $("#telefono_cliente"+id).val();

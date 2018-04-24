@@ -31,10 +31,14 @@
 	$id_vendedor=intval($_GET['id_vendedor']);
 	$condiciones=mysqli_real_escape_string($con,(strip_tags($_REQUEST['condiciones'], ENT_QUOTES)));
 
+	
+	
+
 	//Fin de variables por GET
 	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_factura) as last from facturas order by id_factura desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);
 	$numero_factura=$rw['last']+1;	
+
     // get the HTML
      ob_start();
 	 include(dirname('__FILE__').'/res/factura_html.php');
@@ -50,7 +54,8 @@
         // convert
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
         // send the PDF
-        $html2pdf->Output('Factura.pdf');
+		$html2pdf->Output('Factura'.$pdf.'.pdf');
+		//$html2pdf->Output('Factura.pdf');
     }
     catch(HTML2PDF_exception $e) {
         echo $e;

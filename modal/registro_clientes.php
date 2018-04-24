@@ -47,6 +47,62 @@
 				  
 				</div>
 			  </div>
+
+			  <div class="form-group">
+				<label for="direccion" class="col-sm-3 control-label">Departamento:</label>
+				<div class="col-sm-8">
+
+				<select class="form-control" name="select4" id="cboDepartamento">
+      				<option value="">TODOS</option>
+    				<option value="01">01 Amazonas</option>
+					<option value="02">02 Áncash</option>
+					<option value="03">03 Apurímac</option>
+					<option value="04">04 Arequipa</option>
+					<option value="05">05 Ayacucho</option>
+					<option value="06">06 Cajamarca</option>
+					<option value="07">07 Callao</option>
+					<option value="08">08 Cusco</option>
+					<option value="09">09 Huancavelica</option>
+					<option value="10">10 Huánuco</option>
+					<option value="11">11 Ica</option>
+					<option value="12">12 Junín</option>
+					<option value="13">13 La Libertad</option>
+					<option value="14">14 Lambayeque</option>
+					<option value="15">15 Lima</option>
+					<option value="16">16 Loreto</option>
+					<option value="17">17 Madre de Dios</option>
+					<option value="18">18 Moquegua</option>
+					<option value="19">19 Pasco</option>
+					<option value="20">20 Piura</option>
+					<option value="21">21 Puno</option>
+					<option value="22">22 San Martín</option>
+					<option value="23">23 Tacna</option>
+					<option value="24">24 Tumbes</option>
+   					<option value="25">25 Ucayali</option>
+        		</select> 
+				</div>
+			  </div>
+
+
+ 			  <div class="form-group">
+				<label for="Provincia" class="col-sm-3 control-label">Provincia:</label>
+				<div class="col-sm-8">
+
+				<select class="form-control" name="select5" id="cboProvincia">
+        		</select> 
+				</div>
+			  </div>
+			  
+			   <div class="form-group">
+				<label for="Distrito" class="col-sm-3 control-label">Distrito:</label>
+				<div class="col-sm-8">
+
+				<select class="form-control" name="select6" id="cboDistrito">
+        		</select> 
+				</div>
+			  </div>
+			  
+
 			  
 			  <div class="form-group">
 				<label for="estado" class="col-sm-3 control-label">Estado</label>
