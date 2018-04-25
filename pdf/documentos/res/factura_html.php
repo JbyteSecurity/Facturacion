@@ -321,7 +321,7 @@ $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	{
 			
     	$direccion_cliente = $row["direccion_cliente"];
-		$ubigeo = $row["direccion_cliente"];
+		$ubigeo = $row["ubigeo"];
 	} 
 
 	fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|".$ubigeo."|".$direccion_cliente."||||".$date."|");
