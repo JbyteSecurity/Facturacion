@@ -115,12 +115,46 @@ $("#cboDepartamento").change(function(){
     })
 
 })
-
 $("#cboDepartamento2").change(function(){
 	
+	var departamento = $("#cboDepartamento2").val()+"0000";
+	$("#cboProvincia2").empty();	
+	$("#cboProvincia2").append('<option value="0">TODOS</option>');
+	$.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
+  
+			//alert(data);
+			var i = 0;
+			var id;
+			var nombre;
+			$.each(JSON.parse(data), function(key, value) {		  	
+				if(i==0)
+				{
+						id = value.toString().split(',');
+				}
+				if(i==1)
+				{
+					 nombre = value.toString().split(',');
+				}
+				if(i==2)
+				{
+					 region_id = value.toString().split(',');
+				}
+			i++;
+			}); 
+  
+			for (var i=0; i<id.length; i++) {
+			$("#cboProvincia2").append('<option value="' + region_id[i] +'-'+id[i]+ '">' + nombre[i] + '</option>');
+			}
+  
+	})
+  
+  })
+  
+$("#cboProvincia2").click(function(){
+	
   var departamento = $("#cboDepartamento2").val()+"0000";
-  $("#cboProvincia2").empty();	
-  $("#cboProvincia2").append('<option value="0">TODOS</option>');
+  //$("#cboProvincia2").empty();	
+  //$("#cboProvincia2").append('<option value="0">TODOS</option>');
   $.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
 
 		  //alert(data);
@@ -150,40 +184,7 @@ $("#cboDepartamento2").change(function(){
   })
 
 })
-function provincia()
-{
-	var departamento = $("#cboDepartamento2").val()+"0000";
-  $("#cboProvincia2").empty();	
-  $("#cboProvincia2").append('<option value="0">TODOS</option>');
-  $.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
 
-		  //alert(data);
-		  var i = 0;
-		  var id;
-		  var nombre;
-		  $.each(JSON.parse(data), function(key, value) {		  	
-			  if(i==0)
-			  {
-					  id = value.toString().split(',');
-			  }
-			  if(i==1)
-			  {
-				   nombre = value.toString().split(',');
-			  }
-			  if(i==2)
-			  {
-				   region_id = value.toString().split(',');
-			  }
-		  i++;
-		  }); 
-
-		  for (var i=0; i<id.length; i++) {
-		  $("#cboProvincia2").append('<option value="' + region_id[i] +'-'+id[i]+ '">' + nombre[i] + '</option>');
-		  }
-
-  })
-
-}
 $("#cboProvincia").change(function(){
 	  var provincia = $("#cboProvincia").val();
 	 	  
@@ -246,6 +247,36 @@ $("#cboProvincia2").change(function(){
 
 })
 
+$("#cboDistrito2").click(function(){
+	var provincia = $("#cboProvincia2").val();
+		 
+  //$("#cboDistrito2").empty();	
+  //$("#cboDistrito2").append('<option value="0">TODOS</option>');
+  $.post('../facturacion/inei.php',  { provincia: provincia },  function(data, status, jqXHR) {
+		  
+		  var i = 0;
+		  var id;
+		  var nombre;
+		  $.each(JSON.parse(data), function(key, value) {
+			
+			  if(i==0)
+			  {
+					  id = value.toString().split(',');
+			  }
+			  if(i==1)
+			  {
+				   nombre = value.toString().split(',');
+			  }
+		  i++;
+		  }); 
+
+		  for (var i=0; i<id.length; i++) {
+		  $("#cboDistrito2").append('<option value="' + id[i] + '">' + nombre[i] + '</option>');
+		  }
+
+  })
+
+})
 				
 	function obtener_datos(id){
 			var nombre_cliente = $("#nombre_cliente"+id).val();
@@ -266,17 +297,15 @@ $("#cboProvincia2").change(function(){
 	
 	function obtener_ubigeo(id)
 	{  
-		alert("ubigeo");	
 		$.post('../facturacion/inei.php',  { id: id },  function(data, status, jqXHR) {
 		var obj = jQuery.parseJSON(data)
 		console.log(obj)
 		var departamento_id = obj.departamento_id.substring(0, 2);
-		
+		//alert(obj.provincia);
 		$("select[name='select4']").find("option[value='"+departamento_id+"']").attr("selected",true);
-		provincia();
-		alert(obj.provincia_id);
-		$("select[name='select5']").find("option[value='"+obj.provincia_id+"']").attr("selected",true);
-		$("select[name='select6']").find("option[value='"+obj.ubigeo_id+"']").attr("selected",true);
+		$("#cboProvincia2").append('<option value="' + obj.provincia_id + '">' +obj.provincia+ '</option>');
+		$("#cboDistrito2").append('<option value="' + obj.ubigeo_id + '">' +obj.ubigeo+ '</option>');
+		   
 		})
 	}	
 		
