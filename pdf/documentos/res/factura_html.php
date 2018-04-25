@@ -313,7 +313,7 @@ $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
     //Creamos Archivo Adicional Cabecera
 	$ruc3 = "10292356817-01-F002-".$numero_factura.".ACA";
 	$file3 =fopen($ruc3, "a") or die("Problemas");
-	$sql=mysqli_query($con, "Select direccion_cliente  from clientes where id_cliente =".$id_cliente."");
+	$sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
 	//echo $sql;
     $direccion_cliente = "";
 
@@ -321,9 +321,10 @@ $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 	{
 			
     	$direccion_cliente = $row["direccion_cliente"];
+		$ubigeo = $row["direccion_cliente"];
 	} 
 
-	fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|040102|".$direccion_cliente."||||".$date."|");
+	fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|".$ubigeo."|".$direccion_cliente."||||".$date."|");
 	fwrite($file3,"\n");{  
 	
 	}
