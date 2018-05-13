@@ -10,6 +10,7 @@
 		exit;
         }
 	$active_facturas="active";
+	$active_nota="";
 	$active_productos="";
 	$active_clientes="";
 	$active_usuarios="";	

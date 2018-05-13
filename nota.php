@@ -10,7 +10,8 @@
 		exit;
         }
 	
-	$active_facturas="active";
+	$active_nota="active";
+	$active_facturas="";
 	$active_productos="";
 	$active_clientes="";
 	$active_usuarios="";	
@@ -30,7 +31,7 @@
 		<div class="panel panel-info">
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
-				<a  href="nueva_factura.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Nota de Credito</a>
+				<a  href="nueva_nota.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nueva Nota de Credito</a>
 			</div>
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Nota de Credito</h4>
 		</div>
@@ -38,13 +39,10 @@
 				<form class="form-horizontal" role="form" id="datos_cotizacion">
 				
 						<div class="form-group row">
-							<label for="q" class="col-md-2 control-label">Cliente o # de nota de credito</label>
+							<label for="q" class="col-md-2 control-label">Numero de nota de credito</label>
 							<div class="col-md-5">
 								<input type="text" class="form-control" id="q" placeholder="Nombre del cliente o # de nota de credito" onkeyup='load(1);'>
 							</div>
-							
-							
-							
 							<div class="col-md-3">
 								<button type="button" class="btn btn-default" onclick='load(1);'>
 									<span class="glyphicon glyphicon-search" ></span> Buscar</button>
@@ -67,6 +65,6 @@
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
-	<script type="text/javascript" src="js/facturas.js"></script>
+	<script type="text/javascript" src="js/nota.js"></script>
   </body>
 </html>

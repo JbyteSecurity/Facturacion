@@ -37,9 +37,10 @@
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		 $sTable = "nota";
 		 $sWhere = "";
+
 		if ( $_GET['q'] != "" )
 		{
-		$sWhere.= " where  numero_nota like '%$q%')";
+		$sWhere.= " where  numero_nota like '%$q%'";
 			
 		}
 		
@@ -52,8 +53,10 @@
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
 		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
+		//echo "SELECT count(*) AS numrows FROM $sTable  $sWhere";
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
+		//echo $numrows;
 		$total_pages = ceil($numrows/$per_page);
 		$reload = './nota.php';
 		//main query to fetch the data
@@ -68,12 +71,10 @@
 				<tr  class="info">
 					<th>#</th>
 					<th>Fecha</th>
-					<th>Cliente</th>
-					<th>Vendedor</th>
-					<th>Estado</th>
-					<th class='text-right'>Total</th>
-					<th class='text-right'>Acciones</th>
-					
+					<th>Nota</th>
+					<th>Factura</th>
+					<th>Tipo Nota</th>
+					<th>Motivo</th>					
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
@@ -87,7 +88,13 @@
 					?>
 					<tr>
 						<td><?php echo $numero_nota; ?></td>
-						<td><?php echo $fecha; ?></td>						
+						<td><?php echo $fecha; ?></td>		
+						<td><?php echo $numero_nota; ?></td>
+						<td><?php echo $numero_factura; ?></td>	
+						<td><?php echo $tipo_nota; ?></td>
+						<td><?php echo $motivo; ?></td>					
+
+
 					<td class="text-right">
 						<a href="editar_nota.php?id_nota=<?php echo $id_nota;?>" class='btn btn-default' title='Editar nota' ><i class="glyphicon glyphicon-edit"></i></a> 
 						<a href="#" class='btn btn-default' title='Descargar nota de credito' onclick="imprimir_nota('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 

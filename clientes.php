@@ -22,6 +22,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <head>
     <?php include("head.php");?>
   </head>
@@ -81,5 +82,6 @@
 	include("footer.php");
 	?>		
 	<script type="text/javascript" src="js/clientes.js"></script>	
+	<script type="text/javascript" src="modal/registro_clientes.js"></script>
   </body>
 </html>
