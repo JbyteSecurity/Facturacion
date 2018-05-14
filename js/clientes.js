@@ -48,7 +48,7 @@ $( "#guardar_cliente" ).submit(function( event ) {
   
  var parametros = $(this).serialize();
 	 $.ajax({
-			type: "POST",
+			type: "POST", 
 			url: "ajax/nuevo_cliente.php",
 			data: parametros,
 			 beforeSend: function(objeto){
