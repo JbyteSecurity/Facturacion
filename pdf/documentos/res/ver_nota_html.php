@@ -64,7 +64,45 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 
             </td>
 			<td style="width: 25%;text-align:right">
-			NOTA Nº <?php echo $numero_nota;?>
+			NOTA Nº <?php 
+			//echo $numero_nota;
+			$cantidad = strlen($numero_nota);  
+			if($cantidad == "1")
+			{
+				$numero_nota = "0000000".$numero_nota;
+			}
+
+            if($cantidad == "2")
+			{
+				$numero_nota = "000000".$numero_nota;
+			}
+
+			if($cantidad == "3")
+			{
+				$numero_nota = "00000".$numero_nota;
+			}
+
+			if($cantidad == "4")
+			{
+				$numero_nota = "0000".$numero_nota;
+			}
+
+			if($cantidad == "5")
+			{
+				$numero_nota = "000".$numero_nota;
+			}
+
+			if($cantidad == "6")
+			{
+				$numero_nota = "00".$numero_nota;
+			}
+
+			if($cantidad == "7")
+			{
+				$numero_nota = "0".$numero_nota;
+			}
+			echo $numero_nota;
+			?>
 			</td>
 			
         </tr>
