@@ -96,9 +96,9 @@
 
 
 					<td class="text-right">
-						<a href="editar_nota.php?id_nota=<?php echo $id_nota;?>" class='btn btn-default' title='Editar nota' ><i class="glyphicon glyphicon-edit"></i></a> 
-						<a href="#" class='btn btn-default' title='Descargar nota de credito' onclick="imprimir_nota('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
-						<a href="#" class='btn btn-default' title='Borrar nota de credito' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
+					<!--<a href="editar_nota.php?id_nota=<?php echo $id_nota;?>" class='btn btn-default' title='Editar nota' ><i class="glyphicon glyphicon-edit"></i></a> --> 
+						<a href="#" class='btn btn-default' title='Descargar nota de credito' onclick="imprimir_nota('<?php echo $id_nota;?>');"><i class="glyphicon glyphicon-download"></i></a> 
+					<!--<a href="#" class='btn btn-default' title='Borrar nota de credito' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>-->
 					</td>
 						
 					</tr>

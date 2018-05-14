@@ -175,14 +175,14 @@ while ($row=mysqli_fetch_array($sql))
 ?>
 	  
         <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL &#36; </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% &#36; </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
         </tr><tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL &#36; </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
         </tr>
     </table>

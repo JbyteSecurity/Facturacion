@@ -22,24 +22,24 @@ function load(page){
 
 
 
-    function eliminar (id)
-{
-    var q= $("#q").val();
-if (confirm("Realmente deseas eliminar la nota de credito")){	
-$.ajax({
-type: "GET",
-url: "./ajax/buscar_nota.php",
-data: "id="+id,"q":q,
- beforeSend: function(objeto){
-    $("#resultados").html("Mensaje: Cargando...");
-  },
-success: function(datos){
-$("#resultados").html(datos);
-load(1);
-}
-    });
-}
-}
+//     function eliminar (id)
+// {
+//     var q= $("#q").val();
+// if (confirm("Realmente deseas eliminar la nota de credito")){	
+// $.ajax({
+// type: "GET",
+// url: "./ajax/buscar_nota.php",
+// data: "id="+id,"q":q,
+//  beforeSend: function(objeto){
+//     $("#resultados").html("Mensaje: Cargando...");
+//   },
+// success: function(datos){
+// $("#resultados").html(datos);
+// load(1);
+// }
+//     });
+// }
+// }
 
 function imprimir_nota(id_nota){
     VentanaCentrada('./pdf/documentos/ver_nota.php?id_nota='+id_nota,'Nota','','1024','768','true');
