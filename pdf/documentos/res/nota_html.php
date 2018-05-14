@@ -221,7 +221,7 @@ $numero_nota=$rw['last']+1;
 
 
 $insert=mysqli_query($con,"INSERT INTO nota VALUES (0,'$numero_nota','$date','$tipo_nota','$numero_factura','$motivo','$id_vendedor')");
-	
+	 $factura = $numero_factura;
 	 $cantidad = strlen($numero_factura);  
 			if($cantidad == "1")
 			{
@@ -277,60 +277,40 @@ $insert=mysqli_query($con,"INSERT INTO nota VALUES (0,'$numero_nota','$date','$t
 	fputs($file, $date."|01|".$tipo_nota."|01|".$factura."|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|".$subtotal."|0.00|0.00|".$total_iva."|0.00|0.00|".$total_factura."|");
 	fclose($file);  
 
- //    //Creamos Archivo Detalle Sunat
-	// $ruc2 = "10292356817-01-F002-".$numero_factura.".DET";
-	// $file2 =fopen($ruc2, "a") or die("Problemas");
-	// $sql=mysqli_query($con, "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura."'");
-	// while ($row=mysqli_fetch_array($sql))
-	// {
-	// $cantidad=$row["cantidad"].".00";
-	// $codigoproducto=$row["codigo_producto"];
-	// $nombreproducto = $row["nombre_producto"];
-	// $precioproducto = $row["precio_producto"];
-	// $pos = strpos($precioproducto, ".");
-	// if ($pos === false) {
- //        $precioproducto = $precioproducto.".00";
-	// } 
+    //Creamos Archivo Detalle Sunat
+	$ruc2 = "10292356817-07-F002-".$numero_factura.".DET";
+	$file2 =fopen($ruc2, "a") or die("Problemas");
+	$sql=mysqli_query($con, "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura."'");
+	while ($row=mysqli_fetch_array($sql))
+	{
+	    $cantidad=$row["cantidad"].".00";
+		$codigoproducto=$row["codigo_producto"];
+		$nombreproducto = $row["nombre_producto"];
+		$precioproducto = $row["precio_producto"];
+		$pos = strpos($precioproducto, ".");
+		if ($pos === false) {
+         $precioproducto = $precioproducto.".00";
+		} 
     
- //    $preciototalunitario =  $cantidad * $precioproducto;
-	// $pos2 = strpos($preciototalunitario, ".");
-	// if ($pos2 === false) {
- //        $preciototalunitario = $preciototalunitario.".00";
-	// } 
-	// $igv=($preciototalunitario * TAX )/100;
-	// $igv=number_format($igv,2,'.','');
- //    $total = $preciototalunitario + $igv;
-	// $pos3 = strpos($total, ".");
-	// if ($pos3 === false) {
- //        $total = $total.".00";
-	// } 
-
-	// fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
-	// fwrite($file2,"\n");  
+ 		$preciototalunitario =  $cantidad * $precioproducto;
+	    $pos2 = strpos($preciototalunitario, ".");
+		if ($pos2 === false) {
+        $preciototalunitario = $preciototalunitario.".00";
+		} 
+		$igv=($preciototalunitario * TAX )/100;
+		$igv=number_format($igv,2,'.','');
+ 		$total = $preciototalunitario + $igv;
+		$pos3 = strpos($total, ".");
+		if ($pos3 === false) {
+         $total = $total.".00";
+		} 
+		
+		fwrite($file2, "ZZ|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
+		//fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
+		fwrite($file2,"\n");  
 	
-	// }
-	// fclose($file2);
+	}
+		fclose($file2);
 
-
- //    //Creamos Archivo Adicional Cabecera
-	// $ruc3 = "10292356817-01-F002-".$numero_factura.".ACA";
-	// $file3 =fopen($ruc3, "a") or die("Problemas");
-	// $sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
-	// //echo $sql;
- //    $direccion_cliente = "";
-
-	// while ($row=mysqli_fetch_array($sql))
-	// {
-			
- //    	$direccion_cliente = $row["direccion_cliente"];
-	// 	$ubigeo = $row["ubigeo"];
-	// } 
-
-	// fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|".$ubigeo."|".$direccion_cliente."||||".$date."|");
-	// fwrite($file3,"\n");{  
-	
-	// }
-	// fclose($file3);
-
-
+ 
 ?>
