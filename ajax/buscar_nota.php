@@ -74,7 +74,8 @@
 					<th>Nota</th>
 					<th>Factura</th>
 					<th>Tipo Nota</th>
-					<th>Motivo</th>					
+					<th>Motivo</th>		
+					<th>Accion</th>				
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
