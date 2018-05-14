@@ -68,7 +68,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
             </td>
 			<td style="width: 25%;text-align:right">
 			NOTA Nº
-			<?php 			
+			<?php 
+					
             echo $numero_nota;
 			?>
 			</td>
@@ -150,7 +151,7 @@ while ($row=mysqli_fetch_array($sql))
 	$codigo_producto=$row['codigo_producto'];
 	$cantidad=$row['cantidad'];
 	$nombre_producto=$row['nombre_producto'];
-	
+	$factura_num = $row['numero_factura'];
 	$precio_venta=$row['precio_venta'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
@@ -221,7 +222,7 @@ $numero_nota=$rw['last']+1;
 
 
 $insert=mysqli_query($con,"INSERT INTO nota VALUES (0,'$numero_nota','$date','$tipo_nota','$numero_factura','$motivo','$id_vendedor')");
-	 $factura = $numero_factura;
+	 
 	 $cantidad = strlen($numero_factura);  
 			if($cantidad == "1")
 			{
@@ -280,7 +281,8 @@ $insert=mysqli_query($con,"INSERT INTO nota VALUES (0,'$numero_nota','$date','$t
     //Creamos Archivo Detalle Sunat
 	$ruc2 = "10292356817-07-F002-".$numero_factura.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
-	$sql=mysqli_query($con, "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura."'");
+	$query = "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura_num."'";
+	$sql=mysqli_query($con, $query);	
 	while ($row=mysqli_fetch_array($sql))
 	{
 	    $cantidad=$row["cantidad"].".00";
