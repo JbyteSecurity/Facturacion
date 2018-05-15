@@ -218,6 +218,11 @@ while ($row=mysqli_fetch_array($sql))
 
 	<?php 
 	//Insert en la tabla detalle_cotizacion
+	$sql=mysqli_query($con, "select numero from correlativos where documento ='Factura' ");
+	$rw=mysqli_fetch_array($sql);
+	$numero_factura=$rw['numero'];	
+	$nuevo_numero = $rw['numero'] + 1;	
+
 	$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES (0,'$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
 	
 	$nums++;
@@ -233,7 +238,7 @@ while ($row=mysqli_fetch_array($sql))
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% &#36; </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
@@ -256,7 +261,44 @@ $date=date("Y-m-d H:i:s");
 
 $insert=mysqli_query($con,"INSERT INTO facturas VALUES (0,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
+$insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_numero where documento ='Factura' ");	 
+			$cantidad = strlen($numero_factura);  
+			if($cantidad == "1")
+			{
+				$numero_factura = "0000000".$numero_factura;
+			}
 
+            if($cantidad == "2")
+			{
+				$numero_factura = "000000".$numero_factura;
+			}
+
+			if($cantidad == "3")
+			{
+				$numero_factura = "00000".$numero_factura;
+			}
+
+			if($cantidad == "4")
+			{
+				$numero_factura = "0000".$numero_factura;
+			}
+
+			if($cantidad == "5")
+			{
+				$numero_factura = "000".$numero_factura;
+			}
+
+			if($cantidad == "6")
+			{
+				$numero_factura = "00".$numero_factura;
+			}
+
+			if($cantidad == "7")
+			{
+				$numero_factura = "0".$numero_factura;
+			}
+                
+			
 	//Creamos Archivo txt
     $pdf = "10292356817-01-F002-".$numero_factura;
 	$ruc = "10292356817-01-F002-".$numero_factura.".CAB";

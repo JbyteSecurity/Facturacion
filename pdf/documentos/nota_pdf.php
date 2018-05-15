@@ -26,7 +26,7 @@
 	
 
 	//Fin de variables por GET
-	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_factura) as last from nota order by id_nota desc limit 0,1 ");
+	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_nota) as last from nota order by id_nota desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);
 	$numero_nota=$rw['last']+1;	
 

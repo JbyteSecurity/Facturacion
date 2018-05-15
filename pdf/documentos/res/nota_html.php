@@ -70,7 +70,42 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 			NOTA Nº
 			<?php 
 					
-            echo $numero_nota;
+            $cantidad = strlen($numero_nota);  
+			if($cantidad == "1")
+			{
+				$numero_nota = "0000000".$numero_nota;
+			}
+
+            if($cantidad == "2")
+			{
+				$numero_nota = "000000".$numero_nota;
+			}
+
+			if($cantidad == "3")
+			{
+				$numero_nota = "00000".$numero_nota;
+			}
+
+			if($cantidad == "4")
+			{
+				$numero_nota = "0000".$numero_nota;
+			}
+
+			if($cantidad == "5")
+			{
+				$numero_nota = "000".$numero_nota;
+			}
+
+			if($cantidad == "6")
+			{
+				$numero_nota = "00".$numero_nota;
+			}
+
+			if($cantidad == "7")
+			{
+				$numero_nota = "0".$numero_nota;
+			}
+			echo $numero_nota;
 			?>
 			</td>
 			
@@ -194,7 +229,7 @@ while ($row=mysqli_fetch_array($sql))
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% &#36; </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
@@ -215,14 +250,15 @@ while ($row=mysqli_fetch_array($sql))
 <?php
 $date=date("Y-m-d H:i:s");
 
-$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_nota) as last from nota order by id_nota desc limit 0,1 ");
+$sql=mysqli_query($con, "select numero from correlativos where documento ='nota' ");
 $rw=mysqli_fetch_array($sql);
-$numero_nota=$rw['last']+1;	
+$numero_nota=$rw['numero'];	
+$nuevo_numero = $rw['numero'] + 1;	
 
 
 
 $insert=mysqli_query($con,"INSERT INTO nota VALUES (0,'$numero_nota','$date','$tipo_nota','$numero_factura','$motivo','$id_vendedor')");
-	 
+$insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_numero where documento ='Nota' ");	 
 	 $cantidad = strlen($numero_factura);  
 			if($cantidad == "1")
 			{

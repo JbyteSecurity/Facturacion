@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 25, 2018 at 01:42 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Servidor: localhost
+-- Tiempo de generación: 15-05-2018 a las 04:43:39
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `simple_invoice`
+-- Base de datos: `simple_invoice`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clientes`
+-- Estructura de tabla para la tabla `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -43,23 +43,35 @@ CREATE TABLE `clientes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `clientes`
+-- Volcado de datos para la tabla `clientes`
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre_cliente`, `ruc`, `telefono_cliente`, `email_cliente`, `direccion_cliente`, `departamento`, `provincia`, `ubigeo`, `status_cliente`, `date_added`) VALUES
-(1, 'Fondesurco', '2147483647', '22323223', 'jordan_diaz_diaz@hotmail.com', 'Calle Colombia 203', '', '', '', 1, '2018-04-12 03:29:41'),
-(2, 'Jordan', '214748364712', '22323223', 'jordan_diaz_diaz@hotmail.com', 'wewewewewe', '', '', '', 1, '2018-04-13 05:32:36'),
-(3, 'Fondesurco3', '2147483647', '22323223', 'jordan_diaz_diaz@hotmail.com', '', '', '', '', 1, '2018-04-13 05:35:05'),
-(4, 'Fondesurco4', '2147483647', '22323223', 'jordan_diaz_diaz@hotmail.com', '', '', '', '', 1, '2018-04-13 05:37:21'),
-(5, 'JordanDiaz', '12345678901', '22323223', 'jordan_diaz_diaz@hotmail.com', 'wwewew', '', '', '', 1, '2018-04-13 05:44:29'),
-(6, 'Fabr', '12345678966', '32323', 'sdsdqs@ddd.com', 'dsddd', '', '', '040701', 1, '2018-04-24 19:48:05'),
-(7, '3232', '12345678966', '3232332', 'jordan_diaz_diaz@gmail.com', 'wewewew', '120000', '', '120708', 1, '2018-04-24 23:24:39'),
-(8, 'ewewe', '12345678966', '23232', 'jordan_diaz_diaz@gmail.com', 'wwewe', '130000', '131100', '131102', 1, '2018-04-24 23:32:05');
+(6, 'COOPERATIVA DE AHORRO Y CREDITO FONDESURCO', '20600147952', '22323223', 'jordan_diaz_diaz@hotmail.com', 'LA NEGRITA', '040000', '040100', '040101', 1, '2018-05-15 04:31:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalle_factura`
+-- Estructura de tabla para la tabla `correlativos`
+--
+
+CREATE TABLE `correlativos` (
+  `documento` text NOT NULL,
+  `numero` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `correlativos`
+--
+
+INSERT INTO `correlativos` (`documento`, `numero`) VALUES
+('Factura', 9),
+('Nota', 8);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_factura`
 --
 
 CREATE TABLE `detalle_factura` (
@@ -71,7 +83,7 @@ CREATE TABLE `detalle_factura` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `detalle_factura`
+-- Volcado de datos para la tabla `detalle_factura`
 --
 
 INSERT INTO `detalle_factura` (`id_detalle`, `numero_factura`, `id_producto`, `cantidad`, `precio_venta`) VALUES
@@ -175,12 +187,20 @@ INSERT INTO `detalle_factura` (`id_detalle`, `numero_factura`, `id_producto`, `c
 (98, 85, 2, 1, 12),
 (99, 85, 1, 1, 15.56),
 (100, 86, 2, 1, 12),
-(101, 86, 1, 1, 15.56);
+(101, 86, 1, 1, 15.56),
+(102, 1, 2, 1, 12),
+(103, 2, 1, 1, 15.56),
+(104, 3, 1, 1, 15.56),
+(105, 4, 2, 1, 12),
+(106, 5, 2, 1, 12),
+(107, 6, 2, 1, 12),
+(108, 7, 2, 1, 12),
+(109, 8, 1, 1, 15.56);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `districts`
+-- Estructura de tabla para la tabla `districts`
 --
 
 CREATE TABLE `districts` (
@@ -193,7 +213,7 @@ CREATE TABLE `districts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `districts`
+-- Volcado de datos para la tabla `districts`
 --
 
 INSERT INTO `districts` (`id`, `name`, `region_id`, `province_id`, `created_at`, `updated_at`) VALUES
@@ -2077,7 +2097,7 @@ INSERT INTO `districts` (`id`, `name`, `region_id`, `province_id`, `created_at`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `facturas`
+-- Estructura de tabla para la tabla `facturas`
 --
 
 CREATE TABLE `facturas` (
@@ -2092,101 +2112,50 @@ CREATE TABLE `facturas` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `facturas`
+-- Volcado de datos para la tabla `facturas`
 --
 
 INSERT INTO `facturas` (`id_factura`, `numero_factura`, `fecha_factura`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_factura`) VALUES
-(1, 1, '2018-04-12 03:30:24', 1, 1, '1', '17.55', 1),
-(2, 2, '2018-04-12 03:48:42', 1, 1, '1', '17.55', 1),
-(3, 3, '2018-04-12 03:48:51', 1, 1, '1', '17.55', 1),
-(4, 4, '2018-04-12 03:49:42', 1, 1, '1', '17.55', 1),
-(5, 5, '2018-04-12 03:59:16', 1, 1, '1', '17.55', 1),
-(6, 6, '2018-04-13 03:11:18', 1, 1, '1', '17.55', 1),
-(7, 7, '2018-04-13 03:21:54', 1, 1, '1', '17.55', 1),
-(8, 8, '2018-04-13 03:23:29', 1, 1, '1', '17.55', 1),
-(9, 9, '2018-04-13 03:28:15', 1, 1, '1', '17.55', 1),
-(10, 10, '2018-04-13 03:35:38', 1, 1, '1', '17.55', 1),
-(11, 11, '2018-04-13 03:53:01', 1, 1, '1', '17.55', 1),
-(12, 12, '2018-04-13 04:00:07', 1, 1, '1', '15', 1),
-(13, 13, '2018-04-13 04:01:57', 1, 1, '1', '15', 1),
-(14, 14, '2018-04-13 04:04:41', 1, 1, '1', '15', 1),
-(15, 15, '2018-04-13 04:11:12', 1, 1, '1', '15', 1),
-(16, 16, '2018-04-13 04:11:49', 1, 1, '1', '15', 1),
-(17, 17, '2018-04-13 04:12:35', 1, 1, '1', '15', 1),
-(18, 18, '2018-04-13 04:14:52', 1, 1, '1', '17.55', 1),
-(19, 19, '2018-04-13 04:15:32', 1, 1, '1', '17.55', 1),
-(20, 20, '2018-04-13 04:16:30', 1, 1, '1', '17.55', 1),
-(21, 21, '2018-04-13 04:17:04', 1, 1, '1', '17.55', 1),
-(22, 22, '2018-04-13 04:17:33', 1, 1, '1', '17.55', 1),
-(23, 23, '2018-04-13 04:18:38', 1, 1, '1', '17.55', 1),
-(24, 24, '2018-04-13 04:19:14', 1, 1, '1', '17.55', 1),
-(25, 25, '2018-04-13 04:21:07', 1, 1, '1', '17.55', 1),
-(26, 26, '2018-04-13 04:23:11', 1, 1, '1', '17.55', 1),
-(27, 27, '2018-04-13 04:23:59', 1, 1, '1', '17.55', 1),
-(28, 28, '2018-04-13 04:24:31', 1, 1, '1', '17.55', 1),
-(29, 29, '2018-04-13 04:30:18', 1, 1, '1', '17.55', 1),
-(30, 30, '2018-04-13 04:32:04', 1, 1, '1', '17.55', 1),
-(31, 31, '2018-04-13 04:39:35', 1, 1, '1', '17.55', 1),
-(32, 32, '2018-04-13 04:39:50', 1, 1, '1', '17.55', 1),
-(33, 33, '2018-04-13 04:40:38', 1, 1, '1', '17.55', 1),
-(34, 34, '2018-04-13 04:42:14', 1, 1, '1', '17.55', 1),
-(35, 35, '2018-04-13 04:45:14', 1, 1, '1', '17.55', 1),
-(36, 36, '2018-04-13 04:46:14', 1, 1, '1', '17.55', 1),
-(37, 37, '2018-04-13 04:52:51', 1, 1, '1', '17.55', 1),
-(38, 38, '2018-04-13 04:56:42', 1, 1, '1', '17.55', 1),
-(39, 39, '2018-04-13 05:00:26', 1, 1, '1', '17.55', 1),
-(40, 40, '2018-04-13 05:01:57', 1, 1, '1', '17.55', 1),
-(41, 41, '2018-04-13 05:02:38', 1, 1, '1', '17.55', 1),
-(42, 42, '2018-04-13 05:10:12', 1, 1, '1', '17.55', 1),
-(43, 43, '2018-04-13 05:10:38', 1, 1, '1', '17.55', 1),
-(44, 44, '2018-04-13 05:11:27', 1, 1, '1', '17.55', 1),
-(45, 45, '2018-04-13 05:12:21', 1, 1, '1', '17.55', 1),
-(46, 46, '2018-04-13 05:13:50', 1, 1, '1', '17.55', 1),
-(47, 47, '2018-04-13 05:15:07', 1, 1, '1', '17.55', 1),
-(48, 48, '2018-04-13 05:19:47', 1, 1, '1', '17.55', 1),
-(49, 49, '2018-04-13 05:25:13', 1, 1, '1', '17.55', 1),
-(50, 50, '2018-04-13 05:25:45', 1, 1, '1', '17.55', 1),
-(51, 51, '2018-04-13 05:26:26', 1, 1, '1', '17.55', 1),
-(52, 52, '2018-04-13 05:26:44', 1, 1, '1', '17.55', 1),
-(53, 53, '2018-04-13 05:27:50', 1, 1, '1', '17.55', 1),
-(54, 54, '2018-04-13 05:29:07', 1, 1, '1', '17.55', 1),
-(55, 55, '2018-04-13 05:29:53', 1, 1, '1', '17.55', 1),
-(56, 56, '2018-04-13 05:44:47', 5, 1, '1', '17.55', 1),
-(57, 57, '2018-04-13 05:45:50', 5, 1, '1', '17.55', 1),
-(58, 58, '2018-04-13 05:47:58', 5, 1, '1', '17.55', 1),
-(59, 59, '2018-04-13 05:49:14', 5, 1, '1', '17.55', 1),
-(60, 60, '2018-04-13 05:51:23', 5, 1, '1', '35.1', 1),
-(61, 61, '2018-04-13 05:52:19', 5, 1, '1', '17.55', 1),
-(62, 62, '2018-04-13 05:54:00', 5, 1, '1', '17.55', 1),
-(63, 63, '2018-04-13 05:54:57', 5, 1, '1', '17.55', 1),
-(64, 64, '2018-04-13 05:57:09', 5, 1, '1', '17.55', 1),
-(65, 65, '2018-04-13 06:11:59', 5, 1, '1', '17.55', 1),
-(66, 66, '2018-04-13 06:13:05', 5, 1, '1', '17.55', 1),
-(67, 67, '2018-04-13 06:25:41', 5, 1, '1', '35.1', 1),
-(68, 68, '2018-04-13 06:26:46', 5, 1, '1', '35.1', 1),
-(69, 69, '2018-04-13 06:37:12', 5, 1, '1', '17.55', 1),
-(70, 70, '2018-04-13 06:37:53', 5, 1, '1', '17.55', 1),
-(71, 71, '2018-04-13 06:38:37', 5, 1, '1', '17.55', 1),
-(72, 72, '2018-04-13 06:44:41', 5, 1, '1', '18.21', 1),
-(73, 73, '2018-04-13 06:47:43', 5, 1, '1', '32.25', 1),
-(74, 74, '2018-04-13 06:48:48', 5, 1, '1', '32.25', 1),
-(75, 75, '2018-04-13 06:49:58', 5, 1, '1', '32.25', 1),
-(76, 76, '2018-04-13 06:54:00', 5, 1, '1', '32.25', 1),
-(77, 77, '2018-04-13 06:54:49', 5, 1, '1', '32.25', 1),
-(78, 78, '2018-04-13 06:57:10', 5, 1, '1', '32.25', 1),
-(79, 79, '2018-04-13 07:27:11', 5, 1, '1', '32.25', 1),
-(80, 80, '2018-04-13 07:29:09', 5, 1, '1', '46.29', 1),
-(81, 81, '2018-04-13 07:31:26', 5, 1, '1', '46.29', 1),
-(82, 82, '2018-04-13 07:37:49', 5, 1, '1', '32.25', 1),
-(83, 83, '2018-04-22 22:28:52', 1, 1, '1', '32.25', 1),
-(84, 84, '2018-04-22 22:32:17', 1, 1, '1', '32.25', 1),
-(85, 85, '2018-04-22 22:35:42', 1, 1, '1', '32.25', 1),
-(86, 86, '2018-04-22 22:38:21', 1, 1, '1', '32.25', 1);
+(90, 4, '2018-05-15 04:33:24', 6, 1, '1', '14.04', 1),
+(89, 3, '2018-05-15 04:31:56', 6, 1, '1', '18.21', 1),
+(91, 5, '2018-05-15 04:37:04', 6, 1, '1', '14.04', 1),
+(92, 6, '2018-05-15 04:38:15', 6, 1, '1', '14.04', 1),
+(93, 7, '2018-05-15 04:39:44', 6, 1, '1', '14.04', 1),
+(94, 8, '2018-05-15 04:42:21', 6, 1, '1', '18.21', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Estructura de tabla para la tabla `nota`
+--
+
+CREATE TABLE `nota` (
+  `id_nota` bigint(20) UNSIGNED NOT NULL,
+  `numero_nota` int(11) NOT NULL,
+  `fecha_nota` date NOT NULL,
+  `tipo_nota` text NOT NULL,
+  `numero_factura` text NOT NULL,
+  `motivo` text NOT NULL,
+  `id_vendedor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `nota`
+--
+
+INSERT INTO `nota` (`id_nota`, `numero_nota`, `fecha_nota`, `tipo_nota`, `numero_factura`, `motivo`, `id_vendedor`) VALUES
+(14, 1, '2018-05-15', 'ANULACION DE LA OPERACION', '16', 'dddddd', 1),
+(15, 2, '2018-05-15', 'ANULACION DE LA OPERACION', '13', 'dddddd', 1),
+(16, 3, '2018-05-15', 'ANULACION DE LA OPERACION', '12', 'dddddd', 1),
+(17, 4, '2018-05-15', 'ANULACION DE LA OPERACION', '11', 'dddddd', 1),
+(18, 5, '2018-05-15', 'ANULACION DE LA OPERACION', '10', 'dddddd', 1),
+(19, 6, '2018-05-15', 'ANULACION DE LA OPERACION', '4', 'dddddd', 1),
+(20, 7, '2018-05-15', 'ANULACION DE LA OPERACION', '4', 'dddddd', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `products`
 --
 
 CREATE TABLE `products` (
@@ -2199,7 +2168,7 @@ CREATE TABLE `products` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `products`
+-- Volcado de datos para la tabla `products`
 --
 
 INSERT INTO `products` (`id_producto`, `codigo_producto`, `nombre_producto`, `status_producto`, `date_added`, `precio_producto`) VALUES
@@ -2209,7 +2178,7 @@ INSERT INTO `products` (`id_producto`, `codigo_producto`, `nombre_producto`, `st
 -- --------------------------------------------------------
 
 --
--- Table structure for table `provinces`
+-- Estructura de tabla para la tabla `provinces`
 --
 
 CREATE TABLE `provinces` (
@@ -2221,7 +2190,7 @@ CREATE TABLE `provinces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `provinces`
+-- Volcado de datos para la tabla `provinces`
 --
 
 INSERT INTO `provinces` (`id`, `name`, `region_id`, `created_at`, `updated_at`) VALUES
@@ -2425,7 +2394,7 @@ INSERT INTO `provinces` (`id`, `name`, `region_id`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regions`
+-- Estructura de tabla para la tabla `regions`
 --
 
 CREATE TABLE `regions` (
@@ -2436,7 +2405,7 @@ CREATE TABLE `regions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `regions`
+-- Volcado de datos para la tabla `regions`
 --
 
 INSERT INTO `regions` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -2469,7 +2438,7 @@ INSERT INTO `regions` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tmp`
+-- Estructura de tabla para la tabla `tmp`
 --
 
 CREATE TABLE `tmp` (
@@ -2483,7 +2452,7 @@ CREATE TABLE `tmp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -2497,73 +2466,79 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data';
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `user_name`, `user_password_hash`, `user_email`, `date_added`) VALUES
 (1, 'Obed', 'Alvarado', 'admin', '$2y$10$MPVHzZ2ZPOWmtUUGCq3RXu31OTB.jo7M9LZ7PmPQYmgETSNn19ejO', 'admin@admin.com', '2016-05-21 15:06:00');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `clientes`
+-- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`),
   ADD UNIQUE KEY `codigo_producto` (`nombre_cliente`);
 
 --
--- Indexes for table `detalle_factura`
+-- Indices de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
   ADD PRIMARY KEY (`id_detalle`),
   ADD KEY `numero_cotizacion` (`numero_factura`,`id_producto`);
 
 --
--- Indexes for table `districts`
+-- Indices de la tabla `districts`
 --
 ALTER TABLE `districts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `facturas`
+-- Indices de la tabla `facturas`
 --
 ALTER TABLE `facturas`
   ADD PRIMARY KEY (`id_factura`),
   ADD UNIQUE KEY `numero_cotizacion` (`numero_factura`);
 
 --
--- Indexes for table `products`
+-- Indices de la tabla `nota`
+--
+ALTER TABLE `nota`
+  ADD UNIQUE KEY `id_nota` (`id_nota`);
+
+--
+-- Indices de la tabla `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id_producto`),
   ADD UNIQUE KEY `codigo_producto` (`codigo_producto`);
 
 --
--- Indexes for table `provinces`
+-- Indices de la tabla `provinces`
 --
 ALTER TABLE `provinces`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `regions`
+-- Indices de la tabla `regions`
 --
 ALTER TABLE `regions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `tmp`
+-- Indices de la tabla `tmp`
 --
 ALTER TABLE `tmp`
   ADD PRIMARY KEY (`id_tmp`);
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
@@ -2571,41 +2546,47 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `user_email` (`user_email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `detalle_factura`
+-- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
--- AUTO_INCREMENT for table `facturas`
+-- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT de la tabla `nota`
+--
+ALTER TABLE `nota`
+  MODIFY `id_nota` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tmp`
+-- AUTO_INCREMENT de la tabla `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index', AUTO_INCREMENT=2;
