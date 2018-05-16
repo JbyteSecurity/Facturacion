@@ -35,9 +35,9 @@
 	
 
 	//Fin de variables por GET
-	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_factura) as last from facturas order by id_factura desc limit 0,1 ");
+	$sql=mysqli_query($con, "select numero as last from correlativos where documento = 'Factura' ");
 	$rw=mysqli_fetch_array($sql);
-	$numero_factura=$rw['last']+1;	
+	$numero_factura=$rw['last'];	
 
     // get the HTML
      ob_start();

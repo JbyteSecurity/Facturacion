@@ -26,9 +26,9 @@
 	
 
 	//Fin de variables por GET
-	$sql=mysqli_query($con, "select LAST_INSERT_ID(numero_nota) as last from nota order by id_nota desc limit 0,1 ");
+	$sql=mysqli_query($con, "select numero as last from correlativos where documento = 'Nota' ");
 	$rw=mysqli_fetch_array($sql);
-	$numero_nota=$rw['last']+1;	
+	$numero_nota=$rw['last'];	
 
     // get the HTML
      ob_start();
