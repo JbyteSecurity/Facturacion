@@ -15,7 +15,7 @@
 	$active_productos="";
 	$active_clientes="";
 	$active_usuarios="";	
-	$title="Editar Factura | Simple Invoice";
+	$title="Editar Boleta | Simple Invoice";
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -74,7 +74,7 @@
 			include("modal/registro_clientes.php");
 			include("modal/registro_productos.php");
 		?>
-			<form class="form-horizontal" role="form" id="datos_boletas">
+			<form class="form-horizontal" role="form" id="datos_boleta">
 				<div class="form-group row">
 				  <label for="nombre_cliente" class="col-md-1 control-label">Cliente</label>
 				  <div class="col-md-3">

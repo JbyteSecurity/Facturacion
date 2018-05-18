@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-05-2018 a las 04:52:23
+-- Tiempo de generación: 18-05-2018 a las 05:19:02
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -38,6 +38,13 @@ CREATE TABLE `boletas` (
   `total_venta` varchar(20) NOT NULL,
   `estado_boleta` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `boletas`
+--
+
+INSERT INTO `boletas` (`id_boleta`, `numero_boleta`, `fecha_boleta`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_boleta`) VALUES
+(0, 1, '2018-05-18 05:18:07', 6, 1, '1', '14.16', 1);
 
 -- --------------------------------------------------------
 
@@ -83,7 +90,8 @@ CREATE TABLE `correlativos` (
 
 INSERT INTO `correlativos` (`documento`, `numero`) VALUES
 ('Factura', 2349),
-('Nota', 135);
+('Nota', 135),
+('Boleta', 2);
 
 -- --------------------------------------------------------
 
@@ -98,6 +106,13 @@ CREATE TABLE `detalle_boleta` (
   `cantidad` int(11) NOT NULL,
   `precio_venta` double NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_boleta`
+--
+
+INSERT INTO `detalle_boleta` (`id_detalle`, `numero_boleta`, `id_producto`, `cantidad`, `precio_venta`) VALUES
+(0, 1, 2, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -2639,7 +2654,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
