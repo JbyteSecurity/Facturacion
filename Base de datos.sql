@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-05-2018 a las 04:43:39
+-- Tiempo de generación: 18-05-2018 a las 04:52:23
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -21,6 +21,23 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `simple_invoice`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `boletas`
+--
+
+CREATE TABLE `boletas` (
+  `id_boleta` int(11) NOT NULL,
+  `numero_boleta` int(11) NOT NULL,
+  `fecha_boleta` datetime NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_vendedor` int(11) NOT NULL,
+  `condiciones` varchar(30) NOT NULL,
+  `total_venta` varchar(20) NOT NULL,
+  `estado_boleta` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -65,8 +82,22 @@ CREATE TABLE `correlativos` (
 --
 
 INSERT INTO `correlativos` (`documento`, `numero`) VALUES
-('Factura', 9),
-('Nota', 8);
+('Factura', 2349),
+('Nota', 135);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_boleta`
+--
+
+CREATE TABLE `detalle_boleta` (
+  `id_detalle` int(11) NOT NULL,
+  `numero_boleta` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_venta` double NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -195,7 +226,12 @@ INSERT INTO `detalle_factura` (`id_detalle`, `numero_factura`, `id_producto`, `c
 (106, 5, 2, 1, 12),
 (107, 6, 2, 1, 12),
 (108, 7, 2, 1, 12),
-(109, 8, 1, 1, 15.56);
+(109, 8, 1, 1, 15.56),
+(110, 9, 1, 1, 15.56),
+(111, 2345, 1, 1, 15.56),
+(112, 2346, 1, 1, 15.56),
+(113, 2347, 2, 1, 12),
+(114, 2348, 2, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -2121,7 +2157,12 @@ INSERT INTO `facturas` (`id_factura`, `numero_factura`, `fecha_factura`, `id_cli
 (91, 5, '2018-05-15 04:37:04', 6, 1, '1', '14.04', 1),
 (92, 6, '2018-05-15 04:38:15', 6, 1, '1', '14.04', 1),
 (93, 7, '2018-05-15 04:39:44', 6, 1, '1', '14.04', 1),
-(94, 8, '2018-05-15 04:42:21', 6, 1, '1', '18.21', 1);
+(94, 8, '2018-05-15 04:42:21', 6, 1, '1', '18.21', 1),
+(95, 9, '2018-05-16 05:16:57', 6, 1, '1', '18.36', 1),
+(96, 2345, '2018-05-16 05:18:15', 6, 1, '1', '18.36', 1),
+(97, 2346, '2018-05-16 05:28:13', 6, 1, '1', '18.36', 1),
+(98, 2347, '2018-05-16 05:29:02', 6, 1, '1', '14.16', 1),
+(99, 2348, '2018-05-16 05:29:41', 6, 1, '1', '14.16', 1);
 
 -- --------------------------------------------------------
 
@@ -2150,7 +2191,8 @@ INSERT INTO `nota` (`id_nota`, `numero_nota`, `fecha_nota`, `tipo_nota`, `numero
 (17, 4, '2018-05-15', 'ANULACION DE LA OPERACION', '11', 'dddddd', 1),
 (18, 5, '2018-05-15', 'ANULACION DE LA OPERACION', '10', 'dddddd', 1),
 (19, 6, '2018-05-15', 'ANULACION DE LA OPERACION', '4', 'dddddd', 1),
-(20, 7, '2018-05-15', 'ANULACION DE LA OPERACION', '4', 'dddddd', 1);
+(20, 7, '2018-05-15', 'ANULACION DE LA OPERACION', '4', 'dddddd', 1),
+(21, 134, '2018-05-16', 'ANULACION DE LA OPERACION', '4', 'dddddd', 1);
 
 -- --------------------------------------------------------
 
@@ -2477,11 +2519,25 @@ INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `user_name`, `user_pass
 --
 
 --
+-- Indices de la tabla `boletas`
+--
+ALTER TABLE `boletas`
+  ADD PRIMARY KEY (`id_boleta`),
+  ADD UNIQUE KEY `numero_cotizacion` (`numero_boleta`);
+
+--
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`),
   ADD UNIQUE KEY `codigo_producto` (`nombre_cliente`);
+
+--
+-- Indices de la tabla `detalle_boleta`
+--
+ALTER TABLE `detalle_boleta`
+  ADD PRIMARY KEY (`id_detalle`),
+  ADD KEY `numero_cotizacion` (`numero_boleta`,`id_producto`);
 
 --
 -- Indices de la tabla `detalle_factura`
@@ -2559,19 +2615,19 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT de la tabla `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `id_nota` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_nota` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -2583,7 +2639,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
