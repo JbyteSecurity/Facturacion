@@ -286,19 +286,40 @@ while ($row=mysqli_fetch_array($sql))
 	$total_boleta=$subtotal+$total_iva;
 ?>
 	  
+       	<tr>
+			<td colspan="3" style="widtd: 85%; text-align: right;">Monto Descuentos: </td>
+			<td style="widtd: 15%; text-align: right;">0.00</td>
+		</tr> 
         <tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL S/ </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">Op. Gravadas: </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
-        </tr>
+		</tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% S/ </td>
+			<td colspan="3" style="widtd: 85% text-align: right;">Op. Inafectas: <td>
+			<td style="widtd :15%; text-align: right;">0.00</td>
+ 		</tr>
+		<tr>
+			<td colspan="3" style="widtd: 85% text-align: right;">Op. Exoneradas: <td>
+			<td style="widtd :15%; text-align: right;">0.00</td>
+ 		</tr>
+		<tr>
+			<td colspan="3" style="widtd: 85% text-align: right;">Monto Percepción: <td>
+			<td style="widtd :15%; text-align: right;">0.00</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="widtd: 85% text-align: right;">Venta Gratuita: <td>
+			<td style="widtd :15%; text-align: right;">0.00</td>
+		</tr>					
+		<tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IGV: (<?php echo TAX; ?>)% S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
-        </tr><tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
+		</tr>
+		<tr>
+            <td colspan="3" style="widtd: 85%; text-align: right;">Importe Total: </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_boleta,2);?></td>
         </tr>
     </table>
-	
+
 	
 	
 	<br>
