@@ -321,8 +321,8 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
                 
 			
 	//Creamos Archivo txt
-    $pdf = "10292356817-03-B002-".$numero_boleta;
-	$ruc = "10292356817-03-B002-".$numero_boleta.".CAB";
+    $pdf = "10292356817-03-B003-".$numero_boleta;
+	$ruc = "10292356817-03-B003-".$numero_boleta.".CAB";
 	$date=date("Y-m-d");
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
@@ -339,7 +339,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "10292356817-03-B002-".$numero_boleta.".DET";
+	$ruc2 = "10292356817-03-B003-".$numero_boleta.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'");
 	while ($row=mysqli_fetch_array($sql))
@@ -374,7 +374,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
 
     //Creamos Archivo Adicional Cabecera
-	$ruc3 = "10292356817-03-B002-".$numero_boleta.".ACA";
+	$ruc3 = "10292356817-03-B003-".$numero_boleta.".ACA";
 	$file3 =fopen($ruc3, "a") or die("Problemas");
 	$sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
 	//echo $sql;
