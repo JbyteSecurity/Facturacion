@@ -63,8 +63,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 				Email: <?php echo EMAIL_EMPRESA;?>
                 
             </td>
-			<td style="width: 25%;text-align:right">
-			FACTURA Nº <?php 
+			<td style="width: 25%;text-align:left;">
+			<?php 
 			$cantidad = strlen($numero_factura);  
 			if($cantidad == "1")
 			{
@@ -100,7 +100,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 			{
 				$numero_factura = "0".$numero_factura;
 			}
-			echo $numero_factura;
+			     echo "FACTURA F003-".$numero_factura;
 			?>
 			</td>
 			

@@ -59,6 +59,7 @@
 		$reload = './boletas.php';
 		//main query to fetch the data
 		$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
+		//echo $sql;
 		$query = mysqli_query($con, $sql);
 		//loop through fetched data
 		if ($numrows>0){
@@ -97,8 +98,7 @@
 						<td><?php echo $nombre_vendedor; ?></td>
 						<td><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
 						<td class='text-right'><?php echo number_format ($total_venta,2); ?></td>					
-					<td class="text-right">
-						<a href="editar_boleta.php?id_boleta=<?php echo $id_boleta;?>" class='btn btn-default' title='Editar boleta' ><i class="glyphicon glyphicon-edit"></i></a> 
+					<td class="text-right">						
 						<a href="#" class='btn btn-default' title='Descargar boleta' onclick="imprimir_boleta('<?php echo $id_boleta;?>');"><i class="glyphicon glyphicon-download"></i></a> 
 						<a href="#" class='btn btn-default' title='Borrar boleta' onclick="eliminar('<?php echo $numero_boleta; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
 					</td>

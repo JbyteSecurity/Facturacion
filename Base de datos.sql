@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 18-05-2018 a las 05:19:02
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.3
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-06-2018 a las 18:36:01
+-- Versión del servidor: 5.7.17
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `boletas` (
-  `id_boleta` int(11) NOT NULL,
+  `id_boleta` bigint(20) UNSIGNED NOT NULL,
   `numero_boleta` int(11) NOT NULL,
   `fecha_boleta` datetime NOT NULL,
   `id_cliente` int(11) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `boletas` (
 --
 
 INSERT INTO `boletas` (`id_boleta`, `numero_boleta`, `fecha_boleta`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_boleta`) VALUES
-(0, 1, '2018-05-18 05:18:07', 6, 1, '1', '14.16', 1);
+(3, 14, '2018-06-02 18:27:59', 6, 1, '1', '18.36', 1);
 
 -- --------------------------------------------------------
 
@@ -89,9 +89,9 @@ CREATE TABLE `correlativos` (
 --
 
 INSERT INTO `correlativos` (`documento`, `numero`) VALUES
-('Factura', 2349),
+('Factura', 2350),
 ('Nota', 135),
-('Boleta', 2);
+('Boleta', 15);
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,7 @@ CREATE TABLE `detalle_boleta` (
 --
 
 INSERT INTO `detalle_boleta` (`id_detalle`, `numero_boleta`, `id_producto`, `cantidad`, `precio_venta`) VALUES
-(0, 1, 2, 1, 12);
+(0, 14, 1, 1, 15.56);
 
 -- --------------------------------------------------------
 
@@ -246,7 +246,8 @@ INSERT INTO `detalle_factura` (`id_detalle`, `numero_factura`, `id_producto`, `c
 (111, 2345, 1, 1, 15.56),
 (112, 2346, 1, 1, 15.56),
 (113, 2347, 2, 1, 12),
-(114, 2348, 2, 1, 12);
+(114, 2348, 2, 1, 12),
+(115, 2349, 1, 1, 15.56);
 
 -- --------------------------------------------------------
 
@@ -2177,7 +2178,8 @@ INSERT INTO `facturas` (`id_factura`, `numero_factura`, `fecha_factura`, `id_cli
 (96, 2345, '2018-05-16 05:18:15', 6, 1, '1', '18.36', 1),
 (97, 2346, '2018-05-16 05:28:13', 6, 1, '1', '18.36', 1),
 (98, 2347, '2018-05-16 05:29:02', 6, 1, '1', '14.16', 1),
-(99, 2348, '2018-05-16 05:29:41', 6, 1, '1', '14.16', 1);
+(99, 2348, '2018-05-16 05:29:41', 6, 1, '1', '14.16', 1),
+(100, 2349, '2018-06-02 17:38:55', 6, 1, '1', '18.36', 1);
 
 -- --------------------------------------------------------
 
@@ -2506,6 +2508,13 @@ CREATE TABLE `tmp` (
   `session_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `tmp`
+--
+
+INSERT INTO `tmp` (`id_tmp`, `id_producto`, `cantidad_tmp`, `precio_tmp`, `session_id`) VALUES
+(134, 1, 1, 15.56, 'qg87pks07l4fvnbh12ju2galu7');
+
 -- --------------------------------------------------------
 
 --
@@ -2538,7 +2547,8 @@ INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `user_name`, `user_pass
 --
 ALTER TABLE `boletas`
   ADD PRIMARY KEY (`id_boleta`),
-  ADD UNIQUE KEY `numero_cotizacion` (`numero_boleta`);
+  ADD UNIQUE KEY `numero_cotizacion` (`numero_boleta`),
+  ADD UNIQUE KEY `id_boleta` (`id_boleta`);
 
 --
 -- Indices de la tabla `clientes`
@@ -2621,47 +2631,45 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `boletas`
+--
+ALTER TABLE `boletas`
+  MODIFY `id_boleta` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
-
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
-
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 --
 -- AUTO_INCREMENT de la tabla `nota`
 --
 ALTER TABLE `nota`
   MODIFY `id_nota` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
-
+  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index', AUTO_INCREMENT=2;
-COMMIT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index', AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

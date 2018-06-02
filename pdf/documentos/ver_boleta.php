@@ -23,6 +23,7 @@
 	}
 	$sql_boleta=mysqli_query($con,"select * from boletas where id_boleta='".$id_boleta."'");
 	$rw_boleta=mysqli_fetch_array($sql_boleta);
+	$id_boleta=$rw_boleta['id_boleta'];
 	$numero_boleta=$rw_boleta['numero_boleta'];
 	$id_cliente=$rw_boleta['id_cliente'];
 	$id_vendedor=$rw_boleta['id_vendedor'];
