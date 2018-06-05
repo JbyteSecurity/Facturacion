@@ -21,13 +21,14 @@
 		$estado=intval($_POST['estado']);
 		$date_added=date("Y-m-d H:i:s");
 		$sql="INSERT INTO clientes (ruc, nombre_cliente, telefono_cliente, email_cliente, direccion_cliente, departamento, provincia, ubigeo, status_cliente, date_added) VALUES ('$ruc', '$nombre','$telefono','$email','$direccion', '$departamento', '$provincia[1]', '$ubigeo', '$estado','$date_added')";
-		echo $sql;
+		//echo $sql;
 		$query_new_insert = mysqli_query($con,$sql);
-			if ($query_new_insert){
+			//if ($query_new_insert){
 				$messages[] = "Cliente ha sido ingresado satisfactoriamente.";
-			} else{
-				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
-			}
+			//} else{
+			//	$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
+			//	echo "mal"; 
+			//}
 		} else {
 			$errors []= "Error desconocido.";
 		}

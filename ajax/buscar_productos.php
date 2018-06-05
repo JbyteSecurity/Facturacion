@@ -9,7 +9,7 @@
 	/* Connect To Database*/
 	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
-	
+	error_reporting(0);
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
 		$id_producto=intval($_GET['id']);
@@ -102,6 +102,7 @@
 						else {$estado="Inactivo";}
 						$date_added= date('d/m/Y', strtotime($row['date_added']));
 						$precio_producto=$row['precio_producto'];
+						$precio_producto = $precio_producto + $row['igv'];
 					?>
 					
 					<input type="hidden" value="<?php echo $codigo_producto;?>" id="codigo_producto<?php echo $id_producto;?>">

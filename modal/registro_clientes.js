@@ -12,7 +12,10 @@ function buscardni()
 	$.post("modal/buscar_ruc.php", { ruc:ruc } ,function(data){
 			$("#nombre").val("");
 			$("#nombre").val(data);
-			$('#nombre').prop('readonly', true);
+			//$('#nombre').prop('readonly', true);
+			if (data.indexOf('Undefined offset')!=-1) {
+				$("#nombre").val("");
+			}
 			
         });
 }

@@ -297,7 +297,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
 	//Creamos Archivo txt
     $pdf = "10292356817-07-F003-".$numero_nota;
-	$ruc = "10292356817-07-F003-".$numero_nota.".NOT";
+	$ruc = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_nota.".NOT";
 	$date=date("Y-m-d");
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
@@ -315,7 +315,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "10292356817-07-F003-".$numero_nota.".DET";
+	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_nota.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$query = "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura_num."'";
 	$sql=mysqli_query($con, $query);	

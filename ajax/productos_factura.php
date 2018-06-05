@@ -62,6 +62,7 @@
 					$nombre_producto=$row['nombre_producto'];
 					$precio_venta=$row["precio_producto"];
 					$precio_venta=number_format($precio_venta,2);
+					$precio_venta = $precio_venta + $row["igv"];
 					?>
 					<tr>
 						<td><?php echo $codigo_producto; ?></td>

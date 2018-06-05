@@ -120,3 +120,198 @@
 			});
 		  event.preventDefault();
 		})
+$("#cboDepartamento").change(function(){
+  	var departamento = $("#cboDepartamento").val()+"0000";
+	$("#cboProvincia").empty();	
+	$("#cboProvincia").append('<option value="0">TODOS</option>');
+	$.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
+
+			//alert(data);
+			var i = 0;
+			var id;
+			var nombre;
+			$.each(JSON.parse(data), function(key, value) {		  	
+		    	if(i==0)
+		    	{
+		       		 id = value.toString().split(',');
+				}
+				if(i==1)
+				{
+					 nombre = value.toString().split(',');
+				}
+				if(i==2)
+				{
+					 region_id = value.toString().split(',');
+				}
+			i++;
+			}); 
+
+			for (var i=0; i<id.length; i++) {
+			$("#cboProvincia").append('<option value="' + region_id[i] +'-'+id[i]+ '">' + nombre[i] + '</option>');
+		    }
+
+    })
+
+})
+$("#cboDepartamento2").change(function(){
+	
+	var departamento = $("#cboDepartamento2").val()+"0000";
+	$("#cboProvincia2").empty();	
+	$("#cboProvincia2").append('<option value="0">TODOS</option>');
+	$.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
+  
+			//alert(data);
+			var i = 0;
+			var id;
+			var nombre;
+			$.each(JSON.parse(data), function(key, value) {		  	
+				if(i==0)
+				{
+						id = value.toString().split(',');
+				}
+				if(i==1)
+				{
+					 nombre = value.toString().split(',');
+				}
+				if(i==2)
+				{
+					 region_id = value.toString().split(',');
+				}
+			i++;
+			}); 
+  
+			for (var i=0; i<id.length; i++) {
+			$("#cboProvincia2").append('<option value="' + region_id[i] +'-'+id[i]+ '">' + nombre[i] + '</option>');
+			}
+  
+	})
+  
+  })
+  
+$("#cboProvincia2").click(function(){
+	
+  var departamento = $("#cboDepartamento2").val()+"0000";
+  //$("#cboProvincia2").empty();	
+  //$("#cboProvincia2").append('<option value="0">TODOS</option>');
+  $.post('../facturacion/inei.php',  { departamento: departamento },  function(data, status, jqXHR) {
+
+		  //alert(data);
+		  var i = 0;
+		  var id;
+		  var nombre;
+		  $.each(JSON.parse(data), function(key, value) {		  	
+			  if(i==0)
+			  {
+					  id = value.toString().split(',');
+			  }
+			  if(i==1)
+			  {
+				   nombre = value.toString().split(',');
+			  }
+			  if(i==2)
+			  {
+				   region_id = value.toString().split(',');
+			  }
+		  i++;
+		  }); 
+
+		  for (var i=0; i<id.length; i++) {
+		  $("#cboProvincia2").append('<option value="' + region_id[i] +'-'+id[i]+ '">' + nombre[i] + '</option>');
+		  }
+
+  })
+
+})
+
+$("#cboProvincia").change(function(){
+	  var provincia = $("#cboProvincia").val();
+	 	  
+	$("#cboDistrito").empty();	
+	$("#cboDistrito").append('<option value="0">TODOS</option>');
+	$.post('../facturacion/inei.php',  { provincia: provincia },  function(data, status, jqXHR) {
+			
+			var i = 0;
+			var id;
+			var nombre;
+			$.each(JSON.parse(data), function(key, value) {
+		  	
+		    	if(i==0)
+		    	{
+		       		 id = value.toString().split(',');
+				}
+				if(i==1)
+				{
+					 nombre = value.toString().split(',');
+				}
+			i++;
+			}); 
+
+			for (var i=0; i<id.length; i++) {
+			$("#cboDistrito").append('<option value="' + id[i] + '">' + nombre[i] + '</option>');
+		    }
+
+    })
+
+})
+
+$("#cboProvincia2").change(function(){
+	var provincia = $("#cboProvincia2").val();
+		 
+  $("#cboDistrito2").empty();	
+  $("#cboDistrito2").append('<option value="0">TODOS</option>');
+  $.post('../facturacion/inei.php',  { provincia: provincia },  function(data, status, jqXHR) {
+		  
+		  var i = 0;
+		  var id;
+		  var nombre;
+		  $.each(JSON.parse(data), function(key, value) {
+			
+			  if(i==0)
+			  {
+					  id = value.toString().split(',');
+			  }
+			  if(i==1)
+			  {
+				   nombre = value.toString().split(',');
+			  }
+		  i++;
+		  }); 
+
+		  for (var i=0; i<id.length; i++) {
+		  $("#cboDistrito2").append('<option value="' + id[i] + '">' + nombre[i] + '</option>');
+		  }
+
+  })
+
+})
+
+$("#cboDistrito2").click(function(){
+	var provincia = $("#cboProvincia2").val();
+		 
+  //$("#cboDistrito2").empty();	
+  //$("#cboDistrito2").append('<option value="0">TODOS</option>');
+  $.post('../facturacion/inei.php',  { provincia: provincia },  function(data, status, jqXHR) {
+		  
+		  var i = 0;
+		  var id;
+		  var nombre;
+		  $.each(JSON.parse(data), function(key, value) {
+			
+			  if(i==0)
+			  {
+					  id = value.toString().split(',');
+			  }
+			  if(i==1)
+			  {
+				   nombre = value.toString().split(',');
+			  }
+		  i++;
+		  }); 
+
+		  for (var i=0; i<id.length; i++) {
+		  $("#cboDistrito2").append('<option value="' + id[i] + '">' + nombre[i] + '</option>');
+		  }
+
+  })
+
+})

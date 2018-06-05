@@ -3,8 +3,8 @@
 		{
 	?>
 	
-	<script type="text/javascript" src="#ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-	<script type="text/javascript" src="modal/registro_clientes.js"></script>
+	
+	
 	<!-- Modal -->
 	<div class="modal fade" id="nuevoCliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
