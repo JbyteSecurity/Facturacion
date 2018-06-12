@@ -37,6 +37,8 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 </tr>
 <?php
 	$sumador_total=0;
+	$igv = 0;
+	$igv2 = 0;
 	$sql=mysqli_query($con, "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
 	while ($row=mysqli_fetch_array($sql))
 	{
@@ -44,9 +46,9 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	$codigo_producto=$row['codigo_producto'];
 	$cantidad=$row['cantidad_tmp'];
 	$nombre_producto=$row['nombre_producto'];
-	
-	
-	$precio_venta=$row['precio_tmp'];
+	$igv = $row['igv'];
+	$igv2 = $igv + $igv2;	
+	$precio_venta=$row['precio_producto'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
 	$precio_total=$precio_venta_r*$cantidad;
@@ -68,7 +70,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
-	$total_boleta=$subtotal+$total_iva;
+	$total_boleta=$subtotal+$igv2;
 
 ?>
 <tr>
@@ -78,7 +80,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 </tr>
 <tr>
 	<td class='text-right' colspan=4>IGV (<?php echo TAX?>)% S/</td>
-	<td class='text-right'><?php echo number_format($total_iva,2);?></td>
+	<td class='text-right'><?php echo number_format($igv2,2);?></td>
 	<td></td>
 </tr>
 <tr>

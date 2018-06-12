@@ -67,6 +67,6 @@
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
-	<script type="text/javascript" src="js/Boletas.js"></script>
+	<script type="text/javascript" src="js/boletas.js"></script>
   </body>
 </html>

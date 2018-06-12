@@ -17,7 +17,7 @@ if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
 if (!empty($id) and !empty($cantidad) and !empty($precio_venta))
 {
 $insert_tmp=mysqli_query($con, "INSERT INTO tmp (id_producto,cantidad_tmp,precio_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id')");
-
+//echo "INSERT INTO tmp (id_producto,cantidad_tmp,precio_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id')";
 }
 if (isset($_GET['id']))//codigo elimina un elemento del array
 {

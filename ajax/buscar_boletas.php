@@ -53,6 +53,7 @@
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
 		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
+		//echo "SELECT count(*) AS numrows FROM $sTable  $sWhere";
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
 		$total_pages = ceil($numrows/$per_page);

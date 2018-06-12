@@ -179,14 +179,15 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 $nums=1;
 $sumador_total=0;
 $sql=mysqli_query($con, "select * from products, detalle_boleta, boletas where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta=boletas.numero_boleta and boletas.numero_boleta='".$numero_boleta."'");
-
+$igv2 = 0;
 while ($row=mysqli_fetch_array($sql))
 	{
 	$id_producto=$row["id_producto"];
 	$codigo_producto=$row['codigo_producto'];
 	$cantidad=$row['cantidad'];
 	$nombre_producto=$row['nombre_producto'];
-	
+	$igv = $row['igv'];  
+	$igv2 = $igv+$igv2;	
 	$precio_venta=$row['precio_venta'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
@@ -217,7 +218,7 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
-	$total_boleta=$subtotal+$total_iva;
+	$total_boleta=$subtotal+$igv2;
 ?>
 	  
        	<tr>
@@ -246,7 +247,7 @@ while ($row=mysqli_fetch_array($sql))
 		</tr>					
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV: (<?php echo TAX; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
 		</tr>
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">Importe Total: </td>
@@ -260,4 +261,3 @@ while ($row=mysqli_fetch_array($sql))
 	<div style="font-size:11pt;text-align:center;font-weight:bold">Gracias por su compra!</div>
 	</page>
 
-   

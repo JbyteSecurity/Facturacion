@@ -23,10 +23,10 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre"],ENT_QUOTES)));
 		$estado=intval($_POST['estado']);
 		$precio_venta=floatval($_POST['precio']);
-		$igv=(number_format($precio_venta,2,'.','') * TAX )/100;
-		$precio_venta = number_format($precio_venta,2,'.','') - number_format($igv,2,'.','');
+		$precio_neto=(number_format($precio_venta,2,'.','') / TAX);
+		$igv = number_format($precio_venta,2,'.','') - number_format($precio_neto,2,'.','');
 		$date_added=date("Y-m-d H:i:s");
-		$sql="INSERT INTO products (codigo_producto, nombre_producto, status_producto, date_added, precio_producto, igv) VALUES ('$codigo','$nombre','$estado','$date_added','$precio_venta', '$igv')";
+		$sql="INSERT INTO products (codigo_producto, nombre_producto, status_producto, date_added, precio_producto, igv) VALUES ('$codigo','$nombre','$estado','$date_added','$precio_neto', '$igv')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Producto ha sido ingresado satisfactoriamente.";

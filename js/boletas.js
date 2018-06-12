@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 function load(page){
     var q= $("#q").val();
-    $("#loader").fadeIn('slow');
+    $("#loader").fadeIn('slow');    
     $.ajax({
         url:'./ajax/buscar_boletas.php?action=ajax&page='+page+'&q='+q,
          beforeSend: function(objeto){

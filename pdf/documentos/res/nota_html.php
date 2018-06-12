@@ -178,6 +178,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 <?php
 $nums=1;
 $sumador_total=0;
+$igv2 = 0;
 $sql=mysqli_query($con, "select * from products, detalle_factura, facturas where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura and facturas.numero_factura='".$numero_factura."'");
 while ($row=mysqli_fetch_array($sql))
 	{
@@ -186,6 +187,8 @@ while ($row=mysqli_fetch_array($sql))
 	$codigo_producto=$row['codigo_producto'];
 	$cantidad=$row['cantidad'];
 	$nombre_producto=$row['nombre_producto'];
+	$igv = $row['igv'];
+    $igv2 = $igv + $igv2; 	
 	$factura_num = $row['numero_factura'];
 	$precio_venta=$row['precio_venta'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
@@ -219,7 +222,7 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
-	$total_factura=$subtotal+$total_iva;
+	$total_factura=$subtotal+$igv2;
 	?>
 	  
 
@@ -229,8 +232,8 @@ while ($row=mysqli_fetch_array($sql))
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo (TAX-1)*100; ?>)% S/ </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
@@ -302,16 +305,16 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
 	$tipodocumento = "";
-	if(strlen($documento)=="7"){
+	if(strlen($documento)==8){
 		$tipodocumento = "1";
 	}
-	if(strlen($documento)=="11"){
+	if(strlen($documento)==11){
 		$tipodocumento = "6";
 	}
-   
+    $total_factura=number_format($total_factura,2,'.','');
 	$file =fopen($ruc, "a") or die("Problemas");
 	$factura = "F003-". $numero_nota;
-	fputs($file, $date."|01|".$tipo_nota."|01|".$factura."|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|".$subtotal."|0.00|0.00|".$total_iva."|0.00|0.00|".$total_factura."|");
+	fputs($file, $date."|01|".$tipo_nota."|01|".$factura."|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|".$subtotal."|0.00|0.00|".$igv2."|0.00|0.00|".$total_factura."|");
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
@@ -335,14 +338,16 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 		if ($pos2 === false) {
         $preciototalunitario = $preciototalunitario.".00";
 		} 
-		$igv=($preciototalunitario * TAX )/100;
+		$igv=$row["igv"];
 		$igv=number_format($igv,2,'.','');
  		$total = $preciototalunitario + $igv;
 		$pos3 = strpos($total, ".");
 		if ($pos3 === false) {
          $total = $total.".00";
 		} 
-		
+		$total=number_format($total,2,'.','');
+		$precioproducto = number_format($precioproducto,2,'.','');
+		$preciototalunitario = number_format($preciototalunitario,2,'.','');
 		//fwrite($file2, "ZZ|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
 		fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
 		fwrite($file2,"\n");  

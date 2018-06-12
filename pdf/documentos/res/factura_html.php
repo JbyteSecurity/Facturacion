@@ -1,5 +1,6 @@
 <?php
 //error_reporting(E_ERROR);
+$nuevo_numero = "";
 ?>
 <style type="text/css">
 <!--
@@ -185,17 +186,22 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 <?php
 $nums=1;
 $sumador_total=0;
-$igv = 0;
+$igv2 = 0;
 $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
-while ($row=mysqli_fetch_array($sql))
+//echo "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'";
+	
+	while ($row=mysqli_fetch_array($sql))
 	{
 	$id_tmp=$row["id_tmp"];
 	$id_producto=$row["id_producto"];
 	$codigo_producto=$row['codigo_producto'];
 	$cantidad=$row['cantidad_tmp'];
+	error_log("------------------");
+	error_log($row['nombre_producto']);
 	$nombre_producto=$row['nombre_producto'];
-	
-	$precio_venta=$row['precio_tmp'];
+	$igv = $row['igv'];
+    $igv2 = $igv + $igv2; 	
+	$precio_venta=$row['precio_producto'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
 	$precio_total=$precio_venta_r*$cantidad;
@@ -219,18 +225,12 @@ while ($row=mysqli_fetch_array($sql))
 
 	<?php 
 	//Insert en la tabla detalle_cotizacion
-	$sql=mysqli_query($con, "select numero from correlativos where documento ='Factura' ");
-	$rw=mysqli_fetch_array($sql);
-	$numero_factura=$rw['numero'];	
-	$nuevo_numero = $rw['numero'] + 1;	
+	$sql2=mysqli_query($con, "select numero from correlativos where documento ='Factura' ");
+	$rw2=mysqli_fetch_array($sql2);
+	$numero_factura=$rw2['numero'];	
+	$nuevo_numero = $rw2['numero'] + 1;	
 
 	$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES (0,'$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
-	$sql=mysqli_query($con, "select igv from products where id_producto = '$id_producto'");
-	if($row=mysqli_fetch_array($sql))
-	{
-		$igv = $row['igv']+$igv;	
-		echo $igv;
-	}
 	$nums++;
 	}
 
@@ -238,7 +238,7 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
-	$total_factura=$subtotal+$igv;
+	$total_factura=$subtotal+$igv2;
 ?>
 	  
         <tr>
@@ -247,7 +247,7 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv,2);?></td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
@@ -310,23 +310,26 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	//Creamos Archivo txt
     $pdf = "10292356817-01-F003-".$numero_factura;
 	$ruc = "D:/data0/facturador/DATA/"."10292356817-01-F003-".$numero_factura.".CAB";
+	//$ruc = 	"10292356817-01-F003-".$numero_factura.".CAB";
 	$date=date("Y-m-d");
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
 	$tipodocumento = "";
-	if(strlen($documento)=="7"){
+	if(strlen($documento)== 8){
 		$tipodocumento = "1";
 	}
-	if(strlen($documento)=="11"){
+	if(strlen($documento)== 11){
 		$tipodocumento = "6";
 	}
-   
+    $total_factura=number_format($total_factura,2,'.','');
 	$file =fopen($ruc, "a") or die("Problemas");
-	fputs($file, "08|".$date."|0|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$total_iva."|0.00|0.00|".$total_factura."|");
+	fputs($file, "01|".$date."|0|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$igv2."|0.00|0.00|".$total_factura."|");
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
 	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-01-F003-".$numero_factura.".DET";
+	//$ruc2 = "10292356817-01-F003-".$numero_factura.".DET";
+
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura."'");
 	while ($row=mysqli_fetch_array($sql))
@@ -345,14 +348,16 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	if ($pos2 === false) {
         $preciototalunitario = $preciototalunitario.".00";
 	} 
-	$igv=($preciototalunitario * TAX )/100;
+	$igv=$row["igv"];
 	$igv=number_format($igv,2,'.','');
     $total = $preciototalunitario + $igv;
 	$pos3 = strpos($total, ".");
 	if ($pos3 === false) {
         $total = $total.".00";
 	} 
-
+	$total=number_format($total,2,'.','');
+	$precioproducto = number_format($precioproducto,2,'.','');
+	$preciototalunitario = number_format($preciototalunitario,2,'.','');
 	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
 	fwrite($file2,"\n");  
 	
@@ -362,6 +367,8 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
     //Creamos Archivo Adicional Cabecera
 	$ruc3 = "D:/data0/facturador/DATA/"."10292356817-01-F003-".$numero_factura.".ACA";
+	//$ruc3 = "10292356817-01-F003-".$numero_factura.".ACA";
+ 
 	$file3 =fopen($ruc3, "a") or die("Problemas");
 	$sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
 	//echo $sql;

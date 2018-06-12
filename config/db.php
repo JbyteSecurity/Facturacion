@@ -10,7 +10,7 @@ define('NOMBRE_EMPRESA', 'NOTARIA RODRIGUEZ VELARDE');
 define('DIRECCION_EMPRESA', 'MZA. A LOTE. 3 URB. SENORIAL');
 define('TELEFONO_EMPRESA', '51(0)54255559');
 define('EMAIL_EMPRESA', '');
-define('TAX', '18');
+define('TAX', '1.18');
 
 /*-------------------------------------------------
 Los datos por defecto del usuario administrador son:

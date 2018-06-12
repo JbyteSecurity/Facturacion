@@ -185,6 +185,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 <?php
 $nums=1;
 $sumador_total=0;
+$igv2 = 0;
 $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
 	{
@@ -193,8 +194,9 @@ while ($row=mysqli_fetch_array($sql))
 	$codigo_producto=$row['codigo_producto'];
 	$cantidad=$row['cantidad_tmp'];
 	$nombre_producto=$row['nombre_producto'];
-	
-	$precio_venta=$row['precio_tmp'];
+	$igv = $row['igv'];
+    $igv2 = $igv + $igv2; 
+	$precio_venta=$row['precio_producto'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
 	$precio_total=$precio_venta_r*$cantidad;
@@ -219,9 +221,9 @@ while ($row=mysqli_fetch_array($sql))
 	<?php 
 	//Insert en la tabla detalle_cotizacion
 	$sql=mysqli_query($con, "select numero from correlativos where documento ='Boleta' ");
-	$rw=mysqli_fetch_array($sql);
-	$numero_boleta=$rw['numero'];	
-	$nuevo_numero = $rw['numero'] + 1;	
+	$rw2=mysqli_fetch_array($sql);
+	$numero_boleta=$rw2['numero'];	
+	$nuevo_numero = $rw2['numero'] + 1;	
 
 	$insert_detail=mysqli_query($con, "INSERT INTO detalle_boleta VALUES (0,'$numero_boleta','$id_producto','$cantidad','$precio_venta_r')");
 	
@@ -230,7 +232,7 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
-	$total_boleta=$subtotal+$total_iva;
+	$total_boleta=$subtotal+$igv2;
 ?>
 
 		<tr>
@@ -258,8 +260,8 @@ while ($row=mysqli_fetch_array($sql))
 			<td style="widtd :15%; text-align: right;">0.00</td>
 		</tr>					
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IGV: (<?php echo TAX; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_iva,2);?></td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IGV: (<?php echo (TAX-1)*100; ?>)% S/ </td>
+            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
 		</tr>
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">Importe Total: </td>
@@ -328,15 +330,15 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
 	$tipodocumento = "";
-	if(strlen($documento)=="7"){
+	if(strlen($documento)==8){
 		$tipodocumento = "1";
 	}
-	if(strlen($documento)=="11"){
+	if(strlen($documento)==11){
 		$tipodocumento = "6";
 	}
-   
+    $total_boleta=number_format($total_boleta,2,'.','');
 	$file =fopen($ruc, "a") or die("Problemas");
-	fputs($file, "08|".$date."||".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$total_iva."|0.00|0.00|".$total_boleta."|");
+	fputs($file, "01|".$date."||".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$igv2."|0.00|0.00|".$total_boleta."|");
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
@@ -361,14 +363,16 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	if ($pos2 === false) {
         $preciototalunitario = $preciototalunitario.".00";
 	} 
-	$igv=($preciototalunitario * TAX )/100;
+	$igv=$row["igv"];
 	$igv=number_format($igv,2,'.','');
     $total = $preciototalunitario + $igv;
 	$pos3 = strpos($total, ".");
 	if ($pos3 === false) {
         $total = $total.".00";
 	} 
-
+	$total=number_format($total,2,'.','');
+	$precioproducto = number_format($precioproducto,2,'.','');
+	$preciototalunitario = number_format($preciototalunitario,2,'.','');
 	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
 	fwrite($file2,"\n");  
 	
