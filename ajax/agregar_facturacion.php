@@ -79,7 +79,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	<td></td>
 </tr>
 <tr>
-	<td class='text-right' colspan=4>IGV (<?php echo TAX?>)% S/</td>
+	<td class='text-right' colspan=4>IGV: (<?php echo (TAX-1)*100; ?>)% S/ </td>
 	<td class='text-right'><?php echo number_format($igv2,2);?></td>
 	<td></td>
 </tr>

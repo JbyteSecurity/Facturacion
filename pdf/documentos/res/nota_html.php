@@ -1,6 +1,9 @@
 <?php
 //error_reporting(E_ERROR);
 ?>
+<?php 
+require_once("letrasanumeros.php");
+?>
 <style type="text/css">
 <!--
 table { vertical-align: top; }
@@ -202,8 +205,7 @@ while ($row=mysqli_fetch_array($sql))
 	} else {
 		$clase="silver";
 	}
-	?>
-
+	
 	?>
 
         <tr>
@@ -237,6 +239,10 @@ while ($row=mysqli_fetch_array($sql))
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
+        </tr>
+        <tr>
+
+        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo $letra; ?></td>
         </tr>
     </table>
 	

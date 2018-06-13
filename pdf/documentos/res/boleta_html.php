@@ -1,6 +1,9 @@
 <?php
 //error_reporting(E_ERROR);
 ?>
+<?php 
+require_once("letrasanumeros.php");
+?>
 <style type="text/css">
 <!--
 table { vertical-align: top; }
@@ -189,6 +192,7 @@ $igv2 = 0;
 $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
 while ($row=mysqli_fetch_array($sql))
 	{
+	error_log($row['codigo_producto']);
 	$id_tmp=$row["id_tmp"];
 	$id_producto=$row["id_producto"];
 	$codigo_producto=$row['codigo_producto'];
@@ -220,15 +224,14 @@ while ($row=mysqli_fetch_array($sql))
 
 	<?php 
 	//Insert en la tabla detalle_cotizacion
-	$sql=mysqli_query($con, "select numero from correlativos where documento ='Boleta' ");
-	$rw2=mysqli_fetch_array($sql);
-	$numero_boleta=$rw2['numero'];	
-	$nuevo_numero = $rw2['numero'] + 1;	
-
 	$insert_detail=mysqli_query($con, "INSERT INTO detalle_boleta VALUES (0,'$numero_boleta','$id_producto','$cantidad','$precio_venta_r')");
 	
 	$nums++;
 	}
+	$sql=mysqli_query($con, "select numero from correlativos where documento ='Boleta' ");
+	$rw2=mysqli_fetch_array($sql);
+	$numero_boleta=$rw2['numero'];	
+	$nuevo_numero = $rw2['numero'] + 1;	
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
@@ -266,6 +269,10 @@ while ($row=mysqli_fetch_array($sql))
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">Importe Total: </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_boleta,2);?></td>
+        </tr>
+        <tr>
+
+        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_boleta,2)); echo $letra; ?></td>
         </tr>
     </table>
 	

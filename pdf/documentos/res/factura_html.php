@@ -2,6 +2,9 @@
 //error_reporting(E_ERROR);
 $nuevo_numero = "";
 ?>
+<?php 
+require_once("letrasanumeros.php");
+?>
 <style type="text/css">
 <!--
 table { vertical-align: top; }
@@ -224,15 +227,14 @@ $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=
         </tr>
 
 	<?php 
-	//Insert en la tabla detalle_cotizacion
+	//Insert en la tabla detalle_cotizacion	
+	$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES (0,'$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
+	$nums++;
+	}
 	$sql2=mysqli_query($con, "select numero from correlativos where documento ='Factura' ");
 	$rw2=mysqli_fetch_array($sql2);
 	$numero_factura=$rw2['numero'];	
 	$nuevo_numero = $rw2['numero'] + 1;	
-
-	$insert_detail=mysqli_query($con, "INSERT INTO detalle_factura VALUES (0,'$numero_factura','$id_producto','$cantidad','$precio_venta_r')");
-	$nums++;
-	}
 
 	
 	$subtotal=number_format($sumador_total,2,'.','');
@@ -246,11 +248,15 @@ $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
-            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo TAX; ?>)% S/ </td>
+            <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo (TAX-1)*100; ?>)% S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
+        </tr>
+        <tr>
+
+        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo $letra; ?></td>
         </tr>
     </table>
 	
