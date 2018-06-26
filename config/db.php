@@ -6,7 +6,7 @@ define('DB_PASS', '');//Contraseña del usuario de la base de datos
 define('DB_NAME', 'simple_invoice');//Nombre de la base de datos
  
 /*Datos de la empresa*/
-define('NOMBRE_EMPRESA', 'NOTARIA RODRIGUEZ VELARDE');
+define('NOMBRE_EMPRESA', 'JAVIER GERMAN RODRIGUEZ VELARDE');
 define('DIRECCION_EMPRESA', 'MZA. A LOTE. 3 URB. SENORIAL');
 define('TELEFONO_EMPRESA', '51(0)54255559');
 define('EMAIL_EMPRESA', '');

@@ -34,24 +34,18 @@ td    { vertical-align: top; }
 .border-bottom{
 	border-bottom: solid 1px #bdc3c7;
 }
-table.page_footer {width: 100%; border: none; background-color: white; padding: 2mm;border-collapse:collapse; border: none;}
+td {
+border:hidden;
+overflow-x:hidden;
+}
+table {
+border: 1px solid #000000;
 }
 -->
 </style>
 <page backtop="15mm" backbottom="15mm" backleft="15mm" backright="15mm" style="font-size: 12pt; font-family: arial" >
         <page_footer>
-        <table class="page_footer">
-            <tr>
-
-                <td style="width: 50%; text-align: left">
-                    P&aacute;gina [[page_cu]]/[[page_nb]]
-                </td>
-                <td style="width: 50%; text-align: right">
-                    &copy; <?php echo " "; echo  $anio=date('Y'); ?>
-                </td>
-            </tr>
-        </table>
-    </page_footer>
+        </page_footer>
     <table cellspacing="0" style="width: 100%;">
         <tr>
 
@@ -63,10 +57,28 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
                 <span style="color: #34495e;font-size:14px;font-weight:bold"><?php echo NOMBRE_EMPRESA;?></span>
 				<br><?php echo DIRECCION_EMPRESA;?><br> 
 				Teléfono: <?php echo TELEFONO_EMPRESA;?><br>
-				Email: <?php echo EMAIL_EMPRESA;?>
+				Web: http://www.rodriguezvelarde.com.pe/
                 
             </td>
-			<td style="width: 25%;text-align:left;">
+			<td style="width: 25%;text-align:center;">
+			<table border=1 >
+			<tr>
+			<td>
+			10292356817
+			</td>
+			</tr>
+			<tr>
+			<td>
+			FACTURA
+			</td>
+			</tr>
+			<tr>
+			<td>
+			ELECTRONICA
+			</td>
+			</tr>		
+			<tr>
+			<td>
 			<?php 
 			$cantidad = strlen($numero_factura);  
 			if($cantidad == "1")
@@ -103,19 +115,20 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 			{
 				$numero_factura = "0".$numero_factura;
 			}
-			     echo "FACTURA F003-".$numero_factura;
+			     echo "F003-".$numero_factura;
 			?>
+			</td>
+			</tr>
+			</table>
 			</td>
 			
         </tr>
     </table>
-    <br>
-    
 
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:50%;" class='midnight-blue'>FACTURAR A</td>
+           <td style="width:100%;" class='midnight-blue'></td>
         </tr>
 		<tr>
            <td style="width:50%;" >
@@ -137,11 +150,10 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
    
     </table>
     
-       <br>
 		<table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:35%;" class='midnight-blue'>VENDEDOR</td>
-		  <td style="width:25%;" class='midnight-blue'>FECHA</td>
+           <td style="width:35%;" class='midnight-blue'>ABOGADO</td>
+	   	   <td style="width:25%;" class='midnight-blue'>FECHA</td>
 		   <td style="width:40%;" class='midnight-blue'>FORMA DE PAGO</td>
         </tr>
 		<tr>
@@ -166,7 +178,6 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         
    
     </table>
-	<br>
   
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
@@ -207,7 +218,7 @@ while ($row=mysqli_fetch_array($sql))
 
         <tr>
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre_producto;?></td>
+            <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php   echo $nombre_producto;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
             
@@ -234,17 +245,43 @@ while ($row=mysqli_fetch_array($sql))
         </tr><tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
             <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
-        </tr>
+		</tr>
         <tr>
-
-        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo $letra; ?></td>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo "SON: ".$letra; ?></td>
+		</tr>
+    	<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
         </tr>
-    </table>
+     	<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
+        </tr>
+     	<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
+        </tr>
+    	<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
+        </tr>
+
+    	<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: center;">CANCELADO </td>
+		</tr>
+    	<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
+        </tr>
+
+		<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: left;">____________DE____________DEL____________</td>
+		</tr>
+		<tr>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
+        </tr>
+
+
+</table>
 	
 	
 	
 	<br>
-	<div style="font-size:11pt;text-align:center;font-weight:bold">Gracias por su compra!</div>
 	
 	
 	  

@@ -73,7 +73,7 @@ function unidad_centimos($numero)
  
 function decena_centimos($numero)
 {
-	$numero = $numero."/100 Nuevos Soles";
+	$numero = $numero."/100 Soles";
 	return $numero; 
 }
  
@@ -83,47 +83,47 @@ function unidad($numero)
 	{
 		case 9:
 		{
-			$num = "Nueve";
+			$num = "nueve";
 			break;
 		}
 		case 8:
 		{
-			$num = "Ocho";
+			$num = "ocho";
 			break;
 		}
 		case 7:
 		{
-			$num = "Siete";
+			$num = "siete";
 			break;
 		}
 		case 6:
 		{
-			$num = "Seis";
+			$num = "seis";
 			break;
 		}
 		case 5:
 		{
-			$num = "Cinco";
+			$num = "cinco";
 			break;
 		}
 		case 4:
 		{
-			$num = "Cuatro";
+			$num = "cuatro";
 			break;
 		}
 		case 3:
 		{
-			$num = "Tres";
+			$num = "tres";
 			break;
 		}
 		case 2:
 		{
-			$num = "Dos";
+			$num = "dos";
 			break;
 		}
 		case 1:
 		{
-			$num = "Uno";
+			$num = "uno";
 			break;
 		}
 	}
@@ -432,7 +432,7 @@ function convertir_a_letras($numero)
 	$pos = strpos($num_letras, "céntimo");
 	if($pos === false)
 	{
-		$num_letras = $num_letras." con 00/100 Nuevos Soles";
+		$num_letras = $num_letras." con 00/100 Soles";
 	}
 
 	return $num_letras;
