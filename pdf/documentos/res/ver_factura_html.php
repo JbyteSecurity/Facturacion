@@ -276,15 +276,7 @@ while ($row=mysqli_fetch_array($sql))
         	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
         </tr>
 
-
-</table>
-	
-	
-	
+	</table>
 	<br>
-	
-	
-	  
-
-</page>
+	</page>
 
