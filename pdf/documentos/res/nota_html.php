@@ -64,8 +64,8 @@ border: 1px solid #000000;
 				Web: http://www.rodriguezvelarde.com.pe/
                 
             </td>
-			<td style="width: 25%;text-align:right">
-    		<table boder=1 style="text-align:center;">
+			<td style="width: 25%;text-align:center;">
+			<table border=3 style="text-align:center;margin-left:120px;font-weight:bold;border-style:solid;border-width: 3px;">
 			<tr>
 			<td>
 			10292356817
@@ -248,7 +248,7 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
         <tr>
 
-        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo $letra; ?></td>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo "SON: ".$letra; ?></td>
         </tr>
   		<tr>
         	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
@@ -296,42 +296,42 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	 $cantidad = strlen($numero_nota);  
 			if($cantidad == "1")
 			{
-				$numero_nota = "0000000".$numero_nota;
+				$numero_factura = "0000000".$numero_factura;
 			}
 
             if($cantidad == "2")
 			{
-				$numero_nota = "000000".$numero_nota;
+				$numero_factura = "000000".$numero_factura;
 			}
 
 			if($cantidad == "3")
 			{
-				$numero_nota = "00000".$numero_nota;
+				$numero_factura = "00000".$numero_factura;
 			}
 
 			if($cantidad == "4")
 			{
-				$numero_nota = "0000".$numero_nota;
+				$numero_factura = "0000".$numero_factura;
 			}
 
 			if($cantidad == "5")
 			{
-				$numero_nota = "000".$numero_nota;
+				$numero_factura = "000".$numero_factura;
 			}
 
 			if($cantidad == "6")
 			{
-				$numero_nota = "00".$numero_nota;
+				$numero_factura = "00".$numero_factura;
 			}
 
 			if($cantidad == "7")
 			{
-				$numero_nota = "0".$numero_nota;
+				$numero_factura = "0".$numero_factura;
 			}
 
 	//Creamos Archivo txt
-    $pdf = "10292356817-07-F003-".$numero_nota;
-	$ruc = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_nota.".NOT";
+    $pdf = "10292356817-07-F003-".$numero_factura;
+	$ruc = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_factura.".NOT";
 	$date=date("Y-m-d");
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
@@ -344,12 +344,12 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	}
     $total_factura=number_format($total_factura,2,'.','');
 	$file =fopen($ruc, "a") or die("Problemas");
-	$factura = "F003-". $numero_nota;
+	$factura = "F003-". $numero_factura;
 	fputs($file, $date."|01|".$tipo_nota."|01|".$factura."|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|".$subtotal."|0.00|0.00|".$igv2."|0.00|0.00|".$total_factura."|");
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_nota.".DET";
+	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_factura.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$query = "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura_num."'";
 	$sql=mysqli_query($con, $query);	

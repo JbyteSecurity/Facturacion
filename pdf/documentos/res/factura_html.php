@@ -67,7 +67,7 @@ border: 1px solid #000000;
                 
             </td>
 			<td style="width: 25%;text-align:center;">
-			<table border=1 style="text-align:center">
+			<table border=3 style="text-align:center;margin-left:120px;font-weight:bold;border-style:solid;border-width: 3px;">
 			<tr>
 			<td>
 			10292356817
@@ -267,7 +267,7 @@ $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=
         </tr>
         <tr>
 
-        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo $letra; ?></td>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_factura,2)); echo "SON: ".$letra; ?></td>
         </tr>
  		<tr>
         	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>

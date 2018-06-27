@@ -89,6 +89,7 @@
 									<option value="2">Cheque</option>
 									<option value="3">Transferencia bancaria</option>
 									<option value="4">Crédito</option>
+									<option value="5">Tarjeta de Credito VISA</option>
 								</select>
 							</div>
 						</div>

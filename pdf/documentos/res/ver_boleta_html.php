@@ -62,8 +62,8 @@ border: 1px solid #000000;
 				Web: http://www.rodriguezvelarde.com.pe/
                 
             </td>
-			<td style="width: 25%;text-align:left;">
-			<table boder=1 style="text-align:center;">
+			<td style="width: 25%;text-align:center;">
+			<table border=3 style="margin-left:45px; font-weight:bold;" >
 			<tr>
 			<td>
 			10292356817
@@ -131,12 +131,15 @@ border: 1px solid #000000;
            <td style="width:100%;" class='midnight-blue'></td>
         </tr>
 		<tr>
-           <td style="width:50%;" >
+           <td style="width:100%;" >
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['nombre_cliente'];
-				echo "<br>";
+				echo "<br> RUC: ";
+				echo $rw_cliente['ruc'];				
+				echo "<br> Cliente: ";
+				echo $rw_cliente['nombre_cliente'];			
+				echo "<br> Direcciòn: ";
 				echo $rw_cliente['direccion_cliente'];
 				echo "<br> Teléfono: ";
 				echo $rw_cliente['telefono_cliente'];
@@ -269,7 +272,7 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
         <tr>
 
-        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_boleta,2)); echo $letra; ?></td>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_boleta,2)); echo "SON: ".$letra; ?></td>
         </tr>
     	<tr>
         	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>

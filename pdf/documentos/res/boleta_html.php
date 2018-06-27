@@ -65,8 +65,8 @@ border: 1px solid #000000;
 				Web: http://www.rodriguezvelarde.com.pe/
                 
             </td>
-			<td style="width: 25%;text-align:left">
-			<table boder=1 style="text-align:center;">
+			<td style="width: 25%;text-align:center;">
+			<table border=3 style="text-align:center;margin-left:120px;font-weight:bold;border-style:solid;border-width: 3px;">
 			<tr>
 			<td>
 			10292356817
@@ -278,7 +278,7 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
         <tr>
 
-       	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_boleta,2)); echo $letra; ?></td>
+       	<td colspan="3" style="widtd: 85%; text-align: left;"> <?php $letra = convertir_a_letras(number_format($total_boleta,2)); echo "SON: ".$letra; ?></td>
         </tr>
     	<tr>
         	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>

@@ -61,7 +61,7 @@ border: 1px solid #000000;
                 
             </td>
 			<td style="width: 25%;text-align:center;">
-			<table border=1 >
+			<table border=3 style="margin-left:45px; font-weight:bold;" >
 			<tr>
 			<td>
 			10292356817
@@ -131,12 +131,15 @@ border: 1px solid #000000;
            <td style="width:100%;" class='midnight-blue'></td>
         </tr>
 		<tr>
-           <td style="width:50%;" >
+           <td style="width:100%;" >
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo $rw_cliente['nombre_cliente'];
-				echo "<br>";
+				echo "<br> RUC: ";
+				echo $rw_cliente['ruc'];				
+				echo "<br> Cliente: ";
+				echo $rw_cliente['nombre_cliente'];			
+				echo "<br> Direcciòn: ";
 				echo $rw_cliente['direccion_cliente'];
 				echo "<br> Teléfono: ";
 				echo $rw_cliente['telefono_cliente'];
