@@ -378,7 +378,6 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'");
     $query = "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'";
-    echo $query;
 	while ($row=mysqli_fetch_array($sql))
 	{
 	$cantidad=$row["cantidad"].".00";
