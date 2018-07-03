@@ -131,25 +131,92 @@ border: 1px solid #000000;
     </table>
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
-        <tr>
-           <td style="width:100%;" class='midnight-blue'></td>
+	<tr>
+           <td style="width:10%;" class='midnight-blue'></td>
+		   <td style="width:90%;" class='midnight-blue'></td>
         </tr>
 		<tr>
-           <td style="width:50%;" >
+           <td style="width:10%;" >
+			<?php 
+				
+				echo "RUC: ";				
+			?>
+			
+		   </td>
+		   <td style="width:90%;" >
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
-				$rw_cliente=mysqli_fetch_array($sql_cliente);
-				echo "<br> RUC: ";
+				$rw_cliente=mysqli_fetch_array($sql_cliente);				
 				echo $rw_cliente['ruc'];				
-				echo "<br> Cliente: ";
-				echo $rw_cliente['nombre_cliente'];			
-				echo "<br> Direcciòn: ";
-				echo $rw_cliente['direccion_cliente'];
-				echo "<br> Teléfono: ";
-				echo $rw_cliente['telefono_cliente'];
-				echo "<br> Email: ";
-				echo $rw_cliente['email_cliente'];
-				echo "<br> Kardex: ";
+			?>
+			
+		   </td>
+        </tr>
+		<tr>
+           <td style="width:10%;" >
+			<?php 
+				echo "Cliente: ";				
+			?>
+			
+		   </td>
+		   <td style="width:90%;" >
+			<?php 
+				echo $rw_cliente['nombre_cliente'];	
+			?>
+			
+		   </td>
+        </tr>
+		<tr>
+           <td style="width:10%;" >
+			<?php 						
+				echo "Direcciòn: ";					
+			?>
+			
+		   </td>
+		   <td style="width:90%;" >
+			<?php 						
+				echo $rw_cliente['direccion_cliente'];			
+			?>
+			
+		   </td>
+        </tr>
+		<tr>
+           <td style="width:10%;" >
+			<?php 
+				echo "Teléfono: ";							
+			?>
+			
+		   </td>
+		   <td style="width:90%;" >
+			<?php 
+				echo $rw_cliente['telefono_cliente'];				
+			?>
+			
+		   </td>
+        </tr>
+		<tr>
+           <td style="width:10%;" >
+			<?php 
+				echo "Email: ";						
+			?>
+			
+		   </td>
+		   <td style="width:90%;" >
+			<?php 
+				echo $rw_cliente['email_cliente'];				
+			?>
+			
+		   </td>
+        </tr>
+        <tr>
+           <td style="width:10%;" >
+			<?php 
+				echo "Kardex: ";
+			?>
+			
+		   </td>
+		   <td style="width:9s0%;" >
+			<?php 
 				echo $kardex;
 			?>
 			
