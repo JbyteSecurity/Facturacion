@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 26-06-2018 a las 07:01:42
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.3
+-- Tiempo de generación: 04-07-2018 a las 00:02:00
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,17 +36,24 @@ CREATE TABLE `boletas` (
   `id_vendedor` int(11) NOT NULL,
   `condiciones` varchar(30) NOT NULL,
   `total_venta` varchar(20) NOT NULL,
-  `estado_boleta` tinyint(1) NOT NULL
+  `estado_boleta` tinyint(1) NOT NULL,
+  `kardex` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `boletas`
 --
 
-INSERT INTO `boletas` (`id_boleta`, `numero_boleta`, `fecha_boleta`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_boleta`) VALUES
-(15, 15, '2018-06-13 05:03:23', 6, 1, '1', '55', 1),
-(16, 16, '2018-06-13 05:03:48', 6, 1, '1', '55', 1),
-(17, 17, '2018-06-26 05:22:53', 7, 1, '1', '23', 1);
+INSERT INTO `boletas` (`id_boleta`, `numero_boleta`, `fecha_boleta`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_boleta`, `kardex`) VALUES
+(20, 20, '2018-07-03 22:23:23', 6, 1, '1', '60.5', 1, ''),
+(21, 21, '2018-07-03 23:28:31', 6, 1, '1', '48.5', 1, ''),
+(22, 22, '2018-07-03 23:30:40', 6, 1, '1', '60.5', 1, ''),
+(23, 23, '2018-07-03 23:35:28', 6, 1, '1', '58', 1, ''),
+(24, 24, '2018-07-03 23:38:30', 6, 1, '1', '58', 1, ''),
+(25, 25, '2018-07-03 23:40:43', 6, 1, '1', '35', 1, ''),
+(26, 26, '2018-07-03 23:44:15', 6, 1, '1', '35', 1, ''),
+(27, 27, '2018-07-03 23:45:43', 6, 1, '1', '23', 1, 'eeee'),
+(28, 28, '2018-07-03 23:48:03', 6, 1, '1', '23', 1, '11111');
 
 -- --------------------------------------------------------
 
@@ -96,9 +103,9 @@ CREATE TABLE `correlativos` (
 --
 
 INSERT INTO `correlativos` (`documento`, `numero`) VALUES
-('Factura', 25),
-('Nota', 140),
-('Boleta', 18);
+('Factura', 34),
+('Nota', 145),
+('Boleta', 29);
 
 -- --------------------------------------------------------
 
@@ -119,11 +126,20 @@ CREATE TABLE `detalle_boleta` (
 --
 
 INSERT INTO `detalle_boleta` (`id_detalle`, `numero_boleta`, `id_producto`, `cantidad`, `precio_venta`) VALUES
-(22, 15, 17, 1, 29.66),
-(23, 15, 16, 1, 16.95),
-(24, 16, 17, 1, 29.66),
-(25, 16, 16, 1, 16.95),
-(26, 17, 19, 1, 19.49);
+(29, 20, 20, 1, 21.61),
+(30, 20, 17, 1, 29.66),
+(31, 21, 20, 1, 21.61),
+(32, 21, 19, 1, 19.49),
+(33, 22, 20, 1, 21.61),
+(34, 22, 17, 1, 29.66),
+(35, 23, 19, 1, 19.49),
+(36, 23, 17, 1, 29.66),
+(37, 24, 19, 1, 19.49),
+(38, 24, 17, 1, 29.66),
+(39, 25, 17, 1, 29.66),
+(40, 26, 17, 1, 29.66),
+(41, 27, 19, 1, 19.49),
+(42, 28, 19, 1, 19.49);
 
 -- --------------------------------------------------------
 
@@ -144,22 +160,13 @@ CREATE TABLE `detalle_factura` (
 --
 
 INSERT INTO `detalle_factura` (`id_detalle`, `numero_factura`, `id_producto`, `cantidad`, `precio_venta`) VALUES
-(184, 11, 17, 1, 29.66),
-(185, 11, 16, 1, 16.95),
-(186, 12, 18, 1, 12.71),
-(187, 12, 16, 1, 16.95),
-(188, 13, 19, 1, 19.49),
-(189, 14, 19, 1, 19.49),
-(190, 15, 19, 1, 19.49),
-(191, 16, 19, 1, 19.49),
-(192, 17, 19, 1, 19.49),
-(193, 18, 19, 1, 19.49),
-(194, 19, 19, 1, 19.49),
-(195, 20, 19, 1, 19.49),
-(196, 21, 19, 1, 19.49),
-(197, 22, 19, 1, 19.49),
-(198, 23, 19, 1, 19.49),
-(199, 24, 19, 1, 19.49);
+(206, 28, 19, 1, 19.49),
+(207, 28, 16, 1, 16.95),
+(208, 29, 20, 1, 21.61),
+(209, 30, 16, 1, 16.95),
+(210, 31, 17, 1, 29.66),
+(211, 32, 17, 1, 29.66),
+(212, 33, 16, 1, 16.95);
 
 -- --------------------------------------------------------
 
@@ -2072,28 +2079,19 @@ CREATE TABLE `facturas` (
   `id_vendedor` int(11) NOT NULL,
   `condiciones` varchar(30) NOT NULL,
   `total_venta` varchar(20) NOT NULL,
-  `estado_factura` tinyint(1) NOT NULL
+  `estado_factura` tinyint(1) NOT NULL,
+  `kardex` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `facturas`
 --
 
-INSERT INTO `facturas` (`id_factura`, `numero_factura`, `fecha_factura`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_factura`) VALUES
-(160, 11, '2018-06-13 05:04:21', 6, 1, '1', '55', 1),
-(161, 12, '2018-06-24 23:51:12', 6, 1, '1', '30.01', 1),
-(162, 13, '2018-06-26 05:22:27', 7, 1, '1', '23', 1),
-(163, 14, '2018-06-26 05:29:18', 7, 1, '1', '23', 1),
-(164, 15, '2018-06-26 05:36:12', 7, 1, '1', '23', 1),
-(165, 16, '2018-06-26 05:37:18', 7, 1, '1', '23', 1),
-(166, 17, '2018-06-26 05:38:42', 7, 1, '1', '23', 1),
-(167, 18, '2018-06-26 05:54:04', 7, 1, '1', '23', 1),
-(168, 19, '2018-06-26 05:54:55', 7, 1, '1', '19.72', 1),
-(169, 20, '2018-06-26 06:13:24', 7, 1, '1', '23', 1),
-(170, 21, '2018-06-26 06:15:56', 7, 1, '1', '23', 1),
-(171, 22, '2018-06-26 06:22:03', 7, 1, '1', '23', 1),
-(172, 23, '2018-06-26 06:23:40', 7, 1, '1', '23', 1),
-(173, 24, '2018-06-26 06:57:05', 7, 1, '1', '23', 1);
+INSERT INTO `facturas` (`id_factura`, `numero_factura`, `fecha_factura`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_factura`, `kardex`) VALUES
+(177, 28, '2018-07-03 21:46:44', 6, 1, '1', '43', 1, ''),
+(178, 29, '2018-07-03 21:47:16', 6, 1, '1', '21.86', 1, ''),
+(179, 30, '2018-07-03 22:09:59', 6, 1, '1', '20', 1, ''),
+(180, 33, '2018-07-03 23:58:14', 6, 1, '1', '20', 1, '454455');
 
 -- --------------------------------------------------------
 
@@ -2116,11 +2114,7 @@ CREATE TABLE `nota` (
 --
 
 INSERT INTO `nota` (`id_nota`, `numero_nota`, `fecha_nota`, `tipo_nota`, `numero_factura`, `motivo`, `id_vendedor`) VALUES
-(22, 135, '2018-06-13', 'ANULACION DE LA OPERACION', '11', 'wewewew', 1),
-(23, 136, '2018-06-13', 'ANULACION DE LA OPERACION', '11', 'ddwdw', 1),
-(24, 137, '2018-06-13', 'ANULACION DE LA OPERACION', '11', '', 1),
-(25, 138, '2018-06-13', 'ANULACION DE LA OPERACION', '11', '', 1),
-(26, 139, '2018-06-13', 'ANULACION DE LA OPERACION', '', '', 0);
+(31, 144, '2018-07-03', 'ANULACION DE LA OPERACION', '30', 'fdfdfdfd', 1);
 
 -- --------------------------------------------------------
 
@@ -2145,7 +2139,8 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id_producto`, `codigo_producto`, `nombre_producto`, `status_producto`, `date_added`, `precio_producto`, `igv`) VALUES
 (16, 'COD01', 'Carta Poder', 1, '2018-06-12 06:03:37', 16.949152542373, 3.05),
 (17, 'COD02', 'Testamento', 1, '2018-06-12 06:24:44', 29.661016949153, 5.34),
-(19, '001', 'Jordan diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias', 1, '2018-06-26 05:21:55', 19.491525423729, 3.51);
+(19, '001', 'Jordan diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias diaz diaz diaz diaz diaz dias', 1, '2018-06-26 05:21:55', 19.491525423729, 3.51),
+(20, 'SHIT', 'Producto Nuevo', 1, '2018-07-03 21:47:05', 21.610169491525, 3.89);
 
 -- --------------------------------------------------------
 
@@ -2549,7 +2544,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `boletas`
 --
 ALTER TABLE `boletas`
-  MODIFY `id_boleta` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_boleta` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -2561,37 +2556,37 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `detalle_boleta`
 --
 ALTER TABLE `detalle_boleta`
-  MODIFY `id_detalle` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_detalle` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT de la tabla `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `id_nota` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_nota` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=399;
+  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=428;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
