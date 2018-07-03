@@ -252,6 +252,63 @@ $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
 	$total_factura=$subtotal+$igv2;
+	if($nums === 2)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums === 3)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums === 4)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	
+	}
+	if($nums === 5)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums === 6)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums == 7)
+	{
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums == 8)
+	{
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums == 9)
+	{
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
 ?>
 	  
         <tr>

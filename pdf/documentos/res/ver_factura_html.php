@@ -182,7 +182,7 @@ border: 1px solid #000000;
    
     </table>
   
-    <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
+    <table cellspacing="0" style="width: 100%; height: 100%; text-align: left; font-size: 10pt;">
         <tr>
             <th style="width: 10%;text-align:center" class='midnight-blue'>CANT.</th>
             <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
@@ -217,7 +217,7 @@ while ($row=mysqli_fetch_array($sql))
 	} else {
 		$clase="silver";
 	}
-	?>
+		?>
 
         <tr>
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
@@ -236,6 +236,67 @@ while ($row=mysqli_fetch_array($sql))
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
 	$total_factura=$subtotal+$igv2;
+    //echo $nums;
+	if($nums === 2)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums === 3)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums === 4)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	
+	}
+	if($nums === 5)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums === 6)
+	{
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums == 7)
+	{
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums == 8)
+	{
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+	if($nums == 9)
+	{
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+
+	}
+
+
+
 ?>
 	  
         <tr>
