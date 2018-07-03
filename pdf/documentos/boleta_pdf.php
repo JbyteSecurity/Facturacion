@@ -29,6 +29,7 @@
 	//Variables por GET
 	$id_cliente=intval($_GET['id_cliente']);
 	$id_vendedor=intval($_GET['id_vendedor']);
+	$kardex = $_GET['kardex'];	
 	$condiciones=mysqli_real_escape_string($con,(strip_tags($_REQUEST['condiciones'], ENT_QUOTES)));
 
 	

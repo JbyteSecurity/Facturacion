@@ -94,7 +94,12 @@
 								</select>
 							</div>
 						</div>
-				
+				<div class="form-group row">
+				  <label for="kardex" class="col-md-1 control-label">Kardex</label>
+				  <div class="col-md-3">
+					  <input type="text" class="form-control input-sm" id="kardex" placeholder="Ingrese un Kardex" required>
+				  </div>
+				</div>
 				
 				<div class="col-md-12">
 					<div class="pull-right">

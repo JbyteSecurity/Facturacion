@@ -151,6 +151,8 @@ border: 1px solid #000000;
 				echo $rw_cliente['telefono_cliente'];
 				echo "<br> Email: ";
 				echo $rw_cliente['email_cliente'];
+				echo "<br> Kardex: ";
+				echo $kardex;
 			?>
 			
 		   </td>
@@ -365,7 +367,7 @@ $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=
 <?php
 $date=date("Y-m-d H:i:s");
 
-$insert=mysqli_query($con,"INSERT INTO facturas VALUES (0,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1')");
+$insert=mysqli_query($con,"INSERT INTO facturas VALUES (0,'$numero_factura','$date','$id_cliente','$id_vendedor','$condiciones','$total_factura','1','$kardex')");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_numero where documento ='Factura' ");	 
 			$cantidad = strlen($numero_factura);  

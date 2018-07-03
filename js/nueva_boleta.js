@@ -72,13 +72,13 @@
 		  var id_cliente = $("#id_cliente").val();
 		  var id_vendedor = $("#id_vendedor").val();
 		  var condiciones = $("#condiciones").val();
-		  
+		  var kardex = $("#kardex").val();		  
 		  if (id_cliente==""){
 			  alert("Debes seleccionar un cliente");
 			  $("#nombre_cliente").focus();
 			  return false;
 		  }
-		 VentanaCentrada('./pdf/documentos/boleta_pdf.php?id_cliente='+id_cliente+'&id_vendedor='+id_vendedor+'&condiciones='+condiciones,'Boleta','','1024','768','true');
+		 VentanaCentrada('./pdf/documentos/boleta_pdf.php?id_cliente='+id_cliente+'&id_vendedor='+id_vendedor+'&condiciones='+condiciones+'&kardex='+kardex,'Boleta','','1024','768','true');
 	 	});
 		
 		$( "#guardar_cliente" ).submit(function( event ) {

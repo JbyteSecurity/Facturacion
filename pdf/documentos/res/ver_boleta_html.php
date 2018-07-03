@@ -145,6 +145,13 @@ border: 1px solid #000000;
 				echo $rw_cliente['telefono_cliente'];
 				echo "<br> Email: ";
 				echo $rw_cliente['email_cliente'];
+				echo "<br> Kardex: ";
+				$sql=mysqli_query($con, "select * from boletas where numero_boleta='".$numero_boleta."'");
+				if($rowww=mysqli_fetch_array($sql))
+				{
+					$kardex = $rowww["kardex"];
+					echo $kardex;
+				}
 			?>
 			
 		   </td>
