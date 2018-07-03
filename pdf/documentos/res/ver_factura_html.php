@@ -127,7 +127,7 @@ border: 1px solid #000000;
 
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
-	<tr>
+	    <tr>
            <td style="width:10%;" class='midnight-blue'></td>
 		   <td style="width:90%;" class='midnight-blue'></td>
         </tr>
