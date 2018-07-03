@@ -432,7 +432,18 @@ function convertir_a_letras($numero)
 	$pos = strpos($num_letras, "céntimo");
 	if($pos === false)
 	{
-		$num_letras = $num_letras." con 00/100 Soles";
+		$pos = strpos($num_letras, "con");
+		if($pos ===false)
+		{
+			$num_letras = $num_letras." con 00/100 Soles";
+	
+		}
+		else
+		{
+			$num_letras = $num_letras;
+
+		}
+		
 	}
 
 	return $num_letras;

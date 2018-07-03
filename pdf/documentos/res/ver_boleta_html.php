@@ -174,6 +174,7 @@ border: 1px solid #000000;
 				elseif ($condiciones==2){echo "Cheque";}
 				elseif ($condiciones==3){echo "Transferencia bancaria";}
 				elseif ($condiciones==4){echo "Crédito";}
+				elseif ($condiciones==5){echo "Tarjeta de Credito Visa";}
 				?>
 		   </td>
         </tr>
@@ -185,7 +186,8 @@ border: 1px solid #000000;
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 10pt;">
         <tr>
             <th style="width: 10%;text-align:center" class='midnight-blue'>CANT.</th>
-            <th style="width: 60%" class='midnight-blue'>DESCRIPCION</th>
+            <th style="width: 10%;text-align:center" class='midnight-blue'>CODIGO</th>
+            <th style="width: 50%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO UNIT.</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO TOTAL</th>
             
@@ -220,7 +222,8 @@ while ($row=mysqli_fetch_array($sql))
 
         <tr>
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 60%; text-align: left"><?php echo $nombre_producto;?></td>
+            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre_producto;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
             
