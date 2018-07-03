@@ -217,7 +217,7 @@ border: 1px solid #000000;
 			?>
 			
 		   </td>
-		   <td style="width:9s0%;" >
+		   <td style="width:90%;" >
 			<?php 				
 				echo $kardex;
 			?>

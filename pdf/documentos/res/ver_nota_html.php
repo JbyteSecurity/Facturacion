@@ -210,7 +210,7 @@ border: 1px solid #000000;
 			?>
 			
 		   </td>
-		   <td style="width:9s0%;" >
+		   <td style="width:90%;" >
 			<?php 
 				$sql=mysqli_query($con, "select * from facturas where numero_factura='".$numero_factura."'");
 				if($rowww=mysqli_fetch_array($sql))
