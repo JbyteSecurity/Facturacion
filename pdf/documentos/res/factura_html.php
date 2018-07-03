@@ -67,7 +67,7 @@ border: 1px solid #000000;
                 
             </td>
 			<td style="width: 25%;text-align:center;">
-			<table border=3 style="text-align:center;margin-left:120px;font-weight:bold;border-style:solid;border-width: 3px;">
+			<table border=3 style="text-align:center;font-weight:bold;border-style:solid;border-width: 3px;">
 			<tr>
 			<td>
 			10292356817
@@ -134,10 +134,10 @@ border: 1px solid #000000;
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
         <tr>
-           <td style="width:50%;" class='midnight-blue'></td>
+           <td style="width:100%;" class='midnight-blue'></td>
         </tr>
 		<tr>
-           <td style="width:50%;" >
+           <td style="width:100%;" >
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
