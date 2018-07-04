@@ -65,15 +65,7 @@ border: 1px solid #000000;
                 
             </td>
 			<td style="width: 25%;text-align:center;">
-			<table border=3 style="text-align:center;margin-left:120px;font-weight:bold;border-style:solid;border-width: 3px;">
-			<tr>
-			<td>
-			10292356817
-			</td>
-			</tr>
-			<tr>
-			<td>
-			NOTA
+			<table border=3 style="margin-left:45px; font-weight:bold;" >
 			</td>
 			</tr>
 			<tr>
