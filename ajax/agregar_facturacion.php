@@ -40,6 +40,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	$igv = 0;
 	$igv2 = 0;
 	$sql=mysqli_query($con, "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
+	//echo "select * from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'";
 	while ($row=mysqli_fetch_array($sql))
 	{
 	$id_tmp=$row["id_tmp"];

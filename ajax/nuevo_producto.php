@@ -30,7 +30,10 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Producto ha sido ingresado satisfactoriamente.";
-				$sql=mysqli_query($con, "select * from products where codigo_producto='".$codigo."'");
+				$sql = mysqli_query($con, "select MAX(id_producto) AS id_producto from products");
+				$row = mysqli_fetch_array($sql);
+				$id_producto = $row["id_producto"];
+				$sql = mysqli_query($con, "select * from products where id_producto='".$id_producto."'");
 				if($row=mysqli_fetch_array($sql))
 				{
 					$id_producto=$row["id_producto"];

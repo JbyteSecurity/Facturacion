@@ -103,14 +103,14 @@
 				<div class="col-md-12">
 					<div class="pull-right">
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoProducto">
-						 <span class="glyphicon glyphicon-plus"></span> Nuevo producto
+						 <span class="glyphicon glyphicon-plus"></span> Agregar Item
 						</button>
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevoCliente">
 						 <span class="glyphicon glyphicon-user"></span> Nuevo cliente
 						</button>
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+						<!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 						 <span class="glyphicon glyphicon-search"></span> Agregar productos
-						</button>
+						</button>-->
 						<button type="submit" class="btn btn-default">
 						  <span class="glyphicon glyphicon-print"></span> Imprimir
 						</button>
