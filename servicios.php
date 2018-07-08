@@ -15,10 +15,10 @@
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
 	
 	$active_facturas="";
-	$active_productos="active";
+	$active_servicios="active";
 	$active_clientes="";
 	$active_usuarios="";	
-	$title="Productos | Simple Invoice";
+	$title="Servicios | Simple Invoice";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,27 +31,26 @@
 	?>
 	
     <div class="container">
-	<div class="panel panel-info">
+		<div class="panel panel-info">
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
-				<button type='button' class="btn btn-info" data-toggle="modal" data-target="#nuevoProducto"><span class="glyphicon glyphicon-plus" ></span> Nuevo Producto</button>
+				<button type='button' class="btn btn-info" data-toggle="modal" data-target="#nuevoServicio"><span class="glyphicon glyphicon-plus" ></span> Nuevo Servicio</button>
 			</div>
-			<h4><i class='glyphicon glyphicon-search'></i> Buscar Productos</h4>
+			<h4><i class='glyphicon glyphicon-search'></i> Buscar Servicios</h4>
 		</div>
 		<div class="panel-body">
 		
 			
 			
 			<?php
-			include("modal/registro_productos.php");
-			include("modal/editar_productos.php");
+			include("modal/registro_servicios.php");
+			include("modal/editar_servicios.php");
 			?>
 			<form class="form-horizontal" role="form" id="datos_cotizacion">
 				
-						<div class="form-group row">
-							<label for="q" class="col-md-2 control-label">Código o nombre</label>
+						<div class="form-group row"> 
 							<div class="col-md-5">
-								<input type="text" class="form-control" id="q" placeholder="Código o nombre del producto" onkeyup='load(1);'>
+								<input type="text" class="form-control" id="q" placeholder="Código o nombre del servicio" onkeyup='load(1);'>
 							</div>
 							<div class="col-md-3">
 								<button type="button" class="btn btn-default" onclick='load(1);'>
@@ -80,23 +79,23 @@
 	<?php
 	include("footer.php");
 	?>
-	<script type="text/javascript" src="js/productos.js"></script>
+	<script type="text/javascript" src="js/servicios.js"></script>
   </body>
 </html>
 <script>
-$( "#guardar_producto" ).submit(function( event ) {
+$( "#guardar_servicio" ).submit(function( event ) {
   $('#guardar_datos').attr("disabled", true);
   
  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
-			url: "ajax/nuevo_producto.php",
+			url: "ajax/nuevo_servicio.php",
 			data: parametros,
 			 beforeSend: function(objeto){
-				$("#resultados_ajax_productos").html("Mensaje: Cargando...");
+				$("#resultados_ajax_servicios").html("Mensaje: Cargando...");
 			  },
 			success: function(datos){
-			$("#resultados_ajax_productos").html(datos);
+			$("#resultados_ajax_servicios").html(datos);
 			$('#guardar_datos').attr("disabled", false);
 			load(1);
 		  }
@@ -104,13 +103,13 @@ $( "#guardar_producto" ).submit(function( event ) {
   event.preventDefault();
 })
 
-$( "#editar_producto" ).submit(function( event ) {
+$( "#editar_servicio" ).submit(function( event ) {
   $('#actualizar_datos').attr("disabled", true);
   
  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
-			url: "ajax/editar_producto.php",
+			url: "ajax/editar_servicio.php",
 			data: parametros,
 			 beforeSend: function(objeto){
 				$("#resultados_ajax2").html("Mensaje: Cargando...");
@@ -125,13 +124,10 @@ $( "#editar_producto" ).submit(function( event ) {
 })
 
 	function obtener_datos(id){
-			var codigo_producto = $("#codigo_producto"+id).val();
-			var nombre_producto = $("#nombre_producto"+id).val();
-			var estado = $("#estado"+id).val();
-			var precio_producto = $("#precio_producto"+id).val();
+			var codigo_servicio = $("#codigo_servicio"+id).val();
+			var nombre_servicio = $("#nombre_servicio"+id).val();
 			$("#mod_id").val(id);
-			$("#mod_codigo").val(codigo_producto);
-			$("#mod_nombre").val(nombre_producto);
-			$("#mod_precio").val(precio_producto);
+			$("#mod_codigo").val(codigo_servicio);
+			$("#mod_nombre").val(nombre_servicio);
 		}
 </script>
