@@ -63,7 +63,7 @@ border: 1px solid #000000;
                 
             </td>
 			<td style="width: 25%;text-align:center;">
-			<table border=3 style="margin-left:45px; font-weight:bold;" >
+			<table border=3 style="margin-left:45px; font-weight:bold; font-size:75%; margin-left:25px;" >
 			<tr>
 			<td>
 			10292356817
@@ -71,12 +71,12 @@ border: 1px solid #000000;
 			</tr>
 			<tr>
 			<td>
-			RECIBO
+			RECIBO INTERNO
 			</td>
 			</tr>
 			<tr>
 			<td>
-			ELECTRONICO
+			PAGOS REGISTRALES
 			</td>
 			</tr>		
 			<tr>
@@ -117,7 +117,7 @@ border: 1px solid #000000;
 			{
 				$numero_recibo = "0".$numero_recibo;
 			}
-			echo "B003-".$numero_recibo;
+			echo "N°".$numero_recibo;
 			?>
 			</td>
 			</tr>

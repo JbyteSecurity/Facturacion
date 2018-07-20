@@ -66,7 +66,7 @@ border: 1px solid #000000;
                 
             </td>
 			<td style="width: 25%;text-align:center;">
-			<table border=3 style="text-align:center;font-weight:bold;border-style:solid;border-width: 3px;">
+			<table border=3 style="text-align:center;font-weight:bold;border-style:solid;border-width: 3px; font-size:75%; margin-left:25px;">
 			<tr>
 			<td>
 			10292356817
@@ -74,12 +74,12 @@ border: 1px solid #000000;
 			</tr>
 			<tr>
 			<td>
-			RECIBO
+			RECIBO INTERNO
 			</td>
 			</tr>
 			<tr>
 			<td>
-			ELECTRONICO
+			PAGOS REGISTRALES
 			</td>
 			</tr>		
 			<tr>
@@ -121,7 +121,7 @@ border: 1px solid #000000;
 			{
 				$numero_recibo = "0".$numero_recibo;
 			}
-                echo "B003-".$numero_recibo;
+                echo "N°".$numero_recibo;
 			?>
 			</td>
 		    </tr>
@@ -440,119 +440,5 @@ $date=date("Y-m-d H:i:s");
 $insert=mysqli_query($con,"INSERT INTO recibos VALUES (0,'$numero_recibo','$date','$id_cliente','$id_vendedor','$condiciones','$total_recibo','1', '$kardex')");
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
 $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_numero where documento ='recibo' ");	 
-			$cantidad = strlen($numero_recibo);  
-			$recibo = $numero_recibo;
-			if($cantidad == "1")
-			{
-				$numero_recibo = "0000000".$numero_recibo;
-			}
-
-            if($cantidad == "2")
-			{
-				$numero_recibo = "000000".$numero_recibo;
-			}
-
-			if($cantidad == "3")
-			{
-				$numero_recibo = "00000".$numero_recibo;
-			}
-
-			if($cantidad == "4")
-			{
-				$numero_recibo = "0000".$numero_recibo;
-			}
-
-			if($cantidad == "5")
-			{
-				$numero_recibo = "000".$numero_recibo;
-			}
-
-			if($cantidad == "6")
-			{
-				$numero_recibo = "00".$numero_recibo;
-			}
-
-			if($cantidad == "7")
-			{
-				$numero_recibo = "0".$numero_recibo;
-			}
-                
-			
-	//Creamos Archivo txt
-    $pdf = "10292356817-03-B003-".$numero_recibo;
-	$ruc = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_recibo.".CAB";
-	$date=date("Y-m-d");
-	$documento = $rw_cliente['ruc'];
-	$nombre = $rw_cliente['nombre_cliente'];	
-	$tipodocumento = "";
-	if(strlen($documento)==8){
-		$tipodocumento = "1";
-	}
-	if(strlen($documento)==11){
-		$tipodocumento = "6";
-	}
-    $total_recibo=number_format($total_recibo,2,'.','');
-	$file =fopen($ruc, "a") or die("Problemas");
-	fputs($file, "01|".$date."||".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$igv2."|0.00|0.00|".$total_recibo."|");
-	fclose($file);  
-
-    //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_recibo.".DET";
-	$file2 =fopen($ruc2, "a") or die("Problemas");
-	$sql=mysqli_query($con, "select * from detalle_recibo, products where products.id_producto=detalle_recibo.id_producto and detalle_recibo.numero_recibo='".$recibo."'");
-    $query = "select * from detalle_recibo, products where products.id_producto=detalle_recibo.id_producto and detalle_recibo.numero_recibo='".$recibo."'";
-	while ($row=mysqli_fetch_array($sql))
-	{
-	$cantidad=$row["cantidad"].".00";
-	$codigoproducto=$row["codigo_producto"];
-	$nombreproducto = $row["nombre_producto"];
-	$precioproducto = $row["precio_producto"];
-	$pos = strpos($precioproducto, ".");
-	if ($pos === false) {
-        $precioproducto = $precioproducto.".00";
-	} 
-    
-    $preciototalunitario =  $cantidad * $precioproducto;
-	$pos2 = strpos($preciototalunitario, ".");
-	if ($pos2 === false) {
-        $preciototalunitario = $preciototalunitario.".00";
-	} 
-	$igv=$row["igv"];
-	$igv=number_format($igv,2,'.','');
-    $total = $preciototalunitario + $igv;
-	$pos3 = strpos($total, ".");
-	if ($pos3 === false) {
-        $total = $total.".00";
-	} 
-	$total=number_format($total,2,'.','');
-	$precioproducto = number_format($precioproducto,2,'.','');
-	$preciototalunitario = number_format($preciototalunitario,2,'.','');
-	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
-	fwrite($file2,"\n");  
-	
-	}
-	fclose($file2);
-
-
-    //Creamos Archivo Adicional Cabecera
-	$ruc3 = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_recibo.".ACA";
-	$file3 =fopen($ruc3, "a") or die("Problemas");
-	$sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
-	//echo $sql;
-    $direccion_cliente = "";
-
-	while ($row=mysqli_fetch_array($sql))
-	{
-			
-    	$direccion_cliente = $row["direccion_cliente"];
-		$ubigeo = $row["ubigeo"];
-	} 
-
-	fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|".$ubigeo."|".$direccion_cliente."||||".$date."|");
-	fwrite($file3,"\n");{  
-	
-	}
-	fclose($file3);
-
-
+		
 ?>

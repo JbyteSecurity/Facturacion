@@ -55,7 +55,7 @@
         // convert
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
         // send the PDF
-		$html2pdf->Output('recibo'.$pdf.'.pdf');
+		$html2pdf->Output('recibo'.'.pdf');
 		//$html2pdf->Output('Factura.pdf');
     }
     catch(HTML2PDF_exception $e) {
