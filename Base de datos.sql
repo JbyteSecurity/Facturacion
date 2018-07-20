@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-07-2018 a las 00:32:39
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.3
+-- Tiempo de generación: 20-07-2018 a las 18:52:22
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -55,7 +55,9 @@ INSERT INTO `boletas` (`id_boleta`, `numero_boleta`, `fecha_boleta`, `id_cliente
 (22, 22, '2018-07-03 06:25:28', 6, 1, '1', '115', 1, ''),
 (23, 23, '2018-07-03 06:27:20', 6, 1, '1', '78', 1, ''),
 (24, 24, '2018-07-03 06:29:38', 6, 1, '1', '55', 1, ''),
-(25, 25, '2018-07-09 00:25:31', 6, 1, '1', '177', 1, '22222');
+(25, 25, '2018-07-09 00:25:31', 6, 1, '1', '177', 1, '22222'),
+(26, 26, '2018-07-20 16:42:46', 6, 1, '1', '21', 1, '14144'),
+(27, 27, '2018-07-20 16:45:36', 6, 1, '1', '23', 1, '14144');
 
 -- --------------------------------------------------------
 
@@ -105,9 +107,10 @@ CREATE TABLE `correlativos` (
 --
 
 INSERT INTO `correlativos` (`documento`, `numero`) VALUES
-('Factura', 58),
+('Factura', 59),
 ('Nota', 146),
-('Boleta', 26);
+('Boleta', 28),
+('Recibo', 13);
 
 -- --------------------------------------------------------
 
@@ -157,7 +160,9 @@ INSERT INTO `detalle_boleta` (`id_detalle`, `numero_boleta`, `id_producto`, `can
 (48, 24, 17, 1, 29.66),
 (49, 24, 16, 1, 16.95),
 (50, 25, 37, 1, 122.88),
-(51, 25, 36, 1, 27.12);
+(51, 25, 36, 1, 27.12),
+(52, 26, 38, 1, 17.8),
+(53, 27, 39, 1, 19.49);
 
 -- --------------------------------------------------------
 
@@ -247,7 +252,31 @@ INSERT INTO `detalle_factura` (`id_detalle`, `numero_factura`, `id_producto`, `c
 (304, 56, 17, 1, 29.66),
 (305, 56, 19, 1, 19.49),
 (306, 57, 35, 1, 105.08),
-(307, 57, 34, 1, 27.12);
+(307, 57, 34, 1, 27.12),
+(308, 58, 41, 1, 19.49);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_recibo`
+--
+
+CREATE TABLE `detalle_recibo` (
+  `id_detalle` bigint(20) UNSIGNED NOT NULL,
+  `numero_recibo` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_venta` double NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_recibo`
+--
+
+INSERT INTO `detalle_recibo` (`id_detalle`, `numero_recibo`, `id_producto`, `cantidad`, `precio_venta`) VALUES
+(63, 11, 52, 1, 19.49),
+(62, 10, 51, 1, 19.49),
+(61, 9, 50, 1, 17.8);
 
 -- --------------------------------------------------------
 
@@ -2181,7 +2210,8 @@ INSERT INTO `facturas` (`id_factura`, `numero_factura`, `fecha_factura`, `id_cli
 (203, 54, '2018-07-03 06:17:31', 6, 1, '1', '78', 1, ''),
 (204, 55, '2018-07-03 06:18:17', 6, 1, '1', '113', 1, ''),
 (205, 56, '2018-07-03 06:20:06', 6, 1, '1', '188', 1, ''),
-(206, 57, '2018-07-09 00:24:55', 6, 1, '1', '156', 1, '22222');
+(206, 57, '2018-07-09 00:24:55', 6, 1, '1', '156', 1, '22222'),
+(207, 58, '2018-07-20 16:51:51', 6, 1, '1', '23', 1, '14144');
 
 -- --------------------------------------------------------
 
@@ -2239,7 +2269,26 @@ INSERT INTO `products` (`id_producto`, `codigo_producto`, `nombre_producto`, `st
 (34, '1111', 'TESTAMENTOooo', 1, '2018-07-09 00:24:26', 27.118644067797, 4.88),
 (35, '1111', 'TESTAMENTO677', 1, '2018-07-09 00:24:37', 105.08474576271, 18.92),
 (36, '1111', 'TESTAMENTOffffff', 1, '2018-07-09 00:25:19', 27.118644067797, 4.88),
-(37, '1111', 'TESTAMENTOffffffppppppp', 1, '2018-07-09 00:25:28', 122.8813559322, 22.12);
+(37, '1111', 'TESTAMENTOffffffppppppp', 1, '2018-07-09 00:25:28', 122.8813559322, 22.12),
+(38, '1111', 'TESTAMENTO1ww1w1', 1, '2018-07-20 16:42:43', 17.796610169492, 3.2),
+(39, '1111', 'TESTAMENTOwwew', 1, '2018-07-20 16:45:34', 19.491525423729, 3.51),
+(40, '1111', 'TESTAMENTOsdwwed', 1, '2018-07-20 16:51:03', 19.491525423729, 3.51),
+(41, '1111', 'TESTAMENTOwdewe', 1, '2018-07-20 16:51:50', 19.491525423729, 3.51),
+(42, '1111', 'TESTAMENTOedwew', 1, '2018-07-20 16:55:14', 25.423728813559, 4.58),
+(43, '1111', 'TESTAMENTOwewe', 1, '2018-07-20 17:07:22', 19.491525423729, 3.51),
+(44, '1111', 'TESTAMENTO111', 1, '2018-07-20 17:27:01', 19.491525423729, 3.51),
+(45, '1111', 'TESTAMENTOd', 1, '2018-07-20 17:27:45', 19.491525423729, 3.51),
+(46, '1111', 'TESTAMENTOd', 1, '2018-07-20 17:28:45', 19.491525423729, 3.51),
+(47, '1111', 'TESTAMENTO', 1, '2018-07-20 17:29:14', 19.491525423729, 3.51),
+(48, '1111', 'TESTAMENTOee', 1, '2018-07-20 17:29:51', 17.796610169492, 3.2),
+(49, '1111', 'TESTAMENTO111', 1, '2018-07-20 17:40:49', 19.491525423729, 3.51),
+(50, '1111', 'TESTAMENTO1', 1, '2018-07-20 17:54:20', 17.796610169492, 3.2),
+(51, '1111', 'TESTAMENTO111', 1, '2018-07-20 17:58:03', 19.491525423729, 3.51),
+(52, '1111', 'TESTAMENTO11111', 1, '2018-07-20 17:59:45', 19.491525423729, 3.51),
+(53, '1111', 'TESTAMENTO111', 1, '2018-07-20 18:02:55', 19.491525423729, 3.51),
+(54, '1111', 'TESTAMENTO1', 1, '2018-07-20 18:16:21', 19.491525423729, 3.51),
+(55, '1111', 'TESTAMENTO1', 1, '2018-07-20 18:16:24', 19.491525423729, 3.51),
+(56, '1111', 'TESTAMENTO12', 1, '2018-07-20 18:16:27', 19.491525423729, 3.51);
 
 -- --------------------------------------------------------
 
@@ -2460,6 +2509,33 @@ INSERT INTO `provinces` (`id`, `name`, `region_id`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recibos`
+--
+
+CREATE TABLE `recibos` (
+  `id_recibo` bigint(20) UNSIGNED NOT NULL,
+  `numero_recibo` int(11) NOT NULL,
+  `fecha_recibo` datetime NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_vendedor` int(11) NOT NULL,
+  `condiciones` varchar(30) NOT NULL,
+  `total_venta` varchar(20) NOT NULL,
+  `estado_recibo` tinyint(1) NOT NULL,
+  `kardex` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `recibos`
+--
+
+INSERT INTO `recibos` (`id_recibo`, `numero_recibo`, `fecha_recibo`, `id_cliente`, `id_vendedor`, `condiciones`, `total_venta`, `estado_recibo`, `kardex`) VALUES
+(37, 11, '2018-07-20 17:59:47', 6, 1, '1', '23', 1, '11111'),
+(36, 10, '2018-07-20 17:58:04', 6, 1, '1', '23', 1, 'eeee'),
+(35, 9, '2018-07-20 17:54:21', 6, 1, '1', '21', 1, '14144');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `regions`
 --
 
@@ -2521,7 +2597,8 @@ CREATE TABLE `servicios` (
 INSERT INTO `servicios` (`id_servicio`, `codigo_servicio`, `nombre`, `date_added`) VALUES
 (1, '1111', 'TESTAMENTO', '0000-00-00 00:00:00'),
 (2, '0', 'jorda', '2018-07-08 20:08:10'),
-(4, '0', 'll,,l,l,l,l,', '2018-07-08 21:15:23');
+(4, '0', 'll,,l,l,l,l,', '2018-07-08 21:15:23'),
+(8, '1111', '1111', '2018-07-20 18:16:39');
 
 -- --------------------------------------------------------
 
@@ -2542,8 +2619,9 @@ CREATE TABLE `tmp` (
 --
 
 INSERT INTO `tmp` (`id_tmp`, `id_producto`, `cantidad_tmp`, `precio_tmp`, `session_id`) VALUES
-(308, 12, 1, 30.00, '50fc7fcbd76fcc72248702f3eac1243e'),
-(307, 13, 1, 20.00, '50fc7fcbd76fcc72248702f3eac1243e');
+(561, 54, 1, 23.00, 'f5pqfb80u3krh5che7u3mbtrd0'),
+(562, 55, 1, 23.00, 'f5pqfb80u3krh5che7u3mbtrd0'),
+(563, 56, 1, 23.00, 'f5pqfb80u3krh5che7u3mbtrd0');
 
 -- --------------------------------------------------------
 
@@ -2603,6 +2681,14 @@ ALTER TABLE `detalle_factura`
   ADD KEY `numero_cotizacion` (`numero_factura`,`id_producto`);
 
 --
+-- Indices de la tabla `detalle_recibo`
+--
+ALTER TABLE `detalle_recibo`
+  ADD PRIMARY KEY (`id_detalle`),
+  ADD UNIQUE KEY `id_detalle` (`id_detalle`),
+  ADD KEY `numero_cotizacion` (`numero_recibo`,`id_producto`);
+
+--
 -- Indices de la tabla `districts`
 --
 ALTER TABLE `districts`
@@ -2635,6 +2721,14 @@ ALTER TABLE `products`
 ALTER TABLE `provinces`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indices de la tabla `recibos`
+--
+ALTER TABLE `recibos`
+  ADD PRIMARY KEY (`id_recibo`),
+  ADD UNIQUE KEY `numero_cotizacion` (`numero_recibo`),
+  ADD UNIQUE KEY `id_recibo` (`id_recibo`);
 
 --
 -- Indices de la tabla `regions`
@@ -2671,7 +2765,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `boletas`
 --
 ALTER TABLE `boletas`
-  MODIFY `id_boleta` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_boleta` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -2683,19 +2777,25 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `detalle_boleta`
 --
 ALTER TABLE `detalle_boleta`
-  MODIFY `id_detalle` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_detalle` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_recibo`
+--
+ALTER TABLE `detalle_recibo`
+  MODIFY `id_detalle` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT de la tabla `nota`
@@ -2707,19 +2807,25 @@ ALTER TABLE `nota`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_producto` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_producto` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT de la tabla `recibos`
+--
+ALTER TABLE `recibos`
+  MODIFY `id_recibo` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id_servicio` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_servicio` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `tmp`
 --
 ALTER TABLE `tmp`
-  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=545;
+  MODIFY `id_tmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=564;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
