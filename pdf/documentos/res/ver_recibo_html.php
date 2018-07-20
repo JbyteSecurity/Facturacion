@@ -71,12 +71,12 @@ border: 1px solid #000000;
 			</tr>
 			<tr>
 			<td>
-			recibo
+			RECIBO
 			</td>
 			</tr>
 			<tr>
 			<td>
-			ELECTRONICA
+			ELECTRONICO
 			</td>
 			</tr>		
 			<tr>

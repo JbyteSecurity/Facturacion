@@ -9,7 +9,7 @@
         header("location: login.php");
 		exit;
 				}
-	$active_boletas="";
+	$active_recibos="";
 	$active_recibos="active";
 	$active_facturas="";
 	$active_productos="";
@@ -31,7 +31,7 @@
 		<div class="panel panel-info">
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
-				<a  href="nueva_boleta.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nuevo Recibo Interno</a>
+				<a  href="nuevo_recibo.php" class="btn btn-info"><span class="glyphicon glyphicon-plus" ></span> Nuevo Recibo Interno</a>
 			</div>
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Recibo Interno</h4>
 		</div>
