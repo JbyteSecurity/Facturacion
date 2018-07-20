@@ -1,4 +1,5 @@
 <?php
+//Libreria que consulta el INE para poder traer la regiones, provincias y distritos
 
 include("config/db.php");
 include("config/conexion.php");
