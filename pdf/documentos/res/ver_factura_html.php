@@ -257,15 +257,18 @@ border: 1px solid #000000;
     </table>
   
     <table cellspacing="0" style="width: 100%; height: 100%; text-align: left; font-size: 10pt;">
+       
+
         <tr>
+        	
             <th style="width: 10%;text-align:center" class='midnight-blue'>CANT.</th>
 			<th style="width: 10%;text-align:center" class='midnight-blue'>CODIGO</th>
             <th style="width: 50%" class='midnight-blue'>DESCRIPCION</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO UNIT.</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>PRECIO TOTAL</th>
-            
+        		    
         </tr>
-
+        
 <?php
 $nums=1;
 $sumador_total=0;
@@ -295,7 +298,9 @@ while ($row=mysqli_fetch_array($sql))
 		?>
 
         <tr>
+        	<div class="row vdivide">
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
+			</div>
 			<td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
             <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php   echo $nombre_producto;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
@@ -417,6 +422,7 @@ while ($row=mysqli_fetch_array($sql))
         </tr>
 
 	</table>
+
 	<br>
 	</page>
 
