@@ -286,6 +286,7 @@ while ($row=mysqli_fetch_array($sql))
 	$precio_total_f=number_format($precio_total,2);//Precio total formateado
 	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
 	$sumador_total+=$precio_total_r;//Sumador
+	$sumatoria = number_format($precio_venta_f,2) + number_format($igv,2) ;
 	if ($nums%2==0){
 		$clase="clouds";
 	} else {
@@ -297,8 +298,8 @@ while ($row=mysqli_fetch_array($sql))
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
             <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
             <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre_producto;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($sumatoria,2);?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo number_format($sumatoria,2);?></td>
             
         </tr>
 
@@ -371,7 +372,7 @@ while ($row=mysqli_fetch_array($sql))
 		</tr> 
         <tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">Op. Gravadas: </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
+            <td style="widtd: 15%; text-align: right;">0.00</td>
 		</tr>
 		<tr>
 			<td colspan="3" style="widtd: 85%; text-align: right;">Op. Inafectas: </td>
@@ -391,7 +392,7 @@ while ($row=mysqli_fetch_array($sql))
 		</tr>					
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo (TAX-1)*100; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
+            <td style="widtd: 15%; text-align: right;">0.00</td>
 		</tr>
 		<tr>
             <td colspan="3" style="widtd: 85%; text-align: right;">Importe Total: </td>
