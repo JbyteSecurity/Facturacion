@@ -23,9 +23,10 @@
          <li class="<?php echo $active_boletas;?>"><a href="boletas.php"><i class='glyphicon glyphicon-list-alt'></i> Boletas</a></li>
          <li class="<?php echo $active_nota;?>"><a href="nota.php"><i class='glyphicon glyphicon-list-alt'></i> Nota de Crédito</a></li>
          <li class="<?php echo $active_recibos;?>"><a href="recibos.php"><i class='glyphicon glyphicon-list-alt'></i> RR.PP.</a></li>
-        <li class="<?php echo $active_servicios;?>"><a href="servicios.php"><i class='glyphicon glyphicon-barcode'></i> Servicios</a></li>
-		<li class="<?php echo $active_clientes;?>"><a href="clientes.php"><i class='glyphicon glyphicon-user'></i> Clientes</a></li>
-		<li class="<?php echo $active_usuarios;?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-lock'></i> Usuarios</a></li>
+         <li class="<?php echo $active_servicios;?>"><a href="servicios.php"><i class='glyphicon glyphicon-barcode'></i> Servicios</a></li>
+		     <li class="<?php echo $active_clientes;?>"><a href="clientes.php"><i class='glyphicon glyphicon-user'></i> Clientes</a></li>
+         <li class="<?php echo $active_reportes;?>"><a href="reportes.php"><i class='glyphicon glyphicon-list-alt'></i> Reportes</a></li>
+		     <li class="<?php echo $active_usuarios;?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-lock'></i> Usuarios</a></li>
        </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" target='_blank'><i class='glyphicon glyphicon-envelope'></i> Soporte</a></li>
