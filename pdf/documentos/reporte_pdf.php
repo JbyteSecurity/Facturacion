@@ -15,6 +15,8 @@
 	include("../../config/db.php");
 	include("../../config/conexion.php");
 	require_once(dirname(__FILE__).'/../html2pdf.class.php');
+	require_once('HtmlExcel.php');
+
 		
 	//Variables por GET
 	$fecha_inicial=$_GET['fecha_inicial'];
@@ -36,9 +38,16 @@
         $html2pdf->pdf->SetDisplayMode('fullpage');
         // convert
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+        //Excel
+        $xls = new HtmlExcel();		
+		$xls->addSheet("Reporte", $content);		
+		$xls->headers();
+		echo $xls->buildFile();
+        ///////////////////////////////////
         // send the PDF
 		$html2pdf->Output('Reporte'.'.pdf');
 		//$html2pdf->Output('Factura.pdf');
+		
     }
     catch(HTML2PDF_exception $e) {
         echo $e;
