@@ -44,6 +44,26 @@ overflow-x:hidden;
 table {
 border: 1px solid #000000;
 }
+.headt td {
+  min-width: 235px;
+  height: 50px;  
+}
+.headt2 td {
+  min-width: 235px;
+  height: 100px;  
+}
+.headt3 td {
+  min-width: 235px;
+  height: 255px;  
+}
+.headt4 td {
+  min-width: 235px;
+  height: 20px;  
+}
+.headt5 td {
+  min-width: 235px;
+  height: 5px;  
+}
 
 
 -->
@@ -263,6 +283,32 @@ border: 1px solid #000000;
         </tr>
 
 <?php
+$sql=mysqli_query($con, "select count(*) as items from products, tmp where products.id_producto=tmp.id_producto and tmp.session_id='".$session_id."'");
+$cantidad = 0;
+if($row=mysqli_fetch_array($sql))
+{
+	    $cantidad = $row["items"];		
+}
+if($cantidad >= 5)
+{
+		$detalle="headt5";
+}
+if($cantidad == 4)
+{
+		$detalle="headt4";
+}
+if($cantidad == 3)
+{
+		$detalle="headt";
+}
+if($cantidad == 2)
+{
+		$detalle="headt2";
+}
+if($cantidad == 1)
+{
+		$detalle="headt3";
+}
 $nums=1;
 $sumador_total=0;
 $igv2 = 0;
@@ -291,12 +337,12 @@ while ($row=mysqli_fetch_array($sql))
 	}
 	?>
 
-        <tr>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $cantidad; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center"><?php echo $codigo_producto; ?></td>
-            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left"><?php echo $nombre_producto;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_venta_f;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $precio_total_f;?></td>
+        <tr class='<?php echo $detalle;?>' >
+            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center; padding-top:20px;border-right:2px solid #0000;"><?php echo $cantidad; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 10%; text-align: center; padding-top:20px;border-right:2px solid #0000;"><?php echo $codigo_producto; ?></td>
+            <td class='<?php echo $clase;?>' style="width: 50%; text-align: left; padding-top:20px;border-right:2px solid #0000;"><?php echo $nombre_producto;?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right; padding-top:20px;border-right:2px solid #0000;"><?php echo $precio_venta_f;?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right; padding-top:20px;border-right:2px solid #0000;"><?php echo $precio_total_f;?></td>
             
         </tr>
 
@@ -314,55 +360,8 @@ while ($row=mysqli_fetch_array($sql))
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
 	$total_boleta=$subtotal+$igv2;
-	if($nums === 2)
-	{
-
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 	
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-	}
-	if($nums === 3)
-	{
-
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-	
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-	}
-	if($nums === 4)
-	{
-
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-	
-	}
-	if($nums === 5)
-	{
-	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-	}
-	if($nums === 6)
-	{
-	 	echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-	}
-	if($nums == 7)
-	{
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-	}
-	if($nums == 8)
-	{
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-	}
-	if($nums == 9)
-	{
-		echo "<tr><td colspan='2' height='100' style='widtd: 85%; text-align: left;'><br></td> </tr>";
-
-	}
+	echo "<tr><td colspan='2' height='50' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 
 
 ?>
@@ -481,6 +480,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	//Creamos Archivo txt
     $pdf = "10292356817-03-B003-".$numero_boleta;
 	$ruc = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_boleta.".CAB";
+	//$ruc = "10292356817-03-B003-".$numero_boleta.".CAB";
 	$date=date("Y-m-d");
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
@@ -498,6 +498,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
     //Creamos Archivo Detalle Sunat
 	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_boleta.".DET";
+	//$ruc2 = "10292356817-03-B003-".$numero_boleta.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'");
     $query = "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'";
@@ -536,6 +537,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
     //Creamos Archivo Adicional Cabecera
 	$ruc3 = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_boleta.".ACA";
+	//$ruc3 = "10292356817-03-B003-".$numero_boleta.".ACA";
 	$file3 =fopen($ruc3, "a") or die("Problemas");
 	$sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
 	//echo $sql;
