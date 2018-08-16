@@ -45,22 +45,27 @@ border: 1px solid #000000;
 .headt td {
   min-width: 235px;
   height: 50px;  
+  border:1px solid #000000;
 }
 .headt2 td {
   min-width: 235px;
   height: 100px;  
+  border:1px solid #000000;
 }
 .headt3 td {
   min-width: 235px;
-  height: 255px;  
+  height: 255px;
+  border:1px solid #000000;  
 }
 .headt4 td {
   min-width: 235px;
   height: 20px;  
+  border:1px solid #000000;  
 }
 .headt5 td {
   min-width: 235px;
-  height: 5px;  
+  height: 5px;
+  border:1px solid #000000;  
 }
 
 -->
@@ -348,21 +353,23 @@ while ($row=mysqli_fetch_array($sql))
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right; padding-top:20px;border-right:2px solid #0000;"><?php echo number_format($sumatoria,2);?></td>
             
         </tr>
-
+		
 	<?php 
 
 	
 	$nums++;
 	}
+	
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
 	$total_recibo=$subtotal+$igv2;
 	
 	echo "<tr><td colspan='2' height='50' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	
 
 ?>
-	  
+
        	<tr>
 			<td colspan="3" style="widtd: 85%; text-align: right;">Monto Descuentos: </td>
 			<td style="widtd: 15%; text-align: right;">0.00</td>

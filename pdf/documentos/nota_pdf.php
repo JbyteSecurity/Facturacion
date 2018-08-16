@@ -45,7 +45,7 @@
         // convert
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
         // send the PDF
-		$html2pdf->Output('Nota'.'.pdf');
+		$html2pdf->Output('Nota.pdf');
 		//$html2pdf->Output('Factura.pdf');
     }
     catch(HTML2PDF_exception $e) {

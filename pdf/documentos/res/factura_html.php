@@ -49,22 +49,27 @@ border: 1px solid #000000;
 .headt td {
   min-width: 235px;
   height: 50px;  
+  border:1px solid #000000;
 }
 .headt2 td {
   min-width: 235px;
   height: 100px;  
+  border:1px solid #000000;
 }
 .headt3 td {
   min-width: 235px;
   height: 255px;  
+  border:1px solid #000000;
 }
 .headt4 td {
   min-width: 235px;
   height: 20px;  
+  border:1px solid #000000;
 }
 .headt5 td {
   min-width: 235px;
   height: 5px;  
+  border:1px solid #000000;
 }
 
 -->
