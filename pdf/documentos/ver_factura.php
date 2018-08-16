@@ -33,7 +33,6 @@
      ob_start();
      include(dirname('__FILE__').'/res/ver_factura_html.php');
     $content = ob_get_clean();
-
     try
     {
         // init HTML2PDF
@@ -49,3 +48,4 @@
         echo $e;
         exit;
     }
+?>

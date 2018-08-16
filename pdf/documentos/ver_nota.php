@@ -42,7 +42,8 @@
         // display the full page
         $html2pdf->pdf->SetDisplayMode('fullpage');
         // convert
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+		$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+		//echo "GET VALUE".$_GET['vuehtml'];
         // send the PDF
         $html2pdf->Output('Nota.pdf');
     }
