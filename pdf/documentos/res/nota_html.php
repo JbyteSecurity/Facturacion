@@ -73,7 +73,7 @@ border: 1px solid #000000;
         <tr>
 
             <td style="width: 25%; color: #444444;">
-                <img style="width: 100%;" src="../../img/logo.jpg" alt="Logo"><br>
+                <img style="width: 100%;height: 9%;" src="../../img/logo.jpg" alt="Logo"><br>
                 
             </td>
 			<td style="width: 50%; color: #34495e;font-size:12px;text-align:center">
@@ -360,15 +360,18 @@ while ($row=mysqli_fetch_array($sql))
 
   
         <tr>
+			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">SUBTOTAL S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($subtotal,2);?></td>
         </tr>
 		<tr>
+			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo (TAX-1)*100; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($igv2,2);?></td>
         </tr><tr>
+			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($total_factura,2);?></td>
         </tr>
         <tr>
 

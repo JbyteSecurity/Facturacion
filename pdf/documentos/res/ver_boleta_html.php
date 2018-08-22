@@ -70,7 +70,7 @@ border: 1px solid #000000;
         <tr>
 
             <td style="width: 25%; color: #444444;">
-                <img style="width: 100%;" src="../../img/logo.jpg" alt="Logo"><br>
+                <img style="width: 100%;height: 9%;" src="../../img/logo.jpg" alt="Logo"><br>
                 
             </td>
 			<td style="width: 50%; color: #34495e;font-size:12px;text-align:center">
@@ -358,41 +358,49 @@ while ($row=mysqli_fetch_array($sql))
 	$total_iva=number_format($total_iva,2,'.','');
 	$total_boleta=$subtotal+$igv2;
 	
-	echo "<tr><td colspan='2' height='50' style='widtd: 85%; text-align: left;'><br></td> </tr>";
+	echo "<tr><td colspan='2' height='25' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 	
 ?>
 	  
-       	<tr>
+       	<tr style="border: 1px solid black;">
+		    <td></td>
 			<td colspan="3" style="widtd: 85%; text-align: right;">Monto Descuentos: </td>
-			<td style="widtd: 15%; text-align: right;">0.00</td>
+			<td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;">0.00</td>
 		</tr> 
         <tr>
+			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">Op. Gravadas: </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($subtotal,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($subtotal,2);?></td>
 		</tr>
 		<tr>
+			<td></td>
 			<td colspan="3" style="widtd: 85%; text-align: right;">Op. Inafectas: </td>
-			<td style="widtd :15%; text-align: right;">0.00</td>
+			<td style="widtd :15%; text-align: right;border: 1px solid black;border-collapse: collapse;">0.00</td>
  		</tr>
 		<tr>
+			<td></td>
 			<td colspan="3" style="widtd: 85%; text-align: right;">Op. Exoneradas: </td>
-			<td style="widtd :15%; text-align: right;">0.00</td>
+			<td style="widtd :15%; text-align: right;border: 1px solid black;border-collapse: collapse;">0.00</td>
  		</tr>
 		<tr>
+			<td></td>
 			<td colspan="3" style="widtd: 85%; text-align: right;">Monto Percepción: </td>
-			<td style="widtd :15%; text-align: right;">0.00</td>
+			<td style="widtd :15%; text-align: right;border: 1px solid black;border-collapse: collapse;">0.00</td>
 		</tr>
 		<tr>
+			<td></td>
 			<td colspan="3" style="widtd: 85%; text-align: right;">Venta Gratuita: </td>
-			<td style="widtd :15%; text-align: right;">0.00</td>
+			<td style="widtd :15%; text-align: right;border: 1px solid black;border-collapse: collapse;">0.00</td>
 		</tr>					
 		<tr>
+			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo (TAX-1)*100; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($igv2,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($igv2,2);?></td>
 		</tr>
 		<tr>
+			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">Importe Total: </td>
-            <td style="widtd: 15%; text-align: right;"> <?php echo number_format($total_boleta,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($total_boleta,2);?></td>
             
         </tr>
         <tr>
