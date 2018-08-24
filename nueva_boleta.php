@@ -48,9 +48,9 @@
 					  <input type="text" class="form-control input-sm" id="nombre_cliente" placeholder="Selecciona un cliente" required>
 					  <input id="id_cliente" type='hidden'>	
 				  </div>
-				  <label for="ruc1" class="col-md-1 control-label">Ruc</label>
+				  <label for="ruc1" class="col-md-1 control-label">RUC/DNI</label>
 							<div class="col-md-2">
-								<input type="text" class="form-control input-sm" id="ruc1" placeholder="Ruc" readonly>
+								<input type="text" class="form-control input-sm" id="ruc1" placeholder="RUC/DNI">
 							</div>
 				  <label for="tel1" class="col-md-1 control-label">Teléfono</label>
 							<div class="col-md-3">
@@ -158,6 +158,24 @@
 						 
 						
 					});
+		$(function() {
+						$("#ruc1").autocomplete({
+							source: "./ajax/autocomplete/clientes2.php",
+							minLength: 2,
+							select: function(event, ui) {
+								event.preventDefault();
+								$('#id_cliente').val(ui.item.id_cliente);
+								$('#nombre_cliente').val(ui.item.nombre_cliente);		
+								$('#ruc1').val(ui.item.ruc);						
+								$('#tel1').val(ui.item.telefono_cliente);
+								$('#mail').val(ui.item.email_cliente);
+																
+								
+							 }
+						});
+						 
+						
+					});	
 					
 	$("#nombre_cliente" ).on( "keydown", function( event ) {
 						if (event.keyCode== $.ui.keyCode.LEFT || event.keyCode== $.ui.keyCode.RIGHT || event.keyCode== $.ui.keyCode.UP || event.keyCode== $.ui.keyCode.DOWN || event.keyCode== $.ui.keyCode.DELETE || event.keyCode== $.ui.keyCode.BACKSPACE )
