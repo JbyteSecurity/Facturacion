@@ -279,6 +279,8 @@ border: 1px solid #000000;
         </tr>
 
 <?php
+$cantidad = 1;
+$igv2 = 0;
 $sql=mysqli_query($con, "select count(*) as items from products, detalle_factura, facturas where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura and facturas.numero_factura='".$numero_factura."'");
 $cantidad = 0;
 if($row=mysqli_fetch_array($sql))
@@ -315,7 +317,8 @@ while ($row=mysqli_fetch_array($sql))
 	$codigo_producto=$row['codigo_producto'];
 	$cantidad=$row['cantidad'];
 	$nombre_producto=$row['nombre_producto'];
-	
+	$igv = $row['igv'];  
+	$igv2 = $igv+$igv2;	
 	$precio_venta=$row['precio_venta'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
@@ -347,7 +350,8 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
-	$total_factura=$subtotal+$total_iva;
+	$igv2 = $igv2 * $cantidad;
+	$total_factura=$subtotal+$igv2;
 	
 	echo "<tr><td colspan='2' height='50' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 ?>
@@ -360,7 +364,7 @@ while ($row=mysqli_fetch_array($sql))
 		<tr>
 			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo (TAX-1)*100; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($total_iva,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($igv2,2);?></td>
         </tr><tr>
 			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>

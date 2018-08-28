@@ -318,6 +318,7 @@ if($cantidad == 1)
 {
 		$detalle="headt3";
 }
+$cantidad = 1;
 $nums=1;
 $sumador_total=0;
 $sql=mysqli_query($con, "select * from products, detalle_recibo, recibos where products.id_producto=detalle_recibo.id_producto and detalle_recibo.numero_recibo=recibos.numero_recibo and recibos.numero_recibo='".$numero_recibo."'");
@@ -363,6 +364,7 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
+	$igv2 = $igv2 * $cantidad;
 	$total_recibo=$subtotal+$igv2;
 	
 	echo "<tr><td colspan='2' height='25' style='widtd: 85%; text-align: left;'><br></td> </tr>";

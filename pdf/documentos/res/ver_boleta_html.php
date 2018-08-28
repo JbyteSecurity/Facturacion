@@ -285,7 +285,7 @@ border: 1px solid #000000;
         </tr>
 
 <?php
-    
+$cantidad = 1;    
 $sql = 	mysqli_query($con, "select count(*) as items from products, detalle_boleta, boletas where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta=boletas.numero_boleta and boletas.numero_boleta='".$numero_boleta."'");
 $cantidad = 0;
 if($row=mysqli_fetch_array($sql))
@@ -356,6 +356,7 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
+	$igv2 = $igv2 * $cantidad;
 	$total_boleta=$subtotal+$igv2;
 	
 	echo "<tr><td colspan='2' height='25' style='widtd: 85%; text-align: left;'><br></td> </tr>";

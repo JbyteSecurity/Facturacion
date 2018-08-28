@@ -318,6 +318,7 @@ if($cantidad == 1)
 {
 		$detalle="headt3";
 }
+$cantidad = 1;
 $nums=1;
 $sumador_total=0;
 $igv2 = 0;
@@ -372,6 +373,7 @@ $sql=mysqli_query($con, "select * from products, tmp where products.id_producto=
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
+	$igv2 = $igv2 * $cantidad;
 	$total_factura=$subtotal+$igv2;
 	
 	echo "<tr><td colspan='2' height='50' style='widtd: 85%; text-align: left;'><br></td> </tr>";

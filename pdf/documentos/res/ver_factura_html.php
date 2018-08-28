@@ -295,6 +295,7 @@ border: 1px solid #000000;
         </tr>
         
 <?php
+$cantidad = 1;
 $sql=mysqli_query($con, "select count(*) as items from products, detalle_factura, facturas where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura and facturas.id_factura='".$id_factura."'");
 $cantidad = 0;
 if($row=mysqli_fetch_array($sql))
@@ -365,6 +366,7 @@ while ($row=mysqli_fetch_array($sql))
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
+	$igv2 = $igv2 * $cantidad;
 	$total_factura=$subtotal+$igv2;
     //echo $nums;
 	echo "<tr><td colspan='2' height='50' style='widtd: 85%; text-align: left;'><br></td> </tr>";

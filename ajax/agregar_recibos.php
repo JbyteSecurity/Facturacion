@@ -37,6 +37,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	<th></th>
 </tr>
 <?php
+	$cantidad = 1;
 	$sumador_total=0;
 	$igv = 0;
 	$igv2 = 0;
@@ -71,6 +72,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
+	$igv2 = $igv2 * $cantidad;
 	$total_recibo=$subtotal+$igv2;
 
 ?>
