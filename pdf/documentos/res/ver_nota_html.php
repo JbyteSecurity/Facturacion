@@ -95,7 +95,7 @@ border: 1px solid #000000;
 			</tr>
 			<tr>
 			<td>
-			ELECTRONICA
+			CREDITO
 			</td>
 			</tr>		
 			<tr>
@@ -137,7 +137,7 @@ border: 1px solid #000000;
 			{
 				$numero_nota = "0".$numero_nota;
 			}
-			echo $numero_nota;
+			echo echo "003-".$numero_nota;
 			?>
 			</td>
 		    </tr>
