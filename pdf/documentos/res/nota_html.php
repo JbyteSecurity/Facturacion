@@ -97,7 +97,7 @@ border: 1px solid #000000;
 			</tr>
 			<tr>
 			<td>
-			ELECTRONICA
+			CREDITO
 			</td>
 			</tr>		
 			<tr>
@@ -138,7 +138,7 @@ border: 1px solid #000000;
 			{
 				$numero_nota = "0".$numero_nota;
 			}
-			echo $numero_nota;
+			echo echo "003-".$numero_nota;
 			?>
 			</td>
 		    </tr>
@@ -423,42 +423,42 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	 $cantidad = strlen($numero_nota);  
 			if($cantidad == "1")
 			{
-				$numero_factura = "0000000".$numero_factura;
+				$numero_nota = "0000000".$numero_nota;
 			}
 
             if($cantidad == "2")
 			{
-				$numero_factura = "000000".$numero_factura;
+				$numero_nota = "000000".$numero_nota;
 			}
 
 			if($cantidad == "3")
 			{
-				$numero_factura = "00000".$numero_factura;
+				$numero_nota = "00000".$numero_nota;
 			}
 
 			if($cantidad == "4")
 			{
-				$numero_factura = "0000".$numero_factura;
+				$numero_nota = "0000".$numero_nota;
 			}
 
 			if($cantidad == "5")
 			{
-				$numero_factura = "000".$numero_factura;
+				$numero_nota = "000".$numero_nota;
 			}
 
 			if($cantidad == "6")
 			{
-				$numero_factura = "00".$numero_factura;
+				$numero_nota = "00".$numero_nota;
 			}
 
 			if($cantidad == "7")
 			{
-				$numero_factura = "0".$numero_factura;
+				$numero_nota = "0".$numero_nota;
 			}
 
 	//Creamos Archivo txt
-    $pdf = "10292356817-07-F003-".$numero_factura;
-	$ruc = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_factura.".NOT";
+    $pdf = "10292356817-07-F003-".$numero_nota;
+	$ruc = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_nota.".NOT";
 	$date=date("Y-m-d");
 	$documento = $rw_cliente['ruc'];
 	$nombre = $rw_cliente['nombre_cliente'];	
@@ -476,7 +476,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_factura.".DET";
+	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_nota.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$query = "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura_num."'";
 	$sql=mysqli_query($con, $query);	
