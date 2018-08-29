@@ -2,6 +2,7 @@
 //error_reporting(E_ERROR);
 ?>
 <?php 
+error_reporting(0);
 require_once("letrasanumeros.php");
 ?>
 <style type="text/css">
@@ -323,7 +324,8 @@ while ($row=mysqli_fetch_array($sql))
 	$cantidad=$row['cantidad_tmp'];
 	$nombre_producto=$row['nombre_producto'];
 	$igv = $row['igv'];
-    $igv2 = $igv + $igv2; 
+	$igv2 = $igv*$cantidad;
+	$igv3 = $igv2+$igv3;
 	$precio_venta=$row['precio_producto'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
@@ -361,7 +363,7 @@ while ($row=mysqli_fetch_array($sql))
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
 	$igv2 = $igv2 * $cantidad;
-	$total_boleta=$subtotal+$igv2;
+	$total_boleta=$subtotal+$igv3;
 	
 	echo "<tr><td colspan='2' height='25' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 
@@ -401,7 +403,7 @@ while ($row=mysqli_fetch_array($sql))
 		<tr>
 			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV: (<?php echo (TAX-1)*100; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($igv2,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($igv3,2);?></td>
 		</tr>
 		<tr>
 			<td></td>

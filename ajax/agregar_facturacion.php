@@ -4,6 +4,7 @@
 	Web: 
 	Mail: jordandiaz2016@gmail.com
 	---------------------------*/
+error_reporting(0);
 include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 $session_id= session_id();
 if (isset($_POST['id'])){$id=$_POST['id'];}
@@ -49,7 +50,8 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	$cantidad=$row['cantidad_tmp'];
 	$nombre_producto=$row['nombre_producto'];
 	$igv = $row['igv'];
-	$igv2 = $igv + $igv2;
+	$igv2 = $igv*$cantidad;
+	$igv3 = $igv2+$igv3;
 	$precio_venta=$row['precio_producto'];
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
@@ -57,6 +59,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	$precio_total_f=number_format($precio_total,2);//Precio total formateado
 	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
 	$sumador_total+=$precio_total_r;//Sumador
+; 
 	
 		?>
 		<tr>
@@ -71,9 +74,8 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 	}
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
-	$total_iva=number_format($total_iva,2,'.','');
-	$igv2 = $igv2 * $cantidad;
-	$total_factura=$subtotal+$igv2;
+	$total_iva=number_format($total_iva,2,'.','');	
+	$total_factura=$subtotal+$igv3;
 
 ?>
 <tr>
@@ -83,7 +85,7 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 </tr>
 <tr>
 	<td class='text-right' colspan=4>IGV: (<?php echo (TAX-1)*100; ?>)% S/ </td>
-	<td class='text-right'><?php echo number_format($igv2,2);?></td>
+	<td class='text-right'><?php echo number_format($igv3,2);?></td>
 	<td></td>
 </tr>
 <tr>
