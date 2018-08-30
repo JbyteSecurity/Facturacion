@@ -474,7 +474,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
     $total_factura=number_format($total_factura,2,'.','');
 	$file =fopen($ruc, "a") or die("Problemas");
 	$factura = "F003-". $numero_factura;
-	fputs($file, $date."|01|".$tipo_nota."|01|".$factura."|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|".$subtotal."|0.00|0.00|".$igv2."|0.00|0.00|".$total_factura."|");
+	fputs($file, $date."|01|".$tipo_nota."|01|".$factura."|".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|".$subtotal."|0.00|0.00|".$igv3."|0.00|0.00|".$total_factura."|");
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat

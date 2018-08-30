@@ -505,7 +505,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	}
     $total_boleta=number_format($total_boleta,2,'.','');
 	$file =fopen($ruc, "a") or die("Problemas");
-	fputs($file, "01|".$date."||".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$igv2."|0.00|0.00|".$total_boleta."|");
+	fputs($file, "01|".$date."||".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$igv3."|0.00|0.00|".$total_boleta."|");
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
