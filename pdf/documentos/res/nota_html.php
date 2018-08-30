@@ -462,7 +462,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
     $pdf = "10292356817-07-F003-".$numero_nota;
 	$ruc = "D:/data0/facturador/DATA/"."10292356817-07-F003-".$numero_nota.".NOT";
 	$date=date("Y-m-d");
-	$documento = $rw_cliente['ruc'];
+	$documento = trim($rw_cliente['ruc']);
 	$nombre = $rw_cliente['nombre_cliente'];	
 	$tipodocumento = "";
 	if(strlen($documento)==8){
