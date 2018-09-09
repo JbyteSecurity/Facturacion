@@ -477,7 +477,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 			
 	//Creamos Archivo txt
     $pdf = "10292356817-01-F003-".$numero_factura;
-	$ruc = "D:/data0/facturador/DATA/"."10292356817-01-F003-".$numero_factura.".CAB";
+	$ruc = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".CAB";
 	//$ruc = 	"10292356817-01-F003-".$numero_factura.".CAB";
 	$date=date("Y-m-d");
 	$documento = trim($rw_cliente['ruc']);
@@ -495,7 +495,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-01-F003-".$numero_factura.".DET";
+	$ruc2 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".DET";
 	//$ruc2 = "10292356817-01-F003-".$numero_factura.".DET";
 
 	$file2 =fopen($ruc2, "a") or die("Problemas");
@@ -526,34 +526,27 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	$total=number_format($total,2,'.','');
 	$precioproducto = number_format($precioproducto,2,'.','');
 	$preciototalunitario = number_format($preciototalunitario,2,'.','');
-	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
+	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."|-|".$nombreproducto."|".$precioproducto."|".$igv."|1000|".$igv."|".$precioproducto."|IGV|VAT|10|18|-|||||||-||||||".$total."|".$preciototalunitario."|0|");
 	fwrite($file2,"\n");  
 	
 	}
 	fclose($file2);
 
 
-    //Creamos Archivo Adicional Cabecera
-	$ruc3 = "D:/data0/facturador/DATA/"."10292356817-01-F003-".$numero_factura.".ACA";
-	//$ruc3 = "10292356817-01-F003-".$numero_factura.".ACA";
- 
-	$file3 =fopen($ruc3, "a") or die("Problemas");
-	$sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
-	//echo $sql;
-    $direccion_cliente = "";
-
-	while ($row=mysqli_fetch_array($sql))
-	{
-			
-    	$direccion_cliente = $row["direccion_cliente"];
-		$ubigeo = $row["ubigeo"];
-	} 
-
-	fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|".$ubigeo."|".$direccion_cliente."||||".$date."|");
+  //Creamos Archivo Tributos Generales
+	$ruc3 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".TRI";
+	fwrite($file3, "1000|IGV|VAT|".$subtotal."|".$igv3."|");
 	fwrite($file3,"\n");{  
-	
 	}
 	fclose($file3);
+
+  //Creamos Archivo Tributos Generales
+	$ruc4 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".LEY";
+	fwrite($file4, "1000|".$letra."|");
+	fwrite($file4,"\n");{  
+	}
+	fclose($file4);
+
 
 
 ?>

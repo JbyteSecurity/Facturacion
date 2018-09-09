@@ -509,7 +509,7 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_boleta.".DET";
+	$ruc2 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_boleta.".DET";
 	//$ruc2 = "10292356817-03-B003-".$numero_boleta.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'");
@@ -540,33 +540,33 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	$total=number_format($total,2,'.','');
 	$precioproducto = number_format($precioproducto,2,'.','');
 	$preciototalunitario = number_format($preciototalunitario,2,'.','');
-	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."||".$nombreproducto."|".$precioproducto."|0.00|".$igv."|10|0.00|01|".$preciototalunitario."|".$total."|");
+	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."|-|".$nombreproducto."|".$precioproducto."|".$igv."|1000|".$igv."|".$precioproducto."|IGV|VAT|10|18|-|||||||-||||||".$total."|".$preciototalunitario."|0|");
 	fwrite($file2,"\n");  
 	
 	}
 	fclose($file2);
 
 
-    //Creamos Archivo Adicional Cabecera
-	$ruc3 = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_boleta.".ACA";
-	//$ruc3 = "10292356817-03-B003-".$numero_boleta.".ACA";
+  //Creamos Archivo Tributos Generales
+	$ruc3 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_boleta.".TRI";
+	//$ruc3 = "10292356817-03-B003-".$numero_boleta.".TRI";
 	$file3 =fopen($ruc3, "a") or die("Problemas");
-	$sql=mysqli_query($con, "Select direccion_cliente, ubigeo  from clientes where id_cliente =".$id_cliente."");
-	//echo $sql;
-    $direccion_cliente = "";
-
-	while ($row=mysqli_fetch_array($sql))
-	{
-			
-    	$direccion_cliente = $row["direccion_cliente"];
-		$ubigeo = $row["ubigeo"];
-	} 
-
-	fwrite($file3, "01|0.00|0.00|0.00|0.00|0.00|PER|".$ubigeo."|".$direccion_cliente."||||".$date."|");
+	fwrite($file3, "1000|IGV|VAT|".$subtotal."|".$igv3."|");
 	fwrite($file3,"\n");{  
 	
 	}
 	fclose($file3);
+
+  //Creamos Archivo Tributos Generales
+	$ruc4 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_boleta.".LEY";
+	//$ruc3 = "10292356817-03-B003-".$numero_boleta.".TRI";
+	$file4 =fopen($ruc4, "a") or die("Problemas");
+	fwrite($file4, "1000|".$letra."|");
+	fwrite($file4,"\n");{  
+	
+	}
+	fclose($file4);
+
 
 
 ?>
