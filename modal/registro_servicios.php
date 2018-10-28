@@ -27,6 +27,14 @@
 				  
 				</div>
 			  </div>
+
+			  <div class="form-group">
+				<label for="nombre" class="col-sm-3 control-label">Precio</label>
+				<div class="col-sm-8">
+					<textarea class="form-control" id="precio_servicio" name="precio_servicio" placeholder="Precio del servicio" required maxlength="255" ></textarea>
+				  
+				</div>
+			  </div>
 							
 		  </div>
 		  <div class="modal-footer">

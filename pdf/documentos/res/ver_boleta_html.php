@@ -355,12 +355,14 @@ while ($row=mysqli_fetch_array($sql))
 	
 	$nums++;
 	}
+	$sumador_total = round($sumador_total, 2);
 	$subtotal=number_format($sumador_total,2,'.','');
 	$total_iva=($subtotal * TAX )/100;
 	$total_iva=number_format($total_iva,2,'.','');
 	$igv2 = $igv2 * $cantidad;
+	$igv3 = round($igv3, 2);
 	$total_boleta=$subtotal+$igv3;
-	
+	$total_boleta = round($total_boleta, 2);
 	echo "<tr><td colspan='2' height='25' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 	
 ?>

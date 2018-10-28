@@ -7,7 +7,8 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 			$errors[] = "Nombre del producto vacío";
 		} else if (
 			!empty($_POST['codigo']) &&
-			!empty($_POST['nombre_servicio']))
+			!empty($_POST['nombre_servicio']) &&
+			!empty($_POST['precio_servicio']))
 		{
 
 		/* Connect To Database*/
@@ -16,8 +17,10 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		// escaping, additionally removing everything that could be (html/javascript-) code
 		$codigo=mysqli_real_escape_string($con,(strip_tags($_POST["codigo"],ENT_QUOTES)));
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre_servicio"],ENT_QUOTES)));
+		$precio=mysqli_real_escape_string($con,(strip_tags($_POST["precio_servicio"],ENT_QUOTES)));
 		$date_added=date("Y-m-d H:i:s");
-		$sql="INSERT INTO servicios (codigo_servicio, nombre, date_added) VALUES ('$codigo','$nombre','$date_added')";
+		$sql="INSERT INTO servicios (codigo_servicio, nombre, precio, date_added) VALUES ('$codigo','$nombre', $precio, '$date_added')";
+		//echo $sql;
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Servicio ha sido ingresado satisfactoriamente.";

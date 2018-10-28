@@ -80,17 +80,17 @@ $delete=mysqli_query($con, "DELETE FROM tmp WHERE id_tmp='".$id_tmp."'");
 ?>
 <tr>
 	<td class='text-right' colspan=4>SUBTOTAL S/</td>
-	<td class='text-right'><?php echo number_format($subtotal,2);?></td>
+	<td class='text-right'><?php echo number_format(round($subtotal,2), 2);?></td>
 	<td></td>
 </tr>
 <tr>
 	<td class='text-right' colspan=4>IGV: (<?php echo (TAX-1)*100; ?>)% S/ </td>
-	<td class='text-right'><?php echo number_format($igv3,2);?></td>
+	<td class='text-right'><?php echo number_format(round($igv3,2), 2);?></td>
 	<td></td>
 </tr>
 <tr>
 	<td class='text-right' colspan=4>TOTAL S/</td>
-	<td class='text-right'><?php echo number_format($total_factura,2);?></td>
+	<td class='text-right'><?php echo number_format(round($total_factura,2), 2);?></td>
 	<td></td>
 </tr>
 

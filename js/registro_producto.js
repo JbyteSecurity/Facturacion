@@ -6,10 +6,12 @@ $(document).ready(function() {
 		var url = './ajax/buscar_servicio.php?codigo_servicio='+codigo_servicio;
 	    console.log(url);
 		$.get(url,function(data){ 
-			console.log(data);
+			data = JSON.parse(data);
 			$("#cantidad").val("1");
 			var area = document.getElementById ("nombre_producto");
-			area.value = data;
+			area.value = data[0];
+			var precio = document.getElementById ("precio");
+			precio.value = data[1];
 		});
 	});
  });

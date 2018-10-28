@@ -6,11 +6,14 @@
         }else if (empty($_POST['mod_codigo'])) {
            $errors[] = "Código vacío";
         } else if (empty($_POST['mod_nombre'])){
-			$errors[] = "Nombre del producto vacío";
+			$errors[] = "Nombre del servicio vacío";
+		  else if (empty($_POST['mod_precio'])){
+			$errors[] = "precio del servicio vacío";
 		}else if (
 			!empty($_POST['mod_id']) &&
 			!empty($_POST['mod_codigo']) &&
-			!empty($_POST['mod_nombre'])
+			!empty($_POST['mod_nombre']) &&
+			!empty($_POST['mod_precio'])
 		){
 		/* Connect To Database*/
 		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -18,8 +21,9 @@
 		// escaping, additionally removing everything that could be (html/javascript-) code
 		$codigo=mysqli_real_escape_string($con,(strip_tags($_POST["mod_codigo"],ENT_QUOTES)));
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["mod_nombre"],ENT_QUOTES)));	
+		$precio= mysqli_real_escape_string($con,(strip_tags($_POST["mod_precio"],ENT_QUOTES)));	
 		$id_servicio=$_POST['mod_id'];		
-		$sql="UPDATE servicios SET codigo_servicio='".$codigo."', nombre='".$nombre."' WHERE id_servicio='".$id_servicio."'";
+		$sql="UPDATE servicios SET codigo_servicio='".$codigo."', nombre='".$nombre."', precio= $precio WHERE id_servicio='".$id_servicio."'";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){
 				$messages[] = "Producto ha sido actualizado satisfactoriamente.";

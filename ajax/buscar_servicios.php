@@ -47,7 +47,7 @@
 	}
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
-		error_log("Llego AQUI");
+		//error_log("Llego AQUI");
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
 		 $aColumns = array('codigo_servicio', 'nombre');//Columnas de busqueda
 		 $sTable = "servicios";
@@ -87,7 +87,8 @@
 			  <table class="table">
 				<tr  class="info">
 					<th>Código</th>
-					<th>Servicio</th>				
+					<th>Servicio</th>		
+					<th>Precio</th>			
 					<th class='text-right'>Acciones</th>
 					
 				</tr>
@@ -97,15 +98,18 @@
 						$id_servicio=$row['id_servicio'];
 						$codigo_servicio=$row['codigo_servicio'];
 						$nombre_servicio=$row['nombre'];
+						$precio_servicio=$row['precio'];
 						$date_added= date('d/m/Y', strtotime($row['date_added']));
 					?>
 					
 					<input type="hidden" value="<?php echo $codigo_servicio;?>" id="codigo_servicio<?php echo $id_servicio;?>">
 					<input type="hidden" value="<?php echo $nombre_servicio;?>" id="nombre_servicio<?php echo $id_servicio;?>">
+					<input type="hidden" value="<?php echo $precio_servicio;?>" id="precio_servicio<?php echo $id_servicio;?>">
 					<tr>
 						
 						<td><?php echo $codigo_servicio; ?></td>
 						<td ><?php echo $nombre_servicio; ?></td>
+						<td ><?php echo $precio_servicio; ?></td>
 						<td ><span class="pull-right">
 					<a href="#" class='btn btn-default' title='Editar servicio' onclick="obtener_datos('<?php echo $id_servicio;?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
 					<a href="#" class='btn btn-default' title='Borrar servicio' onclick="eliminar('<?php echo $id_servicio; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
