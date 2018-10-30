@@ -85,14 +85,14 @@ border: 1px solid #000000;
                 <span style="color: #34495e;font-size:14px;font-weight:bold"><?php echo NOMBRE_EMPRESA;?></span>
 				<br><?php echo DIRECCION_EMPRESA;?><br> 
 				Teléfono: <?php echo TELEFONO_EMPRESA;?><br>
-				Web: http://www.rodriguezvelarde.com.pe/
+				
                 
             </td>
 			<td style="width: 25%;text-align:center;">
 			<table border=3 style="margin-left:45px; font-weight:bold; font-size:75%; margin-left:25px;" >
 			<tr>
 			<td>
-			10292356817
+			10292215598
 			</td>
 			</tr>
 			<tr>

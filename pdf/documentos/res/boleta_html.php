@@ -83,14 +83,13 @@ border: 1px solid #000000;
                 <span style="color: #34495e;font-size:14px;font-weight:bold"><?php echo NOMBRE_EMPRESA;?></span>
 				<br><?php echo DIRECCION_EMPRESA;?><br> 
 				Teléfono: <?php echo TELEFONO_EMPRESA;?><br>
-				Web: http://www.rodriguezvelarde.com.pe/
-                
+				
             </td>
 			<td style="width: 25%;text-align:center;">
 			<table border=3 style="text-align:center;font-weight:bold;border-style:solid;border-width: 3px;">
 			<tr>
 			<td>
-			10292356817
+			10292215598
 			</td>
 			</tr>
 			<tr>
@@ -434,7 +433,7 @@ while ($row=mysqli_fetch_array($sql))
         	<td colspan="3" style="widtd: 85%; text-align: center;">CANCELADO </td>
 		</tr>
     	<tr>
-        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>
+        	<td colspan="3" style="widtd: 85%; text-align: left;"><br></td>  
         </tr>
 
 		<tr>
@@ -493,9 +492,9 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
                 
 			
 	//Creamos Archivo txt
-    $pdf = "10292356817-03-B003-".$numero_boleta;
-	$ruc = "D:/data0/facturador/DATA/"."10292356817-03-B003-".$numero_boleta.".CAB";
-	//$ruc = "10292356817-03-B003-".$numero_boleta.".CAB";
+    $pdf = "10292215598-03-B003-".$numero_boleta;
+	$ruc = "D:/data0/facturador/DATA/"."10292215598-03-B003-".$numero_boleta.".CAB";
+	//$ruc = "10292215598-03-B003-".$numero_boleta.".CAB";
 	$date=date("Y-m-d");
 	$documento = trim($rw_cliente['ruc']);
 	$nombre = $rw_cliente['nombre_cliente'];	
@@ -512,8 +511,8 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_boleta.".DET";
-	//$ruc2 = "10292356817-03-B003-".$numero_boleta.".DET";
+	$ruc2 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_boleta.".DET";
+	//$ruc2 = "10292215598-03-B003-".$numero_boleta.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'");
     $query = "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'";
@@ -551,8 +550,8 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
 
   //Creamos Archivo Tributos Generales
-	$ruc3 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_boleta.".TRI";
-	//$ruc3 = "10292356817-03-B003-".$numero_boleta.".TRI";
+	$ruc3 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_boleta.".TRI";
+	//$ruc3 = "10292215598-03-B003-".$numero_boleta.".TRI";
 	$file3 =fopen($ruc3, "a") or die("Problemas");
 	fwrite($file3, "1000|IGV|VAT|".$subtotal."|".$igv3."|");
 	fwrite($file3,"\n");{  
@@ -561,8 +560,8 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file3);
 
   //Creamos Archivo Tributos Generales
-	$ruc4 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_boleta.".LEY";
-	//$ruc3 = "10292356817-03-B003-".$numero_boleta.".TRI";
+	$ruc4 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_boleta.".LEY";
+	//$ruc3 = "10292215598-03-B003-".$numero_boleta.".TRI";
 	$file4 =fopen($ruc4, "a") or die("Problemas");
 	fwrite($file4, "1000|".$letra."|");
 	fwrite($file4,"\n");{  

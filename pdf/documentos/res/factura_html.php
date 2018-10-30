@@ -89,14 +89,14 @@ border: 1px solid #000000;
                 <span style="color: #34495e;font-size:14px;font-weight:bold"><?php echo NOMBRE_EMPRESA;?></span>
 				<br><?php echo DIRECCION_EMPRESA;?><br> 
 				Teléfono: <?php echo TELEFONO_EMPRESA;?><br>
-				Web: http://www.rodriguezvelarde.com.pe/
+				
                 
             </td>
 			<td style="width: 25%;text-align:center;">
 			<table border=3 style="text-align:center;font-weight:bold;border-style:solid;border-width: 3px;">
 			<tr>
 			<td>
-			10292356817
+			10292215598
 			</td>
 			</tr>
 			<tr>
@@ -478,9 +478,9 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
                 
 			
 	//Creamos Archivo txt
-    $pdf = "10292356817-01-F003-".$numero_factura;
-	$ruc = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".CAB";
-	//$ruc = 	"10292356817-01-F003-".$numero_factura.".CAB";
+    $pdf = "10292215598-01-F003-".$numero_factura;
+	$ruc = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_factura.".CAB";
+	//$ruc = 	"10292215598-01-F003-".$numero_factura.".CAB";
 	$date=date("Y-m-d");
 	$documento = trim($rw_cliente['ruc']);
 	$nombre = $rw_cliente['nombre_cliente'];	
@@ -497,8 +497,8 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".DET";
-	//$ruc2 = "10292356817-01-F003-".$numero_factura.".DET";
+	$ruc2 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_factura.".DET";
+	//$ruc2 = "10292215598-01-F003-".$numero_factura.".DET";
 
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_factura, products where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura='".$factura."'");
@@ -536,14 +536,14 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
 
   //Creamos Archivo Tributos Generales
-	$ruc3 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".TRI";
+	$ruc3 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_factura.".TRI";
 	fwrite($file3, "1000|IGV|VAT|".$subtotal."|".$igv3."|");
 	fwrite($file3,"\n");{  
 	}
 	fclose($file3);
 
   //Creamos Archivo Tributos Generales
-	$ruc4 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292356817-07-F003-".$numero_factura.".LEY";
+	$ruc4 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_factura.".LEY";
 	fwrite($file4, "1000|".$letra."|");
 	fwrite($file4,"\n");{  
 	}
