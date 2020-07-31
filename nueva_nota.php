@@ -62,10 +62,13 @@
 				<div class="form-group row">
 				  <label for="ruc1" class="col-md-3 control-label">Número de FE respecto de la cual se emitirá la Nota de Crédito</label>
 							<div class="col-md-2">
-								<input type="text" value = "F003" class="form-control input-sm" id="serie" placeholder="Serie" readonly>
+								<select class="form-control input-sm" id="serie">
+								<option value="F01">E001</option>
+								<option value="B01">EB001</option>							
+					  	</select>
 							</div>
 							<div class="col-md-3">
-								<input type="text" class="form-control input-sm" id="numero_factura" placeholder="numero_factura">
+								<input type="text" class="form-control input-sm" id="numero_factura" placeholder="numero factura o boleta">
 							</div>
 				
 				 </div>

@@ -135,7 +135,8 @@
 	include("footer.php");
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
-	<script type="text/javascript" src="js/nueva_factura.js"></script>		
+	<script type="text/javascript" src="js/nueva_factura.js"></script>	
+	<script type="text/javascript" src="modal/registro_clientes.js"></script>	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>

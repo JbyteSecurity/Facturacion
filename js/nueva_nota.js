@@ -69,11 +69,21 @@
 		}
 		
 		$("#datos_nota").submit(function(){
+			//alert(92);
+			var serie = $("#serie").val();		
 		  var numero_factura = $("#numero_factura").val();		
-		  var tipo_nota = $("#tipo_nota").val();  
+		  var tipo_nota = "1";
 		  var motivo = $("#motivo").val();
-
-	      VentanaCentrada('./pdf/documentos/nota_pdf.php?numero_factura='+numero_factura+'&tipo_nota='+tipo_nota+'&motivo='+motivo,'Nota','','1024','768','true');
+			//alert(3);
+			if(serie=='F01')
+			{
+				VentanaCentrada('./pdf/documentos/nota_pdf.php?numero_factura='+numero_factura+'&serie='+serie+'&motivo='+motivo,'Nota','','1024','768','true');
+			}
+			else
+			{
+				VentanaCentrada('./pdf/documentos/nota_pdf2.php?numero_factura='+numero_factura+'&serie='+serie+'&motivo='+motivo,'Nota','','1024','768','true');
+			}
+			
 	 	});
 		
 		$( "#guardar_cliente" ).submit(function( event ) {

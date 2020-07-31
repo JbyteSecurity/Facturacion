@@ -280,12 +280,14 @@ $("#cboDistrito2").click(function(){
 })
 				
 	function obtener_datos(id){
+			var ruc = $("#ruc"+id).val();
 			var nombre_cliente = $("#nombre_cliente"+id).val();
 			var telefono_cliente = $("#telefono_cliente"+id).val();
 			var email_cliente = $("#email_cliente"+id).val();
 			var direccion_cliente = $("#direccion_cliente"+id).val();
 			var status_cliente = $("#status_cliente"+id).val();
 	        
+			$("#mod_ruc").val(ruc);
 			$("#mod_nombre").val(nombre_cliente);
 			$("#mod_telefono").val(telefono_cliente);
 			$("#mod_email").val(email_cliente);

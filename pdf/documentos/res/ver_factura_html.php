@@ -141,7 +141,7 @@ border: 1px solid #000000;
 			{
 				$numero_factura = "0".$numero_factura;
 			}
-			     echo "F003-".$numero_factura;
+			     echo "F001-".$numero_factura;
 			?>
 			</td>
 			</tr>
@@ -154,18 +154,18 @@ border: 1px solid #000000;
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
 	    <tr>
-           <td style="width:10%;" class='midnight-blue'></td>
-		   <td style="width:90%;" class='midnight-blue'></td>
+           <td style="width:15%;" class='midnight-blue'></td>
+		   <td style="width:85%;" class='midnight-blue'></td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				
 				echo "RUC: ";				
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);				
@@ -175,13 +175,13 @@ border: 1px solid #000000;
 		   </td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Cliente: ";				
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				echo $rw_cliente['nombre_cliente'];	
 			?>
@@ -189,27 +189,81 @@ border: 1px solid #000000;
 		   </td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 						
 				echo "Direcciòn: ";					
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 						
 				echo $rw_cliente['direccion_cliente'];			
 			?>
 			
 		   </td>
         </tr>
+        <tr>
+           <td style="width:15%;" >
+			<?php 						
+				echo "Departamento: ";					
+			?>
+			
+		   </td>
+		   <td style="width:85%;" >
+			<?php 	
+				$id = $rw_cliente['departamento'];
+				$sql_departamento=mysqli_query($con,"SELECT name FROM regions WHERE id = '$id'");
+				$rw_departamento=mysqli_fetch_array($sql_departamento);				
+				echo $rw_departamento['name'];						
+						
+			?>
+			
+		   </td>
+        </tr>
+        <tr>
+           <td style="width:15%;" >
+			<?php 						
+				echo "Provincia: ";					
+			?>
+			
+		   </td>
+		   <td style="width:85%;" >
+			<?php 	
+				$id = $rw_cliente['provincia'];
+				$sql_provincia=mysqli_query($con,"SELECT name FROM provinces WHERE id = '$id'");
+				$rw_provincia=mysqli_fetch_array($sql_provincia);				
+				echo $rw_provincia['name'];						
+						
+			?>
+			
+		   </td>
+        </tr>
+         <tr>
+           <td style="width:15%;" >
+			<?php 						
+				echo "Distrito: ";					
+			?>
+			
+		   </td>
+		   <td style="width:85%;" >
+			<?php 	
+				$id = $rw_cliente['ubigeo'];
+				$sql_distrito=mysqli_query($con,"SELECT name FROM districts WHERE id = '$id'");
+				$rw_distrito=mysqli_fetch_array($sql_distrito);				
+				echo $rw_distrito['name'];						
+						
+			?>
+			
+		   </td>
+        </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Teléfono: ";							
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				echo $rw_cliente['telefono_cliente'];				
 			?>
@@ -217,13 +271,13 @@ border: 1px solid #000000;
 		   </td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Email: ";						
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				echo $rw_cliente['email_cliente'];				
 			?>
@@ -231,13 +285,13 @@ border: 1px solid #000000;
 		   </td>
         </tr>
         <tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Kardex: ";
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				$sql=mysqli_query($con, "select * from facturas where id_factura='".$id_factura."'");
 				if($rowww=mysqli_fetch_array($sql))
@@ -324,7 +378,7 @@ if($cantidad == 1)
 		$detalle="headt3";
 }
 $nums=1;
-$sumador_total=0;
+$sumador_total=0.00;
 $sql=mysqli_query($con, "select * from products, detalle_factura, facturas where products.id_producto=detalle_factura.id_producto and detalle_factura.numero_factura=facturas.numero_factura and facturas.id_factura='".$id_factura."'");
 $igv2 = 0;
 //echo "JORDAN";
@@ -338,11 +392,22 @@ while ($row=mysqli_fetch_array($sql))
 	$igv2 = $igv*$cantidad;
 	$igv3 = $igv2+$igv3;
 	$precio_venta=$row['precio_venta'];
+	//echo $precio_venta;
+	$precio_producto_igv = $precio_venta +$igv;
+	$precio_producto_igv_total = $precio_producto_igv  * $cantidad;
+	$sumador_total_producto += $precio_producto_igv_total;
+
+	//echo "Precio".$precio_producto_igv;
+	$precio_venta = round($precio_venta,2);
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-	$precio_total=$precio_venta_r*$cantidad;
+	$precio_total=($precio_venta_r+$igv)*$cantidad;	
+	$precio_total = $precio_total/(1+0.18);
+	//echo "precip de vents".$precio_venta;
+	$igv3 = $precio_venta * 0.18;
 	$precio_total_f=number_format($precio_total,2);//Precio total formateado
 	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
+	$precio_total_r = 	(double)$precio_total_r;
 	$sumador_total+=$precio_total_r;//Sumador
 	if ($nums%2==0){
 		$clase="clouds";
@@ -365,14 +430,20 @@ while ($row=mysqli_fetch_array($sql))
 	
 	$nums++;
 	}
-	$sumador_total = round($sumador_total, 2);
-	$subtotal=number_format($sumador_total,2,'.','');
-	$total_iva=($subtotal * TAX )/100;
-	$total_iva=number_format($total_iva,2,'.','');
-	$igv2 = $igv2 * $cantidad;
-	$igv3 = round($igv3, 2);
+	$neto_producto = $sumador_total_producto/(1+0.18);
+	$igv_producto = $sumador_total_producto - $neto_producto;
+	$subtotal=$neto_producto;
+	$igv2 = (double)$igv * $cantidad;
+	$igv3 = $subtotal * 0.18;	
+	$total_factura=0.00;
+	$igv3 = round($igv_producto, 2);
+			
 	$total_factura=$subtotal+$igv3;
-	$total_factura = round($total_factura, 2);
+
+
+
+
+	/*$total_factura = round($total_factura, 2);*/
     //echo $nums;
 	echo "<tr><td colspan='2' height='50' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 ?>
@@ -385,7 +456,7 @@ while ($row=mysqli_fetch_array($sql))
 		<tr>
 			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">IGV (<?php echo (TAX-1)*100; ?>)% S/ </td>
-            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo number_format($igv3,2);?></td>
+            <td style="widtd: 15%; text-align: right;border: 1px solid black;border-collapse: collapse;"> <?php echo $igv3;?></td>
         </tr><tr>
 			<td></td>
             <td colspan="3" style="widtd: 85%; text-align: right;">TOTAL S/ </td>

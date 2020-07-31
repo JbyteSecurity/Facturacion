@@ -18,8 +18,9 @@
 	require_once(dirname(__FILE__).'/../html2pdf.class.php');
 		
 	//Variables por GET
+	$serie = $_GET['serie'];
 	$numero_factura=$_GET['numero_factura'];
-	$tipo_nota = $_GET['tipo_nota'];
+	$tipo_nota ="1";
 	$motivo=mysqli_real_escape_string($con,(strip_tags($_REQUEST['motivo'], ENT_QUOTES)));
 
 	

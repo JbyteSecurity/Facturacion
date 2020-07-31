@@ -74,25 +74,33 @@ border: 2px solid #000000;
             <th style="width: 15%;text-align: right" class='midnight-blue'>FECHA</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>TOTAL VENTA</th>
             <th style="width: 15%;text-align: right" class='midnight-blue'>KARDEX</th>
-            <th style="width: 15%;text-align: right" class='midnight-blue'>ABOGADO</th>
+            <th style="width: 15%;text-align: right" class='midnight-blue'>VENDEDOR</th>
             
         </tr>
 
 <?php
 $nums=1;
+
+$date = str_replace('/', '-', $fecha_inicial );
+$fechainicial = date("Y-m-d", strtotime($date));
+
+$date2 = str_replace('/', '-', $fecha_final );
+$fechafinal = date("Y-m-d", strtotime($date2));
+
 if($tipo_documento=="Factura")
 {
-    $sql=mysqli_query($con, "select c.nombre_cliente, c.ruc, c.direccion_cliente, b.numero_factura as numero, b.fecha_factura as fecha, b.total_venta, b.kardex, CONCAT(u.firstname,' ',u.lastname) as abogado from facturas b inner join clientes c on c.id_cliente = b.id_cliente inner join users u on u.user_id = b.id_vendedor where DATE_FORMAT(DATE(b.fecha_factura), '%d/%m/%Y') between '$fecha_inicial' and '$fecha_final' ");
+    $sql=mysqli_query($con, "select c.nombre_cliente, c.ruc, c.direccion_cliente, b.numero_factura as numero, b.fecha_factura as fecha, b.total_venta, b.kardex, CONCAT(u.firstname,' ',u.lastname) as VENDEDOR from facturas b inner join clientes c on c.id_cliente = b.id_cliente inner join users u on u.user_id = b.id_vendedor where b.fecha_factura >= '$fechainicial' and b.fecha_factura <= '$fechafinal' ");
 
 }
 if($tipo_documento=="Boleta")
 {
-    $sql=mysqli_query($con, "select c.nombre_cliente, c.ruc, c.direccion_cliente, b.numero_boleta as numero, b.fecha_boleta as fecha, b.total_venta, b.kardex, CONCAT(u.firstname,' ',u.lastname) as abogado from boletas b inner join clientes c on c.id_cliente = b.id_cliente inner join users u on u.user_id = b.id_vendedor where DATE_FORMAT(DATE(b.fecha_boleta), '%d/%m/%Y') between '$fecha_inicial' and '$fecha_final' ");
+	
+    $sql=mysqli_query($con, "select c.nombre_cliente, c.ruc, c.direccion_cliente, b.numero_boleta as numero, b.fecha_boleta as fecha, b.total_venta, b.kardex, CONCAT(u.firstname,' ',u.lastname) as VENDEDOR from boletas b inner join clientes c on c.id_cliente = b.id_cliente inner join users u on u.user_id = b.id_vendedor where b.fecha_boleta >= '$fechainicial' and  b.fecha_boleta <= '$fechafinal' ");
 
 }
 if($tipo_documento=="Nota")
 {
-    $sql=mysqli_query($con, "select c.nombre_cliente, c.ruc, c.direccion_cliente, b.numero_nota as numero, b.fecha_nota as fecha, (select total_venta from facturas where numero_factura=b.numero_factura) as total_venta, '' as kardex, CONCAT(u.firstname,' ',u.lastname) as abogado from nota b inner join clientes c on c.id_cliente =(select id_cliente from facturas where numero_factura=b.numero_factura) inner join users u on u.user_id = b.id_vendedor where DATE_FORMAT(DATE(b.fecha_nota), '%d/%m/%Y') between '$fecha_inicial' and '$fecha_final' ");
+    $sql=mysqli_query($con, "select c.nombre_cliente, c.ruc, c.direccion_cliente, b.numero_nota as numero, b.fecha_nota as fecha, (select total_venta from facturas where numero_factura=b.numero_factura) as total_venta, '' as kardex, CONCAT(u.firstname,' ',u.lastname) as VENDEDOR from nota b inner join clientes c on c.id_cliente =(select id_cliente from facturas where numero_factura=b.numero_factura) inner join users u on u.user_id = b.id_vendedor where b.fecha_nota >= '$fechainicial' and  b.fecha_nota <= '$fechafinal' ");
 
 }
 
@@ -107,7 +115,7 @@ while ($row=mysqli_fetch_array($sql))
 	$fecha_boleta=$row['fecha'];
 	$total_venta = $row['total_venta'];
     $kardex = $row['kardex'];
-	$abogado=$row['abogado'];	
+	$VENDEDOR=$row['VENDEDOR'];	
 	if ($nums%2==0){
 		$clase="clouds";
 	} else {
@@ -122,7 +130,7 @@ while ($row=mysqli_fetch_array($sql))
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $fecha_boleta;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $total_venta;?></td>
             <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $kardex;?></td>
-            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $abogado;?></td>
+            <td class='<?php echo $clase;?>' style="width: 15%; text-align: right"><?php echo $VENDEDOR;?></td>
             
         </tr>
 

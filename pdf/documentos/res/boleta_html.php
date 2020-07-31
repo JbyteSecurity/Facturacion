@@ -141,7 +141,7 @@ border: 1px solid #000000;
 			{
 				$numero_boleta = "0".$numero_boleta;
 			}
-                echo "B003-".$numero_boleta;
+                echo "B001-".$numero_boleta;
 			?>
 			</td>
 		    </tr>
@@ -152,18 +152,18 @@ border: 1px solid #000000;
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
 	<tr>
-           <td style="width:10%;" class='midnight-blue'></td>
-		   <td style="width:90%;" class='midnight-blue'></td>
+           <td style="width:15%;" class='midnight-blue'></td>
+		   <td style="width:85%;" class='midnight-blue'></td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				
 				echo "RUC: ";				
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
 				$rw_cliente=mysqli_fetch_array($sql_cliente);				
@@ -173,13 +173,13 @@ border: 1px solid #000000;
 		   </td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Cliente: ";				
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				echo $rw_cliente['nombre_cliente'];	
 			?>
@@ -187,27 +187,81 @@ border: 1px solid #000000;
 		   </td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 						
 				echo "Direcciòn: ";					
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 						
 				echo $rw_cliente['direccion_cliente'];			
 			?>
 			
 		   </td>
         </tr>
+        <tr>
+           <td style="width:15%;" >
+			<?php 						
+				echo "Departamento: ";					
+			?>
+			
+		   </td>
+		   <td style="width:85%;" >
+			<?php 	
+				$id = $rw_cliente['departamento'];
+				$sql_departamento=mysqli_query($con,"SELECT name FROM regions WHERE id = '$id'");
+				$rw_departamento=mysqli_fetch_array($sql_departamento);				
+				echo $rw_departamento['name'];						
+						
+			?>
+			
+		   </td>
+        </tr>
+        <tr>
+           <td style="width:15%;" >
+			<?php 						
+				echo "Provincia: ";					
+			?>
+			
+		   </td>
+		   <td style="width:85%;" >
+			<?php 	
+				$id = $rw_cliente['provincia'];
+				$sql_provincia=mysqli_query($con,"SELECT name FROM provinces WHERE id = '$id'");
+				$rw_provincia=mysqli_fetch_array($sql_provincia);				
+				echo $rw_provincia['name'];						
+						
+			?>
+			
+		   </td>
+        </tr>
+         <tr>
+           <td style="width:15%;" >
+			<?php 						
+				echo "Distrito: ";					
+			?>
+			
+		   </td>
+		   <td style="width:85%;" >
+			<?php 	
+				$id = $rw_cliente['ubigeo'];
+				$sql_distrito=mysqli_query($con,"SELECT name FROM districts WHERE id = '$id'");
+				$rw_distrito=mysqli_fetch_array($sql_distrito);				
+				echo $rw_distrito['name'];						
+						
+			?>
+			
+		   </td>
+        </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Teléfono: ";							
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				echo $rw_cliente['telefono_cliente'];				
 			?>
@@ -215,13 +269,13 @@ border: 1px solid #000000;
 		   </td>
         </tr>
 		<tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Email: ";						
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				echo $rw_cliente['email_cliente'];				
 			?>
@@ -229,13 +283,13 @@ border: 1px solid #000000;
 		   </td>
         </tr>
         <tr>
-           <td style="width:10%;" >
+           <td style="width:15%;" >
 			<?php 
 				echo "Kardex: ";
 			?>
 			
 		   </td>
-		   <td style="width:90%;" >
+		   <td style="width:85%;" >
 			<?php 
 				echo $kardex;
 			?>
@@ -326,11 +380,18 @@ while ($row=mysqli_fetch_array($sql))
 	$igv2 = $igv*$cantidad;
 	$igv3 = $igv2+$igv3;
 	$precio_venta=$row['precio_producto'];
+	$precio_venta = round($precio_venta, 2);
+	$precio_producto_igv = $precio_venta +$igv;
+	$precio_producto_igv_total = $precio_producto_igv  * $cantidad;
+	$sumador_total_producto += $precio_producto_igv_total;
 	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
 	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
-	$precio_total=$precio_venta_r*$cantidad;
+	$precio_total=($precio_venta_r+$igv)*$cantidad;	
+	$precio_total = $precio_total/(1+0.18);
+	$igv3 = $precio_venta * 0.18;
 	$precio_total_f=number_format($precio_total,2);//Precio total formateado
 	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
+	$precio_total_r = 	(double)$precio_total_r;
 	$sumador_total+=$precio_total_r;//Sumador
 	if ($nums%2==0){
 		$clase="clouds";
@@ -358,15 +419,16 @@ while ($row=mysqli_fetch_array($sql))
 	$rw2=mysqli_fetch_array($sql);
 	$numero_boleta=$rw2['numero'];	
 	$nuevo_numero = $rw2['numero'] + 1;	
-	$sumador_total = round($sumador_total, 2);
-	$subtotal=number_format($sumador_total,2,'.','');
-	$total_iva=($subtotal * TAX )/100;
-	$total_iva=number_format($total_iva,2,'.','');
-	$igv2 = $igv2 * $cantidad;
-	$igv3 = round($igv3, 2);
+
+	$neto_producto = $sumador_total_producto/(1+0.18);
+	$igv_producto = $sumador_total_producto - $neto_producto;
+	$subtotal=$neto_producto;
+	$igv2 = (double)$igv * $cantidad;
+	$igv3 = $subtotal * 0.18;	
+	$total_factura=0.00;
+	$igv3 = round($igv_producto, 2);
+			
 	$total_boleta=$subtotal+$igv3;
-	$total_boleta= round($total_boleta, 2);
-	
 	echo "<tr><td colspan='2' height='25' style='widtd: 85%; text-align: left;'><br></td> </tr>";
 
 
@@ -492,10 +554,11 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
                 
 			
 	//Creamos Archivo txt
-    $pdf = "10292215598-03-B003-".$numero_boleta;
-	$ruc = "D:/data0/facturador/DATA/"."10292215598-03-B003-".$numero_boleta.".CAB";
-	//$ruc = "10292215598-03-B003-".$numero_boleta.".CAB";
+    $pdf = "10292215598-03-B001-".$numero_boleta;
+	$ruc = "E:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-03-B001-".$numero_boleta.".CAB";
+	//$ruc = "10292215598-03-B001-".$numero_boleta.".CAB";
 	$date=date("Y-m-d");
+	$hora=date("H:i:s");
 	$documento = trim($rw_cliente['ruc']);
 	$nombre = $rw_cliente['nombre_cliente'];	
 	$tipodocumento = "";
@@ -507,12 +570,12 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	}
     $total_boleta=number_format($total_boleta,2,'.','');
 	$file =fopen($ruc, "a") or die("Problemas");
-	fputs($file, "01|".$date."||".$tipodocumento."|".$documento."|".$nombre."|PEN|0.00|0.00|0.00|".$subtotal."|0.00|0.00|".$igv3."|0.00|0.00|".$total_boleta."|");
+	fputs($file, "0101|".$date."|".$hora."|-|0000|".$tipodocumento."|".$documento."|".$nombre."|PEN|".round($igv3,2)."|".round($subtotal, 2)."|".round($total_boleta,2)."|0.00|0.00|0.00|".round($total_boleta,2)."|2.1|2.0|");
 	fclose($file);  
 
     //Creamos Archivo Detalle Sunat
-	$ruc2 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_boleta.".DET";
-	//$ruc2 = "10292215598-03-B003-".$numero_boleta.".DET";
+	$ruc2 = "E:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-03-B001-".$numero_boleta.".DET";
+	//$ruc2 = "10292215598-03-B001-".$numero_boleta.".DET";
 	$file2 =fopen($ruc2, "a") or die("Problemas");
 	$sql=mysqli_query($con, "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'");
     $query = "select * from detalle_boleta, products where products.id_producto=detalle_boleta.id_producto and detalle_boleta.numero_boleta='".$boleta."'";
@@ -528,11 +591,16 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	} 
     
     $preciototalunitario =  $cantidad * $precioproducto;
+    $preciototalunitario = round($preciototalunitario,2);
 	$pos2 = strpos($preciototalunitario, ".");
 	if ($pos2 === false) {
         $preciototalunitario = $preciototalunitario.".00";
 	} 
 	$igv=$row["igv"];
+	$igvunitario = ($precioproducto*$cantidad) * 0.18;
+	$productounitatio= $precioproducto+$igv;
+	$productototal =  $productounitatio * $cantidad;
+	$igvtotal = $productototal /  (1+0.18);
 	$igv=number_format($igv,2,'.','');
     $total = $preciototalunitario + $igv;
 	$pos3 = strpos($total, ".");
@@ -542,7 +610,8 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 	$total=number_format($total,2,'.','');
 	$precioproducto = number_format($precioproducto,2,'.','');
 	$preciototalunitario = number_format($preciototalunitario,2,'.','');
-	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."|-|".$nombreproducto."|".$precioproducto."|".$igv."|1000|".$igv."|".$precioproducto."|IGV|VAT|10|18|-|||||||-||||||".$total."|".$preciototalunitario."|0|");
+	$totalfinal = $productototal ;
+	fwrite($file2, "NIU|".$cantidad."|".$codigoproducto."|-|".$nombreproducto."|".$precioproducto."|".round($igvunitario,2)."|1000|".round($igvunitario,2)."|".round($precioproducto*$cantidad,2)."|IGV|VAT|10|18|-|||||||-||||||".round($totalfinal,2)."|".$preciototalunitario."|0|");
 	fwrite($file2,"\n");  
 	
 	}
@@ -550,18 +619,18 @@ $insertcorrelativo = mysqli_query($con,"UPDATE correlativos set numero = $nuevo_
 
 
   //Creamos Archivo Tributos Generales
-	$ruc3 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_boleta.".TRI";
-	//$ruc3 = "10292215598-03-B003-".$numero_boleta.".TRI";
+	$ruc3 = "E:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-03-B001-".$numero_boleta.".TRI";
+	//$ruc3 = "10292215598-03-B001-".$numero_boleta.".TRI";
 	$file3 =fopen($ruc3, "a") or die("Problemas");
-	fwrite($file3, "1000|IGV|VAT|".$subtotal."|".$igv3."|");
+	fwrite($file3, "1000|IGV|VAT|".round($subtotal, 2)."|".round($igv3,2)."|");
 	fwrite($file3,"\n");{  
 	
 	}
 	fclose($file3);
 
   //Creamos Archivo Tributos Generales
-	$ruc4 = "D:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-07-F003-".$numero_boleta.".LEY";
-	//$ruc3 = "10292215598-03-B003-".$numero_boleta.".TRI";
+	$ruc4 = "E:/SFS_v1.2/sunat_archivos/sfs/DATA/"."10292215598-03-B001-".$numero_boleta.".LEY";
+	//$ruc3 = "10292215598-03-B001-".$numero_boleta.".TRI";
 	$file4 =fopen($ruc4, "a") or die("Problemas");
 	fwrite($file4, "1000|".$letra."|");
 	fwrite($file4,"\n");{  

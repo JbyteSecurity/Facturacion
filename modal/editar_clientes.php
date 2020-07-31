@@ -14,6 +14,12 @@
 			<form class="form-horizontal" method="post" id="editar_cliente" name="editar_cliente">
 			<div id="resultados_ajax2"></div>
 			  <div class="form-group">
+				<label for="mod_nombre" class="col-sm-3 control-label">RUC</label>
+				<div class="col-sm-8">
+				  <input type="text" class="form-control" id="mod_ruc" name="mod_ruc"  required>
+				</div>
+			  </div>
+			  <div class="form-group">
 				<label for="mod_nombre" class="col-sm-3 control-label">Nombre</label>
 				<div class="col-sm-8">
 				  <input type="text" class="form-control" id="mod_nombre" name="mod_nombre"  required>

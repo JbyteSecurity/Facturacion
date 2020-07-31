@@ -109,6 +109,7 @@
 						
 					?>
 					
+					<input type="hidden" value="<?php echo $ruc;?>" id="ruc<?php echo $ruc;?>">
 					<input type="hidden" value="<?php echo $nombre_cliente;?>" id="nombre_cliente<?php echo $id_cliente;?>">
 					<input type="hidden" value="<?php echo $telefono_cliente;?>" id="telefono_cliente<?php echo $id_cliente;?>">
 					<input type="hidden" value="<?php echo $email_cliente;?>" id="email_cliente<?php echo $id_cliente;?>">

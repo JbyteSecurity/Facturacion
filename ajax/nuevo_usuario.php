@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 // checking for minimum PHP version
 if (version_compare(PHP_VERSION, '5.3.7', '<')) {
